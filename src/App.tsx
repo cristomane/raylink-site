@@ -77,7 +77,7 @@ function App() {
 
   return (
     <Router basename="/raylink-site">
-      <div className="min-h-screen bg-dark text-white overflow-x-hidden">
+      <div className="min-h-screen bg-dark text-white overflow-x-clip">
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/offer" element={<OfferPage />} />
