@@ -140,7 +140,7 @@ const Pricing = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-manrope text-4xl lg:text-5xl font-bold text-center text-white mb-12 lg:mb-16"
+          className="font-montserrat text-4xl lg:text-5xl font-bold text-center text-dark dark:text-white mb-12 lg:mb-16"
         >
           Тариф
         </h2>
@@ -155,16 +155,16 @@ const Pricing = () => {
             }}
           >
             {/* Plan Name */}
-            <div className="font-manrope text-lg text-lime tracking-wider mb-6 uppercase font-semibold">
+            <div className="font-montserrat text-lg text-lime tracking-wider mb-6 uppercase font-semibold">
               Единый тариф
             </div>
 
             {/* Price */}
             <div className="mb-8">
-              <span className="font-manrope text-7xl lg:text-8xl font-bold text-white">
+              <span className="font-montserrat text-7xl lg:text-8xl font-bold text-dark dark:text-white">
                 150₽
               </span>
-              <span className="font-manrope text-gray-light text-lg ml-2">
+              <span className="font-montserrat text-gray-600 dark:text-gray-light text-lg ml-2">
                 / месяц
               </span>
             </div>
@@ -176,7 +176,7 @@ const Pricing = () => {
                   <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-lime" />
                   </div>
-                  <span className="font-manrope text-white text-sm">{feature}</span>
+                  <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
                 </li>
               ))}
             </ul>
