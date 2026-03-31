@@ -44,14 +44,14 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
       className="glass-card-light p-8 lg:p-10 group cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime/40"
     >
       <div className="mb-6">
-        <div className="w-14 h-14 rounded-2xl bg-dark-card flex items-center justify-center border border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
-          <Icon className="w-7 h-7 text-gray-light transition-colors duration-300 group-hover:text-lime" />
+        <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
+          <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
         </div>
       </div>
-      <h3 className="font-montserrat text-lg font-bold text-white mb-3 uppercase tracking-wide">
+      <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
         {title}
       </h3>
-      <p className="font-montserrat text-gray-light text-sm leading-relaxed">
+      <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
         {description}
       </p>
     </div>
@@ -127,7 +127,7 @@ const Features = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Почему RayLink
         </h2>
