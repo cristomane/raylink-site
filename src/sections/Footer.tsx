@@ -13,7 +13,7 @@ const Footer = () => {
   const allLinks = [
     {
       icon: Send,
-      title: 'Бот для подключения в Telegram',
+      title: 'Бот в Telegram',
       description: '@raylink_service_bot',
       href: 'https://t.me/raylink_service_bot',
     },
@@ -31,7 +31,7 @@ const Footer = () => {
     },
     {
       icon: 'vk',
-      title: 'Бот для подключения в VK',
+      title: 'Бот в VK',
       description: 'vk.com/raylinkvpn',
       href: 'https://vk.com/raylinkvpn',
     },
@@ -90,7 +90,7 @@ const Footer = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col justify-between h-full items-start text-left p-5 rounded-2xl bg-[rgba(26,26,26,0.6)] backdrop-blur-[20px] border border-white/[0.08] text-white transition-all duration-200 hover:border-lime/40 hover:-translate-y-0.5 group"
+                className="flex flex-col justify-between h-full items-start text-left p-4 rounded-xl bg-[rgba(26,26,26,0.6)] backdrop-blur-[20px] border border-white/[0.08] text-white transition-all duration-200 hover:border-lime/40 hover:-translate-y-0.5 group"
               >
                 <div className="flex items-start gap-2 w-full">
                   {link.icon === 'vk' ? (
