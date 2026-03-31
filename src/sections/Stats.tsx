@@ -58,7 +58,7 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       <div className="font-montserrat text-4xl lg:text-5xl font-bold text-lime mb-2">
         {displayValue}{suffix}
       </div>
-      <div className="font-montserrat text-sm text-gray-light">
+      <div className="font-montserrat text-sm text-gray-600 dark:text-gray-light">
         {label}
       </div>
     </div>
