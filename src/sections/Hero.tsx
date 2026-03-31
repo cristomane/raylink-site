@@ -139,7 +139,7 @@ const Hero = () => {
             ref={subtitleRef}
             className="relative font-montserrat text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
           >
-            РЎРІРѕР±РѕРґР° РІ РєР°Р¶РґРѕРј РєР»РёРєРµ
+            Свобода в каждом клике
           </p>
 
           {/* Description */}
@@ -147,7 +147,7 @@ const Hero = () => {
             ref={descRef}
             className="relative font-montserrat text-lg text-gray-light max-w-xl mx-auto mb-10"
           >
-            РћС‚РєСЂРѕР№С‚Рµ РґР»СЏ СЃРµР±СЏ РёРЅС‚РµСЂРЅРµС‚ Р±РµР· РіСЂР°РЅРёС†. Р‘С‹СЃС‚СЂРѕ, Р±РµР·РѕРїР°СЃРЅРѕ, СЃРІРѕР±РѕРґРЅРѕ.
+            Откройте для себя интернет без границ. Быстро, безопасно, свободно.
           </p>
 
           {/* CTA Button */}
@@ -156,7 +156,7 @@ const Hero = () => {
             onClick={scrollToPricing}
             className="relative btn-primary group"
           >
-            <span>РќР°С‡Р°С‚СЊ Р±РµСЃРїР»Р°С‚РЅРѕ</span>
+            <span>Начать бесплатно</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
