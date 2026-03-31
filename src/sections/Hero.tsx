@@ -12,35 +12,30 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Card entrance animation
       gsap.fromTo(
         cardRef.current,
         { scale: 0.95, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
       );
 
-      // Title animation
       gsap.fromTo(
         titleRef.current,
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.4 }
       );
 
-      // Subtitle animation
       gsap.fromTo(
         subtitleRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.6 }
       );
 
-      // Description animation
       gsap.fromTo(
         descRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.8 }
       );
 
-      // Button animation
       gsap.fromTo(
         buttonRef.current,
         { y: 20, opacity: 0 },
@@ -64,6 +59,18 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
+      {/* Blueprint grid lines */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
@@ -117,7 +124,7 @@ const Hero = () => {
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="relative font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
+            className="relative font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
@@ -125,7 +132,7 @@ const Hero = () => {
           {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="relative font-syncopate text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
+            className="relative font-montserrat text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
           >
             Свобода в каждом клике
           </p>
@@ -146,7 +153,7 @@ const Hero = () => {
           >
             <span>Начать бесплатно</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-n          </button>
+          </button>
         </div>
       </div>
 
