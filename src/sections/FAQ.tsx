@@ -69,7 +69,7 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         onClick={onClick}
         className="w-full flex items-center justify-between p-6 text-left"
       >
-        <span className="font-montserrat text-lg font-medium text-white pr-4">
+        <span className="font-montserrat text-lg font-medium text-dark dark:text-white pr-4">
           {question}
         </span>
         <ChevronDown
@@ -81,7 +81,7 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <p className="font-montserrat text-gray-light text-sm px-6 pb-6 leading-relaxed">
+        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm px-6 pb-6 leading-relaxed">
           {answer}
         </p>
       </div>
@@ -157,7 +157,7 @@ const FAQ = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Частые вопросы
         </h2>
