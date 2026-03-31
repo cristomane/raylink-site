@@ -14,43 +14,32 @@ const Header = () => {
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // If it's an anchor link (starts with #), handle smooth scroll
     if (href.startsWith('#')) {
       e.preventDefault();
       setIsMobileMenuOpen(false);
-      
       const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // For router links (like /instructions), allow normal navigation
       setIsMobileMenuOpen(false);
     }
   };
 
   const scrollToPricing = () => {
     const target = document.querySelector('#pricing');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
-      <header
-        className="fixed top-0 left-0 right-0 z-50 hidden md:block bg-white/85 dark:bg-[rgba(10,10,10,0.85)] backdrop-blur-[20px]"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 hidden md:block bg-white/85 dark:bg-[rgba(10,10,10,0.85)] backdrop-blur-[20px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
             <a href="#hero" className="flex items-center gap-2 group" onClick={(e) => handleLinkClick(e, '#hero')}>
               <span className="font-montserrat text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
                 RayLink
               </span>
             </a>
 
-            {/* Desktop Navigation */}
             <nav className="flex items-center gap-8">
               {navLinks.map((link, index) => (
                 <a
@@ -65,13 +54,9 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Theme Toggle + CTA */}
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <button
-                onClick={scrollToPricing}
-                className="btn-primary py-2.5 px-5 text-sm"
-              >
+              <button onClick={scrollToPricing} className="btn-primary py-2.5 px-5 text-sm">
                 Подключить
               </button>
             </div>
@@ -79,40 +64,28 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Header */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 md:hidden bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 md:hidden bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
-            {/* Logo */}
             <a href="#hero" className="flex items-center gap-2" onClick={(e) => handleLinkClick(e, '#hero')}>
               <span className="font-montserrat text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
                 RayLink
               </span>
             </a>
-
-            {/* Mobile Menu Button */}
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="w-10 h-10 flex items-center justify-center text-dark dark:text-white"
               >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div 
-            className="border-t border-gray-200/20 dark:border-white/5 bg-white/98 dark:bg-[rgba(10,10,10,0.98)] backdrop-blur-[20px]"
-          >
+          <div className="border-t border-gray-200/20 dark:border-white/5 bg-white/98 dark:bg-[rgba(10,10,10,0.98)] backdrop-blur-[20px]">
             <nav className="flex flex-col py-4 px-4">
               {navLinks.map((link, index) => (
                 <a
@@ -124,10 +97,7 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <button
-                onClick={scrollToPricing}
-                className="btn-primary py-3 mt-4 text-center"
-              >
+              <button onClick={scrollToPricing} className="btn-primary py-3 mt-4 text-center">
                 Подключить
               </button>
             </nav>
