@@ -72,7 +72,7 @@ const Footer = () => {
         <div className="text-center mb-12">
           {/* Logo */}
           <div className="flex items-center justify-center mb-6">
-            <span className="font-syncopate text-2xl font-bold text-white tracking-wider uppercase">
+            <span className="font-montserrat text-2xl font-bold text-white tracking-wider uppercase">
               RayLink
             </span>
           </div>
