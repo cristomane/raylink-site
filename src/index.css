@@ -65,6 +65,11 @@ html.lenis, html.lenis body {
   height: auto;
 }
 
+/* Prevent double scrollbar */
+html.lenis {
+  overflow-y: auto;
+}
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
