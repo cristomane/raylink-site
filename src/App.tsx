@@ -14,7 +14,6 @@ import FAQ from './sections/FAQ';
 import Footer from './sections/Footer';
 import OfferPage from './pages/OfferPage';
 import PrivacyPage from './pages/PrivacyPage';
-import Instructions from './sections/Instructions';
 
 import './App.css';
 
