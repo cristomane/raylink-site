@@ -14,11 +14,11 @@ const Pricing = () => {
   const vkButtonRef = useRef<HTMLAnchorElement>(null);
 
   const features = [
+    'Бесплатный тестовый период на 72 часа',
     'Неограниченный трафик',
     'До 3 устройств',
     'Сервер в Риге, Латвия',
     'Поддержка 24/7',
-    'Настройка через бота',
   ];
 
   useEffect(() => {
