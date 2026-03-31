@@ -87,7 +87,7 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
         {/* Circle */}
         <div
           ref={circleRef}
-          className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-lime flex items-center justify-center bg-dark z-10 transition-all duration-300 hover:bg-lime hover:scale-110 group"
+          className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-lime flex items-center justify-center bg-white dark:bg-dark z-10 transition-all duration-300 hover:bg-lime hover:scale-110 group"
         >
           <span className="font-montserrat text-xl lg:text-2xl font-bold text-lime group-hover:text-dark transition-colors duration-300">
             {number}
@@ -111,14 +111,14 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
       {/* Content */}
       <div ref={contentRef} className={`flex-1 ${isLast ? '' : 'pb-12 lg:pb-16'}`}>
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-xl bg-dark-card flex items-center justify-center border border-white/5">
+          <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5">
             <Icon className="w-5 h-5 text-lime" />
           </div>
-          <h3 className="font-montserrat text-lg lg:text-xl font-bold text-white uppercase tracking-wide">
+          <h3 className="font-montserrat text-lg lg:text-xl font-bold text-dark dark:text-white uppercase tracking-wide">
             {title}
           </h3>
         </div>
-        <p className="font-montserrat text-gray-light text-sm lg:text-base leading-relaxed max-w-md">
+        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm lg:text-base leading-relaxed max-w-md">
           {description}
         </p>
       </div>
@@ -180,7 +180,7 @@ const HowItWorks = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Как это работает
         </h2>
