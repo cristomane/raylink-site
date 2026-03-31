@@ -64,23 +64,60 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full opacity-40"
+          style={{
+            background: 'radial-gradient(circle, rgba(204,255,0,0.4) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            animation: 'floatBlob 8s ease-in-out infinite',
+          }}
+        />
+        <div
+          className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(204,255,0,0.3) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+            animation: 'floatBlob 10s ease-in-out infinite reverse',
+          }}
+        />
+        <div
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'floatBlob 12s ease-in-out infinite 2s',
+          }}
+        />
+      </div>
+
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={cardRef}
-          className="p-8 sm:p-12 lg:p-16 text-center rounded-[40px]"
+          className="relative p-8 sm:p-12 lg:p-16 text-center rounded-[40px] overflow-hidden"
           style={{
-            background: 'rgba(26, 26, 26, 0.35)',
-            backdropFilter: 'blur(30px)',
-            WebkitBackdropFilter: 'blur(30px)',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
+            background: 'rgba(26, 26, 26, 0.25)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
             touchAction: 'pan-y',
           }}
         >
+          {/* Liquid glass inner glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(204,255,0,0.08) 0%, transparent 60%)',
+            }}
+          />
+
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
+            className="relative font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
@@ -88,7 +125,7 @@ const Hero = () => {
           {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="font-syncopate text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
+            className="relative font-syncopate text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
           >
             Свобода в каждом клике
           </p>
@@ -96,7 +133,7 @@ const Hero = () => {
           {/* Description */}
           <p
             ref={descRef}
-            className="font-montserrat text-lg text-gray-light max-w-xl mx-auto mb-10"
+            className="relative font-montserrat text-lg text-gray-light max-w-xl mx-auto mb-10"
           >
             Откройте для себя интернет без границ. Быстро, безопасно, свободно.
           </p>
@@ -105,16 +142,24 @@ const Hero = () => {
           <button
             ref={buttonRef}
             onClick={scrollToPricing}
-            className="btn-primary group"
+            className="relative btn-primary group"
           >
             <span>Начать бесплатно</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </button>
+n          </button>
         </div>
       </div>
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+
+      <style>{`
+        @keyframes floatBlob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -30px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+      `}</style>
     </section>
   );
 };
