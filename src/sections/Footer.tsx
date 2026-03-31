@@ -13,25 +13,25 @@ const Footer = () => {
   const allLinks = [
     {
       icon: Send,
-      title: 'Р‘РѕС‚ РІ Telegram',
+      title: 'Бот в Telegram',
       description: '@raylink_service_bot',
       href: 'https://t.me/raylink_service_bot',
     },
     {
       icon: Newspaper,
-      title: 'РљР°РЅР°Р» СЃ РЅРѕРІРѕСЃС‚СЏРјРё',
+      title: 'Канал с новостями',
       description: '@raylink_news',
       href: 'https://t.me/raylink_news',
     },
     {
       icon: MessageCircle,
-      title: 'РџРѕРґРґРµСЂР¶РєР°',
+      title: 'Поддержка',
       description: '@RayLinkSupport',
       href: 'https://t.me/RayLinkSupport',
     },
     {
       icon: 'vk',
-      title: 'Р‘РѕС‚ РІ VK',
+      title: 'Бот в VK',
       description: 'vk.com/raylinkvpn',
       href: 'https://vk.com/raylinkvpn',
     },
@@ -79,7 +79,7 @@ const Footer = () => {
 
           {/* Description */}
           <p className="font-montserrat text-gray-light text-sm max-w-md mx-auto mb-10">
-            Р‘С‹СЃС‚СЂС‹Р№ VPN РЅР° РїСЂРѕС‚РѕРєРѕР»Рµ VLESS. Р‘РµР·РѕРїР°СЃРЅС‹Р№ РґРѕСЃС‚СѓРї Рє РёРЅС‚РµСЂРЅРµС‚Сѓ Р±РµР· РѕРіСЂР°РЅРёС‡РµРЅРёР№.
+            Быстрый VPN на протоколе VLESS. Безопасный доступ к интернету без ограничений.
           </p>
 
           {/* Links Grid */}
@@ -116,20 +116,20 @@ const Footer = () => {
         <div className="border-t border-white/5 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-montserrat text-xs text-gray-light">
-              В© 2026 RayLink. Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹.
+              © 2026 RayLink. Все права защищены.
             </p>
             <div className="flex items-center gap-6">
               <Link 
                 to="/offer" 
                 className="font-montserrat text-xs text-gray-light hover:text-lime transition-colors duration-300"
               >
-                РџСѓР±Р»РёС‡РЅР°СЏ РѕС„РµСЂС‚Р°
+                Публичная оферта
               </Link>
               <Link 
                 to="/privacy" 
                 className="font-montserrat text-xs text-gray-light hover:text-lime transition-colors duration-300"
               >
-                РџРѕР»РёС‚РёРєР° РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё
+                Политика конфиденциальности
               </Link>
             </div>
           </div>
