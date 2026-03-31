@@ -64,7 +64,7 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
-            {/* Blueprint grid lines with edge fade */}
+      {/* Blueprint grid lines with edge fade */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -112,11 +112,11 @@ const Hero = () => {
           ref={cardRef}
           className="relative p-8 sm:p-12 lg:p-16 text-center rounded-[40px] overflow-hidden"
           style={{
-            background: 'rgba(26, 26, 26, 0.25)',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(40px) saturate(180%)',
             WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
+            border: '1px solid var(--glass-border)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
             touchAction: 'pan-y',
           }}
         >
@@ -131,7 +131,7 @@ const Hero = () => {
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="relative font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
+            className="relative font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
@@ -147,7 +147,7 @@ const Hero = () => {
           {/* Description */}
           <p
             ref={descRef}
-            className="relative font-montserrat text-lg text-gray-light max-w-xl mx-auto mb-10"
+            className="relative font-montserrat text-lg text-gray-600 dark:text-gray-light max-w-xl mx-auto mb-10"
           >
             Откройте для себя интернет без границ. Быстро, безопасно, свободно.
           </p>
@@ -165,7 +165,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-dark to-transparent pointer-events-none" />
 
       <style>{`
         @keyframes floatBlob {
