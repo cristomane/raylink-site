@@ -1,167 +1,179 @@
-import { useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ArrowRight } from 'lucide-react';
 
-const OfferPage = () => {
+const Hero = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    // Scroll to top when page loads
-    window.scrollTo(0, 0);
+    const ctx = gsap.context(() => {
+      // Card entrance animation
+      gsap.fromTo(
+        cardRef.current,
+        { scale: 0.95, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
+      );
+
+      // Title animation
+      gsap.fromTo(
+        titleRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.4 }
+      );
+
+      // Subtitle animation
+      gsap.fromTo(
+        subtitleRef.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.6 }
+      );
+
+      // Description animation
+      gsap.fromTo(
+        descRef.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.8 }
+      );
+
+      // Button animation
+      gsap.fromTo(
+        buttonRef.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 1 }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const goBack = () => {
-    window.history.back();
+  const scrollToPricing = () => {
+    const target = document.querySelector('#pricing');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5" style={{ background: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(20px)' }}>
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-          <button
-            onClick={goBack}
-            className="flex items-center gap-2 text-gray-light hover:text-lime transition-colors duration-300"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-montserrat text-sm">Назад</span>
-          </button>
-          <h1 className="font-montserrat text-lg font-bold text-white uppercase tracking-wide">Публичная оферта</h1>
-        </div>
-      </header>
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
+    >
+      {/* Blueprint grid lines */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full opacity-40"
+          style={{
+            background: 'radial-gradient(circle, rgba(204,255,0,0.4) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            animation: 'floatBlob 8s ease-in-out infinite',
+          }}
+        />
+        <div
+          className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(204,255,0,0.3) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+            animation: 'floatBlob 10s ease-in-out infinite reverse',
+          }}
+        />
+        <div
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'floatBlob 12s ease-in-out infinite 2s',
+          }}
+        />
+      </div>
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="glass-card p-8 lg:p-12">
-          <div className="prose prose-invert max-w-none font-montserrat">
-            <h1 className="text-3xl font-bold text-white mb-8">ПУБЛИЧНАЯ ОФЕРТА</h1>
-            <p className="text-gray-light mb-8">March 14, 2026<br/>Версия от 14 Марта 2026 года</p>
-            
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Настоящая публичная Оферта (далее — «Оферта») является официальным предложением 
-              владельца сервиса RayLink (далее — «Исполнитель»), в адрес пользователей услуг 
-              сервиса RayLink, именуемых в дальнейшем «Заказчик».
-            </p>
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={cardRef}
+          className="relative p-8 sm:p-12 lg:p-16 text-center rounded-[40px] overflow-hidden"
+          style={{
+            background: 'rgba(26, 26, 26, 0.25)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
+            touchAction: 'pan-y',
+          }}
+        >
+          {/* Liquid glass inner glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(204,255,0,0.08) 0%, transparent 60%)',
+            }}
+          />
 
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              В настоящей Публичной оферте содержатся условия заключения Договора об оказании 
-              услуг (далее по тексту — «Договор об оказании услуг» и/или «Договор»).
-            </p>
+          {/* Main Title */}
+          <h1
+            ref={titleRef}
+            className="relative font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 uppercase tracking-wider"
+          >
+            RayLink
+          </h1>
 
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">1. ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</h2>
-            
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">1.1. Публичная оферта</strong> — настоящее предложение Исполнителя, адресованное 
-              неопределенному кругу лиц, заключить договор оказания услуг дистанционным способом 
-              (далее — «Договор») на условиях, содержащихся в настоящей Оферте.
-            </p>
+          {/* Subtitle */}
+          <p
+            ref={subtitleRef}
+            className="relative font-montserrat text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
+          >
+            Свобода в каждом клике
+          </p>
 
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">1.2. Договор</strong> – текст настоящей Оферты, акцептованный Заказчиком путем совершения 
-              конклюдентных действий, предусмотренных настоящей Офертой.
-            </p>
+          {/* Description */}
+          <p
+            ref={descRef}
+            className="relative font-montserrat text-lg text-gray-light max-w-xl mx-auto mb-10"
+          >
+            Откройте для себя интернет без границ. Быстро, безопасно, свободно.
+          </p>
 
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">1.3. RayLink</strong> — сервис, предоставляющий услуги, расположенный в сети «Интернет» 
-              по сетевому адресу: https://t.me/raylink_service_bot (далее — «Сервис»)
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">1.4. Акцепт Оферты</strong> — полное и безоговорочное принятие условий настоящей Оферты путём оплаты услуг Сервиса.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">2. ОБЩИЕ ПОЛОЖЕНИЯ</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">2.1.</strong> Заказчик осуществляет Заказ Услуг дистанционным способом через сеть Интернет по сетевому адресу https://t.me/raylink_service_bot. Оплачивая Заказ, Заказчик подтверждает согласие с условиями настоящей Оферты.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">2.2.</strong> Заключая Договор, Заказчик подтверждает, что ознакомлен и согласен с условиями настоящего Договора.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">2.3.</strong> Наименование, количество, порядок и иные условия оказания Услуг определяются на основании сведений Исполнителя при оформлении заявки Заказчиком, либо устанавливаются посредством сети «Интернет» по сетевому адресу: https://t.me/raylink_service_bot
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">3. СТОИМОСТЬ И ОПЛАТА УСЛУГ</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">3.1.</strong> Стоимость Услуг и порядок их оплаты указывается в Сервисе и может варьироваться в зависимости от выбранного тарифа.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">3.2.</strong> Исполнитель вправе в одностороннем порядке изменять стоимость Услуг. Новые цены вступают в силу с момента их публикации по сетевому адресу https://t.me/raylink_service_bot.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">3.3.</strong> Обязательства Заказчика по оплате считаются исполненными с момента поступления денежных средств на счет Исполнителя.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">4.1.</strong> Исполнитель обязуется оказать Услуги в соответствии с положениями настоящего Договора, в сроки и объеме, указанные в настоящем Договоре и (или) в порядке, указанном в Сервисе.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">4.2.</strong> Исполнитель обязуется предоставлять доступ к Услугам после получения оплаты.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">4.3.</strong> Заказчик обязан указывать достоверные данные при оформлении заказа и оплате.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">4.4.</strong> Заказчик обязуется не использовать Услуги в противоправных или запрещенных законом целях.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">5. СРОК ДЕЙСТВИЯ И ПОРЯДОК РАСТОРЖЕНИЯ ДОГОВОРА</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">5.1.</strong> Настоящая Оферта заключается между Сторонами на неопределенный срок, вступает в силу с момента размещения в Сервисе и действует до момента её отзыва Исполнителем.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">5.2.</strong> Заказчик вправе в любое время отказаться от Услуг, уведомив Исполнителя через службу поддержки Сервиса.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">6. КОНФИДЕНЦИАЛЬНОСТЬ И ОБРАБОТКА ДАННЫХ</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">6.1.</strong> Все данные, предоставленные Заказчиком, обрабатываются в соответствии с законодательством РФ.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">6.2.</strong> Обработка данных регулируется Политикой конфиденциальности RayLink.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">7. ФОРС-МАЖОР</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">7.1.</strong> Стороны освобождаются от ответственности за неисполнение или ненадлежащее исполнение обязательств по Договору, если надлежащее исполнение оказалось невозможным вследствие непреодолимой силы.
-            </p>
-
-            <h2 className="text-xl font-bold text-white mt-10 mb-4">8. ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ</h2>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">8.1.</strong> Договор, его заключение и исполнение регулируется действующим законодательством Российской Федерации.
-            </p>
-
-            <p className="text-gray-300 mb-4 leading-relaxed">
-              <strong className="text-white">8.2.</strong> Все споры, возникающие в связи с исполнением настоящего Договора, решаются путем переговоров. В случае невозможности урегулирования разногласий спор передается на рассмотрение в суд по месту регистрации Исполнителя.
-            </p>
-
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <p className="text-gray-light text-sm">
-                📍 Контакты поддержки: <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline">https://t.me/raylink_service_bot</a>
-              </p>
-              <p className="text-gray-light text-sm mt-4">
-                Начиная использование Сервиса, Пользователь подтверждает, что ознакомлен с настоящей Офертой и безусловно принимает её условия.
-              </p>
-            </div>
-          </div>
+          {/* CTA Button */}
+          <button
+            ref={buttonRef}
+            onClick={scrollToPricing}
+            className="relative btn-primary group"
+          >
+            <span>Начать бесплатно</span>
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
-      </main>
-    </div>
+      </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+
+      <style>{`
+        @keyframes floatBlob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -30px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+      `}</style>
+    </section>
   );
 };
 
-export default OfferPage;
+export default Hero;
