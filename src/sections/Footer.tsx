@@ -72,13 +72,13 @@ const Footer = () => {
         <div className="text-center mb-12">
           {/* Logo */}
           <div className="flex items-center justify-center mb-6">
-            <span className="font-montserrat text-2xl font-bold text-white tracking-wider uppercase">
+            <span className="font-montserrat text-2xl font-bold text-dark dark:text-white tracking-wider uppercase">
               RayLink
             </span>
           </div>
 
           {/* Description */}
-          <p className="font-montserrat text-gray-light text-sm max-w-md mx-auto mb-10">
+          <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm max-w-md mx-auto mb-10">
             Быстрый VPN на протоколе VLESS. Безопасный доступ к интернету без ограничений.
           </p>
 
@@ -90,7 +90,7 @@ const Footer = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col justify-between h-full items-start text-left p-4 rounded-xl bg-[rgba(26,26,26,0.6)] backdrop-blur-[20px] border border-white/[0.08] text-white transition-all duration-200 hover:border-lime/40 hover:-translate-y-0.5 group"
+                className="flex flex-col justify-between h-full items-start text-left p-4 rounded-xl bg-white/70 dark:bg-[rgba(26,26,26,0.6)] backdrop-blur-[20px] border border-black/[0.08] dark:border-white/[0.08] text-dark dark:text-white transition-all duration-200 hover:border-lime/40 hover:-translate-y-0.5 group"
               >
                 <div className="flex items-start gap-2 w-full">
                   {link.icon === 'vk' ? (
@@ -100,11 +100,11 @@ const Footer = () => {
                   ) : (
                     <link.icon className="w-5 h-5 text-lime mt-0.5 shrink-0" />
                   )}
-                  <span className="font-montserrat font-medium text-white text-sm leading-snug">
+                  <span className="font-montserrat font-medium text-dark dark:text-white text-sm leading-snug">
                     {link.title}
                   </span>
                 </div>
-                <span className="font-montserrat text-xs text-gray-light mt-3">
+                <span className="font-montserrat text-xs text-gray-600 dark:text-gray-light mt-3">
                   {link.description}
                 </span>
               </a>
@@ -113,21 +113,21 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-8">
+        <div className="border-t border-black/5 dark:border-white/5 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-montserrat text-xs text-gray-light">
+            <p className="font-montserrat text-xs text-gray-600 dark:text-gray-light">
               © 2026 RayLink. Все права защищены.
             </p>
             <div className="flex items-center gap-6">
               <Link 
                 to="/offer" 
-                className="font-montserrat text-xs text-gray-light hover:text-lime transition-colors duration-300"
+                className="font-montserrat text-xs text-gray-600 dark:text-gray-light hover:text-lime transition-colors duration-300"
               >
                 Публичная оферта
               </Link>
               <Link 
                 to="/privacy" 
-                className="font-montserrat text-xs text-gray-light hover:text-lime transition-colors duration-300"
+                className="font-montserrat text-xs text-gray-600 dark:text-gray-light hover:text-lime transition-colors duration-300"
               >
                 Политика конфиденциальности
               </Link>
