@@ -79,18 +79,18 @@ const InstructionsPage = () => {
   const PlatformIcon = currentPlatform?.icon || Apple;
 
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5" style={{ background: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(20px)' }}>
+      <header className="sticky top-0 z-50 border-b border-white/5 dark:border-white/5 border-black/5 bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
           <button
             onClick={goBack}
-            className="flex items-center gap-2 text-gray-light hover:text-lime transition-colors duration-300"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-light hover:text-lime transition-colors duration-300"
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="font-montserrat text-sm">Назад</span>
           </button>
-          <h1 className="font-montserrat text-lg font-bold text-white uppercase tracking-wide">Инструкция по подключению</h1>
+          <h1 className="font-montserrat text-lg font-bold text-dark dark:text-white uppercase tracking-wide">Инструкция по подключению</h1>
         </div>
       </header>
 
@@ -113,12 +113,12 @@ const InstructionsPage = () => {
                 >
                   <Icon
                     className={`w-5 h-5 transition-colors ${
-                      selectedPlatform === platform.id ? 'text-lime' : 'text-gray-light'
+                      selectedPlatform === platform.id ? 'text-lime' : 'text-gray-600 dark:text-gray-light'
                     }`}
                   />
                   <span
                     className={`font-montserrat text-sm font-medium ${
-                      selectedPlatform === platform.id ? 'text-white' : 'text-gray-light'
+                      selectedPlatform === platform.id ? 'text-dark dark:text-white' : 'text-gray-600 dark:text-gray-light'
                     }`}
                   >
                     {platform.name}
@@ -129,15 +129,15 @@ const InstructionsPage = () => {
           </div>
 
           {/* Selected Platform Header */}
-          <div className="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
+          <div className="flex items-center gap-4 mb-8 pb-6 border-b border-black/10 dark:border-white/10">
             <div className="w-12 h-12 rounded-xl bg-lime/10 flex items-center justify-center border border-lime/30">
               <PlatformIcon className="w-6 h-6 text-lime" />
             </div>
             <div>
-              <h2 className="font-montserrat text-xl font-bold text-white uppercase tracking-wide">
+              <h2 className="font-montserrat text-xl font-bold text-dark dark:text-white uppercase tracking-wide">
                 {currentPlatform?.name}
               </h2>
-              <p className="font-montserrat text-sm text-gray-light">
+              <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light">
                 Приложение: {currentPlatform?.appName}
               </p>
             </div>
@@ -145,20 +145,20 @@ const InstructionsPage = () => {
 
           {/* Steps */}
           <div className="space-y-6 mb-10">
-            <h3 className="font-montserrat text-lg font-bold text-white uppercase tracking-wide">
+            <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white uppercase tracking-wide">
               Шаги настройки
             </h3>
             {currentPlatform?.steps.map((step, index) => (
               <div
                 key={index}
-                className="flex gap-4 items-start p-4 rounded-2xl bg-dark-card/50 border border-white/5"
+                className="flex gap-4 items-start p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5"
               >
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-lime/10 border border-lime/30 flex items-center justify-center">
                   <span className="font-montserrat font-bold text-lime text-sm">
                     {index + 1}
                   </span>
                 </div>
-                <p className="font-montserrat text-gray-300 text-sm leading-relaxed pt-1">
+                <p className="font-montserrat text-gray-700 dark:text-gray-300 text-sm leading-relaxed pt-1">
                   {step}
                 </p>
               </div>
@@ -166,11 +166,11 @@ const InstructionsPage = () => {
           </div>
 
           {/* Bot Links */}
-          <div className="border-t border-white/10 pt-8 mb-8">
-            <h3 className="font-montserrat text-lg font-bold text-white mb-4 uppercase tracking-wide">
+          <div className="border-t border-black/10 dark:border-white/10 pt-8 mb-8">
+            <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-4 uppercase tracking-wide">
               Получить конфигурацию
             </h3>
-            <p className="font-montserrat text-gray-light text-sm mb-6">
+            <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm mb-6">
               Напишите нашему боту для получения персональной конфигурации и начала тестового периода (72 часа)
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -200,32 +200,32 @@ const InstructionsPage = () => {
           </div>
 
           {/* FAQ */}
-          <div className="border-t border-white/10 pt-8">
-            <h3 className="font-montserrat text-lg font-bold text-white mb-6 uppercase tracking-wide">
+          <div className="border-t border-black/10 dark:border-white/10 pt-8">
+            <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-6 uppercase tracking-wide">
               Частые вопросы
             </h3>
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-dark-card/50 border border-white/5">
-                <h4 className="font-montserrat font-semibold text-white text-sm mb-2">
+              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
+                <h4 className="font-montserrat font-semibold text-dark dark:text-white text-sm mb-2">
                   Что делать, если не подключается?
                 </h4>
-                <p className="font-montserrat text-gray-light text-sm leading-relaxed">
+                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
                   Проверьте правильность введенной конфигурации, убедитесь что приложение обновлено до последней версии, попробуйте перезагрузить устройство. Если проблема остаётся — обратитесь в поддержку.
                 </p>
               </div>
-              <div className="p-4 rounded-2xl bg-dark-card/50 border border-white/5">
-                <h4 className="font-montserrat font-semibold text-white text-sm mb-2">
+              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
+                <h4 className="font-montserrat font-semibold text-dark dark:text-white text-sm mb-2">
                   Можно ли использовать на нескольких устройствах?
                 </h4>
-                <p className="font-montserrat text-gray-light text-sm leading-relaxed">
+                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
                   Да, одна подписка позволяет подключить до 3 устройств одновременно.
                 </p>
               </div>
-              <div className="p-4 rounded-2xl bg-dark-card/50 border border-white/5">
-                <h4 className="font-montserrat font-semibold text-white text-sm mb-2">
+              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
+                <h4 className="font-montserrat font-semibold text-dark dark:text-white text-sm mb-2">
                   Как обновить конфигурацию?
                 </h4>
-                <p className="font-montserrat text-gray-light text-sm leading-relaxed">
+                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
                   Просто запросите новую конфигурацию у бота в Telegram или ВКонтакте и импортируйте её в приложение.
                 </p>
               </div>
