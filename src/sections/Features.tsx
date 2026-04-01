@@ -141,16 +141,17 @@ const Features = () => {
       id="features"
       className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden"
     >
-      {/* Abstract SVG ellipses only — no blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Abstract SVG ellipses — centered and enlarged */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <svg
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.04]"
-          viewBox="0 0 900 500"
+          className="w-[1400px] h-[900px] opacity-[0.04]"
+          viewBox="0 0 1400 900"
           fill="none"
+          style={{ minWidth: '1400px' }}
         >
-          <ellipse cx="450" cy="250" rx="400" ry="180" stroke="white" strokeWidth="1" />
-          <ellipse cx="450" cy="250" rx="320" ry="140" stroke="white" strokeWidth="0.5" />
-          <ellipse cx="450" cy="250" rx="240" ry="100" stroke="white" strokeWidth="0.5" />
+          <ellipse cx="700" cy="450" rx="650" ry="350" stroke="white" strokeWidth="1" />
+          <ellipse cx="700" cy="450" rx="520" ry="280" stroke="white" strokeWidth="0.5" />
+          <ellipse cx="700" cy="450" rx="390" ry="210" stroke="white" strokeWidth="0.5" />
         </svg>
       </div>
 
