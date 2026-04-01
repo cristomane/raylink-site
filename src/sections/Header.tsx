@@ -9,7 +9,7 @@ const Header = () => {
     { label: 'Преимущества', href: '#features' },
     { label: 'Тариф', href: '#pricing' },
     { label: 'Как работает', href: '#how-it-works' },
-    { label: 'Инструкция', href: '#instructions' },
+    { label: 'Инструкция', href: '/instructions' },
     { label: 'FAQ', href: '#faq' },
   ];
 
