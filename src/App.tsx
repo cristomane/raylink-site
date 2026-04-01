@@ -14,6 +14,7 @@ import FAQ from './sections/FAQ';
 import Footer from './sections/Footer';
 import OfferPage from './pages/OfferPage';
 import PrivacyPage from './pages/PrivacyPage';
+import InstructionsPage from './pages/InstructionsPage';
 
 import './App.css';
 
@@ -80,6 +81,7 @@ function App() {
       <div className="min-h-screen bg-background text-foreground overflow-x-clip transition-colors duration-300">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/instructions" element={<InstructionsPage />} />
           <Route path="/offer" element={<OfferPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
