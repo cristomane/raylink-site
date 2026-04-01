@@ -64,7 +64,7 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
-      {/* Blueprint grid lines with edge fade */}
+      {/* Blueprint grid lines with edge fade on all sides */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -73,8 +73,16 @@ const Hero = () => {
             linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
-          maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
+          maskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          WebkitMaskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          maskComposite: 'intersect',
+          WebkitMaskComposite: 'source-in',
         }}
       />
 
