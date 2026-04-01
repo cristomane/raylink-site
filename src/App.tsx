@@ -77,7 +77,7 @@ function App() {
   }, []);
 
   return (
-    <Router basename="/raylink-site">
+    <Router basename="/">
       <div className="min-h-screen bg-background text-foreground overflow-x-clip transition-colors duration-300">
         <Routes>
           <Route path="/" element={<MainPage />} />
