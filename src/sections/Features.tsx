@@ -41,19 +41,37 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
   return (
     <div
       ref={cardRef}
-      className="glass-card-light p-8 lg:p-10 group cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime/40"
+      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden p-8 lg:p-10"
+      style={{
+        borderRadius: '32px',
+        background: 'var(--glass-bg)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        border: '1px solid var(--glass-border)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
+      }}
     >
-      <div className="mb-6">
-        <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
-          <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
+      {/* Soft top highlight — same liquid-glass feel as Hero */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 60%)',
+        }}
+      />
+
+      <div className="relative z-10">
+        <div className="mb-6">
+          <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
+            <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
+          </div>
         </div>
+        <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
+          {title}
+        </h3>
+        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
+          {description}
+        </p>
       </div>
-      <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
-        {title}
-      </h3>
-      <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-        {description}
-      </p>
     </div>
   );
 };
@@ -123,27 +141,8 @@ const Features = () => {
       id="features"
       className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden"
     >
-      {/* Abstract background shapes */}
+      {/* Abstract SVG ellipses only — no blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Very soft white blob top-right */}
-        <div
-          className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full opacity-[0.06]"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-            filter: 'blur(100px)',
-            animation: 'floatSoft 16s ease-in-out infinite',
-          }}
-        />
-        {/* Very soft white blob bottom-left */}
-        <div
-          className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.04]"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
-            filter: 'blur(100px)',
-            animation: 'floatSoft 18s ease-in-out infinite reverse',
-          }}
-        />
-        {/* Thin abstract ellipses */}
         <svg
           className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.04]"
           viewBox="0 0 900 500"
@@ -177,13 +176,6 @@ const Features = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes floatSoft {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(20px, -20px) scale(1.05); }
-        }
-      `}</style>
     </section>
   );
 };
