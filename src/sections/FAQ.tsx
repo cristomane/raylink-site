@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FAQItemProps {
   question: string;
-  answer: string;
+  answer: ReactNode;
   isOpen: boolean;
   onClick: () => void;
   delay: number;
@@ -81,9 +81,9 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm px-6 pb-6 leading-relaxed">
+        <div className="font-montserrat text-gray-light text-sm px-6 pb-6 leading-relaxed">
           {answer}
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -97,7 +97,30 @@ const FAQ = () => {
   const faqs = [
     {
       question: 'Как начать пользоваться RayLink?',
-      answer: 'Просто перейдите в нашего бота в Telegram (@raylink_service_bot) или ВКонтакте (vk.com/raylinkvpn), нажмите "Start" и следуйте инструкциям. Тестовый период 72 часа активируется автоматически.',
+      answer: (
+        <>
+          Просто перейдите в нашего бота в{' '}
+          <a
+            href="https://t.me/raylink_service_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lime hover:underline font-medium"
+          >
+            Telegram
+          </a>{' '}
+          или{' '}
+          <a
+            href="https://vk.com/raylinkvpn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lime hover:underline font-medium"
+          >
+            VK
+          </a>
+          , нажмите Start и следуйте инструкциям. Тестовый период на 3 дня можно активировать кнопкой{' '}
+          <span className="text-lime font-medium">⚙️Тестовый период</span> внутри бота.
+        </>
+      ),
     },
     {
       question: 'Сколько устройств можно подключить?',
