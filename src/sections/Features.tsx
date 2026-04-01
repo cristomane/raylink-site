@@ -41,44 +41,19 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
   return (
     <div
       ref={cardRef}
-      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-      style={{
-        borderRadius: '28px',
-        background: 'rgba(255,255,255,0.03)',
-        backdropFilter: 'blur(40px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(160%)',
-        border: '1px solid rgba(255,255,255,0.06)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.2), inset 0 0.5px 0 rgba(255,255,255,0.12)',
-      }}
+      className="glass-card-light p-8 lg:p-10 group cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime/40"
     >
-      {/* Subtle top highlight — clean iOS glass feel */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-100"
-        style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 35%)',
-        }}
-      />
-
-      <div className="relative z-10 p-8 lg:p-10">
-        <div className="mb-6">
-          <div 
-            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-            style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
-              boxShadow: 'inset 0 0.5px 0 rgba(255,255,255,0.1)',
-            }}
-          >
-            <Icon className="w-7 h-7 text-gray-400 transition-colors duration-300 group-hover:text-lime" />
-          </div>
+      <div className="mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
+          <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
         </div>
-        <h3 className="font-montserrat text-lg font-bold text-white mb-3 uppercase tracking-wide">
-          {title}
-        </h3>
-        <p className="font-montserrat text-gray-400 text-sm leading-relaxed">
-          {description}
-        </p>
       </div>
+      <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
+        {title}
+      </h3>
+      <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 };
@@ -148,34 +123,35 @@ const Features = () => {
       id="features"
       className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden"
     >
-      {/* Minimal abstract background shapes — very subtle, desaturated */}
+      {/* Abstract background shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft white-gray blob top-right */}
+        {/* Very soft white blob top-right */}
         <div
-          className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full opacity-20"
+          className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full opacity-[0.06]"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+            filter: 'blur(100px)',
+            animation: 'floatSoft 16s ease-in-out infinite',
+          }}
+        />
+        {/* Very soft white blob bottom-left */}
+        <div
+          className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.04]"
           style={{
             background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-            animation: 'floatSoft 14s ease-in-out infinite',
+            filter: 'blur(100px)',
+            animation: 'floatSoft 18s ease-in-out infinite reverse',
           }}
         />
-        {/* Soft white-gray blob bottom-left */}
-        <div
-          className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-15"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-            animation: 'floatSoft 16s ease-in-out infinite reverse',
-          }}
-        />
-        {/* Very thin abstract ring — top center */}
+        {/* Thin abstract ellipses */}
         <svg
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.03]"
-          viewBox="0 0 800 400"
+          className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.04]"
+          viewBox="0 0 900 500"
           fill="none"
         >
-          <ellipse cx="400" cy="200" rx="350" ry="150" stroke="white" strokeWidth="1" />
-          <ellipse cx="400" cy="200" rx="280" ry="120" stroke="white" strokeWidth="0.5" />
+          <ellipse cx="450" cy="250" rx="400" ry="180" stroke="white" strokeWidth="1" />
+          <ellipse cx="450" cy="250" rx="320" ry="140" stroke="white" strokeWidth="0.5" />
+          <ellipse cx="450" cy="250" rx="240" ry="100" stroke="white" strokeWidth="0.5" />
         </svg>
       </div>
 
@@ -183,7 +159,7 @@ const Features = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Почему RayLink
         </h2>
