@@ -41,37 +41,19 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
   return (
     <div
       ref={cardRef}
-      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden p-8 lg:p-10"
-      style={{
-        borderRadius: '32px',
-        background: 'var(--glass-bg)',
-        backdropFilter: 'blur(40px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-        border: '1px solid var(--glass-border)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
-      }}
+      className="glass-card-light p-8 lg:p-10 group cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime/40 !bg-white/40 dark:!bg-[rgba(26,26,26,0.35)]"
     >
-      {/* Soft top highlight — same liquid-glass feel as Hero */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="relative z-10">
-        <div className="mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
-            <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
-          </div>
+      <div className="mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
+          <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
         </div>
-        <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
-          {title}
-        </h3>
-        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-          {description}
-        </p>
       </div>
+      <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
+        {title}
+      </h3>
+      <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 };
@@ -161,7 +143,7 @@ const Features = () => {
           ref={titleRef}
           className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
-          Почему RayLink
+          Преимущества
         </h2>
 
         {/* Features Grid */}
