@@ -59,9 +59,14 @@ const Header = () => {
 
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <button onClick={scrollToPricing} className="btn-primary py-2.5 px-5 text-sm font-martian">
-                Подключить
-              </button>
+              <a
+                href="https://t.me/RayLinkSupport"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary py-2.5 px-5 text-sm font-martian"
+              >
+                Поддержка
+              </a>
             </div>
           </div>
         </div>
@@ -110,9 +115,14 @@ const Header = () => {
               >
                 Инструкция
               </Link>
-              <button onClick={scrollToPricing} className="btn-primary py-3 mt-4 text-center font-martian">
-                Подключить
-              </button>
+              <a
+                href="https://t.me/RayLinkSupport"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary py-3 mt-4 text-center font-martian"
+              >
+                Поддержка
+              </a>
             </nav>
           </div>
         )}
