@@ -123,8 +123,7 @@ const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="relative font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase"
-            style={{ letterSpacing: '-0.04em' }}
+            className="relative font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
