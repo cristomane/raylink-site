@@ -34,7 +34,6 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
         }
       );
 
-      // Animate counter
       const obj = { val: 0 };
       gsap.to(obj, {
         val: value,
@@ -56,22 +55,18 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       className="relative group cursor-pointer transition-all duration-500 hover:scale-105 overflow-hidden text-center"
       style={{
         borderRadius: '28px',
-        background: 'rgba(255,255,255,0.03)',
+        background: 'rgba(255,255,255,0.02)',
         backdropFilter: 'blur(40px) saturate(180%)',
         WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-        border: '1px solid rgba(255,255,255,0.12)',
-        boxShadow: `
-          inset 0 1px 0 rgba(255,255,255,0.15),
-          inset 0 -1px 0 rgba(255,255,255,0.05),
-          0 8px 32px rgba(0,0,0,0.2)
-        `,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       {/* Top glossy highlight */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
         }}
       />
 
@@ -79,15 +74,15 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 40%)',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 40%)',
         }}
       />
 
       {/* Corner reflection */}
       <div
-        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-30"
+        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-20"
         style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
           filter: 'blur(20px)',
         }}
       />
@@ -119,7 +114,6 @@ const Stats = () => {
       id="stats"
       className="relative py-16 lg:py-24"
     >
-      {/* Background gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
