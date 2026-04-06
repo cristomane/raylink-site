@@ -145,9 +145,9 @@ const Hero = () => {
           <button
             ref={buttonRef}
             onClick={scrollToPricing}
-            className="relative btn-primary group font-martian"
+            className="relative btn-primary group font-syncopate"
           >
-            <span>Получить доступ (3 дня бесплатно)</span>
+            <span>3 ДНЯ БЕСПЛАТНО</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
