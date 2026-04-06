@@ -19,9 +19,14 @@ const Footer = () => {
   const fetchIP = async () => {
     setIpLoading(true);
     try {
-      const res = await fetch('https://ipv4.ipapi.co/json/');
-      const data = await res.json();
-      setIpData(data);
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      const ipJson = await ipRes.json();
+      const ipv4 = ipJson.ip;
+
+      const geoRes = await fetch(`https://ipapi.co/${ipv4}/json/`);
+      const geoJson = await geoRes.json();
+
+      setIpData({ ip: ipv4, ...geoJson });
     } catch {
       setIpData({ error: true });
     }
