@@ -31,7 +31,7 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <a href="#hero" className="flex items-center gap-2 group" onClick={(e) => handleAnchorClick(e, '#hero')}>
-              <span className="font-montserrat text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
+              <span className="font-martian text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
                 RayLink
               </span>
             </a>
@@ -59,7 +59,7 @@ const Header = () => {
 
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <button onClick={scrollToPricing} className="btn-primary py-2.5 px-5 text-sm">
+              <button onClick={scrollToPricing} className="btn-primary py-2.5 px-5 text-sm font-martian">
                 Подключить
               </button>
             </div>
@@ -73,7 +73,7 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <a href="#hero" className="flex items-center gap-2" onClick={(e) => handleAnchorClick(e, '#hero')}>
-              <span className="font-montserrat text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
+              <span className="font-martian text-lg font-bold tracking-wider text-dark dark:text-white uppercase">
                 RayLink
               </span>
             </a>
@@ -110,7 +110,7 @@ const Header = () => {
               >
                 Инструкция
               </Link>
-              <button onClick={scrollToPricing} className="btn-primary py-3 mt-4 text-center">
+              <button onClick={scrollToPricing} className="btn-primary py-3 mt-4 text-center font-martian">
                 Подключить
               </button>
             </nav>
