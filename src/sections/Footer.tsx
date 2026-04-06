@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, Newspaper, MessageCircle, Globe, Gauge } from 'lucide-react';
@@ -14,71 +14,7 @@ const Footer = () => {
   const [ipData, setIpData] = useState<any>(null);
   const [ipLoading, setIpLoading] = useState(false);
 
-  const [speedStatus, setSpeedStatus] = useState<'idle' | 'ping' | 'download' | 'upload' | 'done'>('idle');
-  const [speedProgress, setSpeedProgress] = useState(0);
-  const [pingResult, setPingResult] = useState<number | null>(null);
-  const [downloadResult, setDownloadResult] = useState<number | null>(null);
-  const [uploadResult, setUploadResult] = useState<number | null>(null);
 
-  const resetSpeed = () => {
-    setSpeedStatus('idle');
-    setSpeedProgress(0);
-    setPingResult(null);
-    setDownloadResult(null);
-    setUploadResult(null);
-  };
-
-  const runSpeedTest = useCallback(async () => {
-    resetSpeed();
-
-    // Ping
-    setSpeedStatus('ping');
-    const pingTimes: number[] = [];
-    for (let i = 0; i < 3; i++) {
-      const start = performance.now();
-      try {
-        await fetch('https://httpbin.org/get', { method: 'GET', cache: 'no-store' });
-        pingTimes.push(performance.now() - start);
-      } catch {
-        pingTimes.push(0);
-      }
-      setSpeedProgress(((i + 1) / 3) * 10);
-    }
-    const avgPing = pingTimes.filter((t) => t > 0).reduce((a, b) => a + b, 0) / pingTimes.filter((t) => t > 0).length || 0;
-    setPingResult(Math.round(avgPing));
-
-    // Download (5 MB)
-    setSpeedStatus('download');
-    const dlStart = performance.now();
-    try {
-      await fetch('https://httpbin.org/bytes/5242880', { cache: 'no-store' });
-      const dlDuration = (performance.now() - dlStart) / 1000;
-      const dlMbps = (5242880 * 8) / (dlDuration * 1_000_000);
-      setDownloadResult(Number(dlMbps.toFixed(1)));
-    } catch {
-      setDownloadResult(0);
-    }
-    setSpeedProgress(60);
-
-    // Upload (2 MB)
-    setSpeedStatus('upload');
-    const blob = new Blob([new ArrayBuffer(2097152)]);
-    const ulStart = performance.now();
-    try {
-      await fetch('https://httpbin.org/post', {
-        method: 'POST',
-        body: blob,
-        cache: 'no-store',
-      });
-      const ulDuration = (performance.now() - ulStart) / 1000;
-      const ulMbps = (2097152 * 8) / (ulDuration * 1_000_000);
-      setUploadResult(Number(ulMbps.toFixed(1)));
-    } catch {
-      setUploadResult(0);
-    }
-    setSpeedProgress(100);
-    setSpeedStatus('done');
-  }, []);
 
   const fetchIP = async () => {
     setIpLoading(true);
@@ -280,100 +216,24 @@ const Footer = () => {
           onClick={() => setShowSpeed(false)}
         >
           <div
-            className="glass-card w-full max-w-md p-6 relative"
+            className="glass-card w-full max-w-2xl p-4 relative h-[540px] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setShowSpeed(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
             >
               ✕
             </button>
-            <h3 className="font-syncopate text-xl font-bold mb-6 uppercase tracking-wide text-center">
+            <h3 className="font-syncopate text-xl font-bold mb-4 uppercase tracking-wide px-2">
               Тест скорости
             </h3>
-
-            <div className="flex flex-col items-center">
-              <div className="relative w-44 h-44 mb-6">
-                <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
-                  <circle cx="100" cy="100" r="85" stroke="rgba(255,255,255,0.08)" strokeWidth="12" fill="none" />
-                  <circle
-                    cx="100"
-                    cy="100"
-                    r="85"
-                    stroke="#CCFF00"
-                    strokeWidth="12"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeDasharray={2 * Math.PI * 85}
-                    strokeDashoffset={2 * Math.PI * 85 * (1 - speedProgress / 100)}
-                    style={{ transition: 'stroke-dashoffset 0.3s ease' }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  {speedStatus === 'idle' && (
-                    <span className="font-montserrat text-sm text-gray-400">Готов</span>
-                  )}
-                  {speedStatus === 'ping' && (
-                    <span className="font-montserrat text-sm text-gray-400">Ping...</span>
-                  )}
-                  {speedStatus === 'download' && (
-                    <>
-                      <span className="font-syncopate text-2xl font-bold text-lime">{downloadResult ?? 0}</span>
-                      <span className="font-montserrat text-xs text-gray-400">Mbps</span>
-                    </>
-                  )}
-                  {speedStatus === 'upload' && (
-                    <>
-                      <span className="font-syncopate text-2xl font-bold text-lime">{uploadResult ?? 0}</span>
-                      <span className="font-montserrat text-xs text-gray-400">Mbps</span>
-                    </>
-                  )}
-                  {speedStatus === 'done' && (
-                    <span className="font-montserrat text-sm text-lime font-semibold">Готово</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3 w-full mb-6">
-                <div className="text-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                  <div className="font-montserrat text-xs text-gray-400 mb-1">Ping</div>
-                  <div className="font-syncopate text-lg font-bold text-white">
-                    {pingResult !== null ? pingResult : '—'}
-                  </div>
-                  <div className="font-montserrat text-[10px] text-gray-500">ms</div>
-                </div>
-                <div className="text-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                  <div className="font-montserrat text-xs text-gray-400 mb-1">Download</div>
-                  <div className="font-syncopate text-lg font-bold text-white">
-                    {downloadResult !== null ? downloadResult : '—'}
-                  </div>
-                  <div className="font-montserrat text-[10px] text-gray-500">Mbps</div>
-                </div>
-                <div className="text-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                  <div className="font-montserrat text-xs text-gray-400 mb-1">Upload</div>
-                  <div className="font-syncopate text-lg font-bold text-white">
-                    {uploadResult !== null ? uploadResult : '—'}
-                  </div>
-                  <div className="font-montserrat text-[10px] text-gray-500">Mbps</div>
-                </div>
-              </div>
-
-              {speedStatus === 'idle' || speedStatus === 'done' ? (
-                <button
-                  onClick={runSpeedTest}
-                  className="btn-primary py-3 px-8 font-martian"
-                >
-                  {speedStatus === 'done' ? 'Повторить тест' : 'Начать тест'}
-                </button>
-              ) : (
-                <p className="font-montserrat text-sm text-gray-400">
-                  {speedStatus === 'ping' && 'Измерение пинга...'}
-                  {speedStatus === 'download' && 'Измерение загрузки...'}
-                  {speedStatus === 'upload' && 'Измерение отдачи...'}
-                </p>
-              )}
-            </div>
+            <iframe
+              src="https://openspeedtest.com/speedtest?Run=5"
+              className="w-full flex-1 rounded-xl border-0"
+              allow="fullscreen"
+              title="Тест скорости интернета"
+            />
           </div>
         </div>
       )}
