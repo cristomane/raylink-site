@@ -1,4 +1,3 @@
-// src/sections/Features.tsx
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -77,7 +76,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
             <Icon className="w-7 h-7 text-gray-300 transition-colors duration-300 group-hover:text-lime" />
           </div>
         </div>
-        <h3 className="font-montserrat text-lg font-bold text-white mb-3 uppercase tracking-wide">
+        <h3 className="font-martian text-lg font-bold text-white mb-3 uppercase tracking-wide">
           {title}
         </h3>
         <p className="font-montserrat text-gray-400 text-sm leading-relaxed">
@@ -169,7 +168,7 @@ const Features = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-martian text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Преимущества
         </h2>
