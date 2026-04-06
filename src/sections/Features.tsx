@@ -1,3 +1,4 @@
+// src/sections/Features.tsx
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -44,18 +45,18 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
       className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden"
       style={{
         borderRadius: '28px',
-        background: 'rgba(255,255,255,0.02)',
-        backdropFilter: 'blur(40px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        background: 'rgba(255,255,255,0.01)',
+        backdropFilter: 'blur(20px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(140%)',
         border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.1)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       {/* Top glossy highlight */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
         }}
       />
 
@@ -63,16 +64,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 40%)',
-        }}
-      />
-
-      {/* Corner reflection */}
-      <div
-        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-20"
-        style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
-          filter: 'blur(20px)',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
         }}
       />
 
@@ -83,7 +75,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
             style={{
               background: 'rgba(255,255,255,0.03)',
               border: '1px solid rgba(255,255,255,0.06)',
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)',
             }}
           >
             <Icon className="w-7 h-7 text-gray-300 transition-colors duration-300 group-hover:text-lime" />
@@ -165,7 +157,29 @@ const Features = () => {
       id="features"
       className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden"
     >
-      {/* Abstract SVG ellipses — centered and enlarged */}
+      {/* Blueprint grid lines with edge fade */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          maskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          WebkitMaskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          maskComposite: 'intersect',
+          WebkitMaskComposite: 'source-in',
+        }}
+      />
+
+      {/* Abstract SVG ellipses */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <svg
           className="w-[1400px] h-[900px] opacity-[0.04]"
