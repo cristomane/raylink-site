@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Send, Newspaper, MessageCircle } from 'lucide-react';
+import { Send, Newspaper, MessageCircle, Globe, Gauge } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,6 +9,22 @@ gsap.registerPlugin(ScrollTrigger);
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [showIP, setShowIP] = useState(false);
+  const [showSpeed, setShowSpeed] = useState(false);
+  const [ipData, setIpData] = useState<any>(null);
+  const [ipLoading, setIpLoading] = useState(false);
+
+  const fetchIP = async () => {
+    setIpLoading(true);
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      setIpData(data);
+    } catch {
+      setIpData({ error: true });
+    }
+    setIpLoading(false);
+  };
 
   const allLinks = [
     {
@@ -108,6 +124,22 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-black/5 dark:border-white/5 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+            <button
+              onClick={() => { setShowIP(true); fetchIP(); }}
+              className="btn-secondary py-2.5 px-5 text-sm font-martian"
+            >
+              <Globe className="w-4 h-4" />
+              Мой IP адрес
+            </button>
+            <button
+              onClick={() => setShowSpeed(true)}
+              className="btn-secondary py-2.5 px-5 text-sm font-martian"
+            >
+              <Gauge className="w-4 h-4" />
+              Тест скорости
+            </button>
+          </div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-montserrat text-xs text-gray-600 dark:text-gray-light">
               © 2026 RayLink. Все права защищены.
@@ -129,6 +161,80 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {showIP && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setShowIP(false)}
+        >
+          <div
+            className="glass-card w-full max-w-md p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowIP(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              ✕
+            </button>
+            <h3 className="font-syncopate text-xl font-bold mb-6 uppercase tracking-wide">
+              Мой IP адрес
+            </h3>
+            {ipLoading ? (
+              <p className="font-montserrat text-sm text-gray-400">Загрузка...</p>
+            ) : ipData?.error ? (
+              <p className="font-montserrat text-sm text-red-400">Не удалось получить данные</p>
+            ) : (
+              <div className="space-y-3 font-montserrat text-sm">
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">IP адрес</span>
+                  <span className="text-lime font-bold">{ipData?.ip}</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">Страна</span>
+                  <span className="text-white">{ipData?.country_name}</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-gray-400">Город</span>
+                  <span className="text-white">{ipData?.city}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Провайдер</span>
+                  <span className="text-white text-right max-w-[60%]">{ipData?.org}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {showSpeed && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setShowSpeed(false)}
+        >
+          <div
+            className="glass-card w-full max-w-2xl p-4 relative h-[520px] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowSpeed(false)}
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              ✕
+            </button>
+            <h3 className="font-syncopate text-xl font-bold mb-4 uppercase tracking-wide px-2">
+              Тест скорости
+            </h3>
+            <iframe
+              src="https://openspeedtest.com/speedtest.html?run=5"
+              className="w-full flex-1 rounded-xl border-0"
+              allow="fullscreen"
+              title="Тест скорости интернета"
+            />
+          </div>
+        </div>
+      )}
     </footer>
   );
 };
