@@ -66,7 +66,7 @@ const Hero = () => {
     >
       {/* Blueprint grid lines with edge fade on all sides */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 pointer-events-none opacity-[0.05]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
@@ -166,7 +166,7 @@ const Hero = () => {
             onClick={scrollToPricing}
             className="relative btn-primary group"
           >
-            <span>Начать бесплатно</span>
+            <span>Получить доступ (3 дня бесплатно)</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
