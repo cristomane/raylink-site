@@ -67,7 +67,9 @@ const Header = () => {
         </div>
       </header>
 
-      <header className="fixed top-0 left-0 right-0 z-50 md:hidden bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]">
+      <header
+        className="fixed top-0 left-0 right-0 z-50 md:hidden bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px] pt-[env(safe-area-inset-top)]"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <a href="#hero" className="flex items-center gap-2" onClick={(e) => handleAnchorClick(e, '#hero')}>
@@ -75,6 +77,7 @@ const Header = () => {
                 RayLink
               </span>
             </a>
+
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <button
