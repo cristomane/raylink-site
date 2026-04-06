@@ -227,7 +227,7 @@ const Footer = () => {
               Тест скорости
             </h3>
             <iframe
-              src="https://openspeedtest.com/speedtest.html?run=5"
+              src="https://openspeedtest.com/speedtest?Run=5"
               className="w-full flex-1 rounded-xl border-0"
               allow="fullscreen"
               title="Тест скорости интернета"
