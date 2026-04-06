@@ -23,7 +23,6 @@ const Pricing = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
       gsap.fromTo(
         titleRef.current,
         { y: 50, opacity: 0 },
@@ -40,7 +39,6 @@ const Pricing = () => {
         }
       );
 
-      // Card animation with rotation
       gsap.fromTo(
         cardRef.current,
         { rotateY: -10, x: -50, opacity: 0 },
@@ -58,7 +56,6 @@ const Pricing = () => {
         }
       );
 
-      // Features list animation
       if (featuresRef.current) {
         const items = featuresRef.current.querySelectorAll('li');
         gsap.fromTo(
@@ -80,7 +77,6 @@ const Pricing = () => {
         );
       }
 
-      // Button animation
       gsap.fromTo(
         buttonRef.current,
         { y: 30, scale: 0.95, opacity: 0 },
@@ -99,7 +95,6 @@ const Pricing = () => {
         }
       );
 
-      // VK Button animation
       gsap.fromTo(
         vkButtonRef.current,
         { y: 30, scale: 0.95, opacity: 0 },
@@ -128,7 +123,6 @@ const Pricing = () => {
       id="pricing"
       className="relative py-24 lg:py-32"
     >
-      {/* Background gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -137,15 +131,13 @@ const Pricing = () => {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-4xl lg:text-5xl font-bold text-center text-dark dark:text-white mb-12 lg:mb-16"
+          className="font-martian text-4xl lg:text-5xl font-bold text-center text-dark dark:text-white mb-12 lg:mb-16"
         >
           Тариф
         </h2>
 
-        {/* Pricing Card */}
         <div className="flex justify-center" style={{ perspective: '1000px' }}>
           <div
             ref={cardRef}
@@ -154,14 +146,12 @@ const Pricing = () => {
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
             }}
           >
-            {/* Plan Name */}
-            <div className="font-montserrat text-lg text-lime tracking-wider mb-6 uppercase font-semibold">
+            <div className="font-martian text-lg text-lime tracking-wider mb-6 uppercase font-semibold">
               Единый тариф
             </div>
 
-            {/* Price */}
             <div className="mb-8">
-              <span className="font-montserrat text-7xl lg:text-8xl font-bold text-dark dark:text-white">
+              <span className="font-martian text-7xl lg:text-8xl font-bold text-dark dark:text-white">
                 150₽
               </span>
               <span className="font-montserrat text-gray-600 dark:text-gray-light text-lg ml-2">
@@ -169,7 +159,6 @@ const Pricing = () => {
               </span>
             </div>
 
-            {/* Features List */}
             <ul ref={featuresRef} className="space-y-4 mb-10 text-left">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-center gap-3">
@@ -181,31 +170,29 @@ const Pricing = () => {
               ))}
             </ul>
 
-            {/* CTA Buttons */}
             <div className="space-y-3">
               <a
                 ref={buttonRef}
                 href="https://t.me/raylink_service_bot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary w-full group"
+                className="btn-primary w-full group font-martian"
               >
                 <Send className="w-5 h-5" />
                 <span>Подключить через Telegram</span>
               </a>
 
-              {/* VK Button */}
               <a
                 ref={vkButtonRef}
                 href="https://vk.com/raylinkvpn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-vk w-full group text-base"
+                className="btn-vk w-full group text-base font-martian"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.714-1.033-1.033-1.49-1.171-1.744-1.171-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.673 4 8.231c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.049.17.491-.085.744-.576.744z"/>
                 </svg>
-                <span className="font-montserrat font-semibold text-base">Подключить через VK</span>
+                <span>Подключить через VK</span>
               </a>
             </div>
           </div>
