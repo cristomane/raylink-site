@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Gauge, Mail, ChevronRight } from 'lucide-react';
+import { Mail, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -152,15 +152,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 {vpnLinks.map((link, idx) => (
                   <li key={idx}>
-                    {'href' in link ? (
-                      <Link
-                        to={link.href}
-                        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-light hover:text-lime transition-colors group"
-                      >
-                        <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-lime transition-colors" />
-                        {link.label}
-                      </Link>
-                    ) : (
+                    {'action' in link ? (
                       <button
                         onClick={link.action}
                         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-light hover:text-lime transition-colors group"
@@ -168,6 +160,14 @@ const Footer = () => {
                         <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-lime transition-colors" />
                         {link.label}
                       </button>
+                    ) : (
+                      <Link
+                        to={link.href as string}
+                        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-light hover:text-lime transition-colors group"
+                      >
+                        <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-lime transition-colors" />
+                        {link.label}
+                      </Link>
                     )}
                   </li>
                 ))}
@@ -181,7 +181,7 @@ const Footer = () => {
                   <li key={idx}>
                     {link.href.startsWith('/') && !link.href.startsWith('/#') ? (
                       <Link
-                        to={link.href}
+                        to={link.href as string}
                         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-light hover:text-lime transition-colors group"
                       >
                         <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-lime transition-colors" />
@@ -189,7 +189,7 @@ const Footer = () => {
                       </Link>
                     ) : (
                       <a
-                        href={link.href}
+                        href={link.href as string}
                         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-light hover:text-lime transition-colors group"
                       >
                         <ChevronRight className="w-3 h-3 text-gray-400 group-hover:text-lime transition-colors" />
