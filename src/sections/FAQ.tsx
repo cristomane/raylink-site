@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown } from 'lucide-react';
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FAQItemProps {
   question: string;
-  answer: ReactNode;
+  answer: string;
   isOpen: boolean;
   onClick: () => void;
   delay: number;
@@ -69,7 +69,7 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         onClick={onClick}
         className="w-full flex items-center justify-between p-6 text-left"
       >
-        <span className="font-montserrat text-lg font-medium text-dark dark:text-white pr-4">
+        <span className="font-martian text-lg font-medium text-dark dark:text-white pr-4">
           {question}
         </span>
         <ChevronDown
@@ -81,9 +81,9 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <div className="font-montserrat text-gray-light text-sm px-6 pb-6 leading-relaxed">
+        <p className="font-montserrat text-gray-light text-sm px-6 pb-6 leading-relaxed">
           {answer}
-        </div>
+        </p>
       </div>
     </div>
   );
@@ -97,30 +97,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: 'Как начать пользоваться RayLink?',
-      answer: (
-        <>
-          Просто перейдите в нашего бота в{' '}
-          <a
-            href="https://t.me/raylink_service_bot"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lime hover:underline font-medium"
-          >
-            Telegram
-          </a>{' '}
-          или{' '}
-          <a
-            href="https://vk.com/raylinkvpn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lime hover:underline font-medium"
-          >
-            VK
-          </a>
-          , нажмите Start и следуйте инструкциям. Тестовый период на 3 дня можно активировать кнопкой{' '}
-          <span className="text-lime font-medium">⚙️Тестовый период</span> внутри бота.
-        </>
-      ),
+      answer: 'Просто перейдите в нашего бота в Telegram или VK, нажмите Start и следуйте инструкциям. Тестовый период на 3 дня можно активировать кнопкой ⚙️Тестовый период внутри бота.',
     },
     {
       question: 'Сколько устройств можно подключить?',
@@ -177,15 +154,13 @@ const FAQ = () => {
       className="relative py-24 lg:py-32"
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-martian text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Частые вопросы
         </h2>
 
-        {/* FAQ List */}
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <FAQItem
