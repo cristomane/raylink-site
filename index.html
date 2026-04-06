@@ -6,11 +6,13 @@
     <title>RayLink — Быстрый VPN на VLESS</title>
     <meta name="description" content="RayLink — VPN сервис на протоколе VLESS. Высокая скорость, безопасность, доступность. Всего 150₽ в месяц. Тестовый период 72 часа." />
     
-    <!-- iOS status bar color -->
-    <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#F5F5F5" media="(prefers-color-scheme: light)" />
+    <!-- Force dark background immediately for iOS safe area -->
+    <meta name="theme-color" content="#0A0A0A" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <style>
+      html, body { background-color: #0A0A0A !important; }
+    </style>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
