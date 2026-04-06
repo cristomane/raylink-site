@@ -1,3 +1,4 @@
+// src/sections/Stats.tsx
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -55,18 +56,18 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       className="relative group cursor-pointer transition-all duration-500 hover:scale-105 overflow-hidden text-center"
       style={{
         borderRadius: '28px',
-        background: 'rgba(255,255,255,0.02)',
-        backdropFilter: 'blur(40px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        background: 'rgba(255,255,255,0.01)',
+        backdropFilter: 'blur(20px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(140%)',
         border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.1)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       {/* Top glossy highlight */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
         }}
       />
 
@@ -74,16 +75,7 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 40%)',
-        }}
-      />
-
-      {/* Corner reflection */}
-      <div
-        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-20"
-        style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
-          filter: 'blur(20px)',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
         }}
       />
 
@@ -112,8 +104,30 @@ const Stats = () => {
     <section
       ref={sectionRef}
       id="stats"
-      className="relative py-16 lg:py-24"
+      className="relative py-16 lg:py-24 overflow-hidden"
     >
+      {/* Blueprint grid lines with edge fade */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          maskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          WebkitMaskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          maskComposite: 'intersect',
+          WebkitMaskComposite: 'source-in',
+        }}
+      />
+
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
