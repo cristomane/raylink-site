@@ -84,7 +84,7 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
           ref={circleRef}
           className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-lime flex items-center justify-center bg-dark z-10 transition-all duration-300 hover:bg-lime hover:scale-110 group"
         >
-          <span className="font-martian text-xl lg:text-2xl font-bold text-lime group-hover:text-dark transition-colors duration-300">
+          <span className="font-syncopate text-xl lg:text-2xl font-bold text-lime group-hover:text-dark transition-colors duration-300">
             {number}
           </span>
         </div>
@@ -172,7 +172,7 @@ const HowItWorks = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
-          className="font-martian text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-syncopate text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Как это работает
         </h2>

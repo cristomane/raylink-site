@@ -244,6 +244,10 @@ html.lenis {
   }
   
   .font-martian {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .font-syncopate {
     font-family: 'Syncopate Bold Cyr', sans-serif;
   }
 }

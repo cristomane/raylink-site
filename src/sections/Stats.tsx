@@ -75,7 +75,7 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
         }}
       />
       <div className="relative z-10 px-6 py-8">
-        <div className="font-martian text-4xl lg:text-5xl font-bold text-lime mb-2">
+        <div className="font-syncopate text-4xl lg:text-5xl font-bold text-lime mb-2">
           {displayValue}{suffix}
         </div>
         <div className="font-montserrat text-sm text-gray-400">

@@ -123,14 +123,14 @@ const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="relative font-martian text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
+            className="relative font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
 
           <p
             ref={subtitleRef}
-            className="relative font-martian text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
+            className="relative font-syncopate text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
           >
             Свобода в каждом клике
           </p>

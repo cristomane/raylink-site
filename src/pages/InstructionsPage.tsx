@@ -89,7 +89,7 @@ const InstructionsPage = () => {
             <ArrowLeft className="w-5 h-5" />
             <span className="font-montserrat text-sm">Назад</span>
           </button>
-          <h1 className="font-martian text-lg font-bold text-dark dark:text-white uppercase tracking-wide">Инструкция по подключению</h1>
+          <h1 className="font-syncopate text-lg font-bold text-dark dark:text-white uppercase tracking-wide">Инструкция по подключению</h1>
         </div>
       </header>
 
@@ -130,7 +130,7 @@ const InstructionsPage = () => {
               <PlatformIcon className="w-6 h-6 text-lime" />
             </div>
             <div>
-              <h2 className="font-martian text-xl font-bold text-dark dark:text-white uppercase tracking-wide">
+              <h2 className="font-syncopate text-xl font-bold text-dark dark:text-white uppercase tracking-wide">
                 {currentPlatform?.name}
               </h2>
               <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light">
@@ -140,7 +140,7 @@ const InstructionsPage = () => {
           </div>
 
           <div className="space-y-6 mb-10">
-            <h3 className="font-martian text-lg font-bold text-dark dark:text-white uppercase tracking-wide">
+            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white uppercase tracking-wide">
               Шаги настройки
             </h3>
             {currentPlatform?.steps.map((step, index) => (
@@ -149,7 +149,7 @@ const InstructionsPage = () => {
                 className="flex gap-4 items-start p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5"
               >
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-lime/10 border border-lime/30 flex items-center justify-center">
-                  <span className="font-martian font-bold text-lime text-sm">
+                  <span className="font-syncopate font-bold text-lime text-sm">
                     {index + 1}
                   </span>
                 </div>
@@ -161,7 +161,7 @@ const InstructionsPage = () => {
           </div>
 
           <div className="border-t border-black/10 dark:border-white/10 pt-8 mb-8">
-            <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-4 uppercase tracking-wide">
+            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white mb-4 uppercase tracking-wide">
               Получить конфигурацию
             </h3>
             <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm mb-6">
@@ -194,7 +194,7 @@ const InstructionsPage = () => {
           </div>
 
           <div className="border-t border-black/10 dark:border-white/10 pt-8">
-            <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-6 uppercase tracking-wide">
+            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white mb-6 uppercase tracking-wide">
               Частые вопросы
             </h3>
             <div className="space-y-4">
