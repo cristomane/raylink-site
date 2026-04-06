@@ -16,20 +16,66 @@ const Footer = () => {
 
 
 
+  const getCountryName = (code: string) => {
+    try {
+      return new Intl.DisplayNames(['ru'], { type: 'region' }).of(code);
+    } catch {
+      return code;
+    }
+  };
+
   const fetchIP = async () => {
     setIpLoading(true);
-    try {
-      const ipRes = await fetch('https://api.ipify.org?format=json');
-      const ipJson = await ipRes.json();
-      const ipv4 = ipJson.ip;
 
-      const geoRes = await fetch(`https://ipapi.co/${ipv4}/json/`);
-      const geoJson = await geoRes.json();
+    const fetchers = [
+      async () => {
+        const res = await fetch('https://ipinfo.io/json');
+        const data = await res.json();
+        return {
+          ip: data.ip,
+          country_name: getCountryName(data.country),
+          city: data.city,
+          org: data.org,
+        };
+      },
+      async () => {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipJson = await ipRes.json();
+        const geoRes = await fetch(`https://ipapi.co/${ipJson.ip}/json/`);
+        const geoJson = await geoRes.json();
+        return {
+          ip: ipJson.ip,
+          country_name: geoJson.country_name,
+          city: geoJson.city,
+          org: geoJson.org,
+        };
+      },
+      async () => {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        return {
+          ip: data.ip,
+          country_name: data.country_name,
+          city: data.city,
+          org: data.org,
+        };
+      },
+    ];
 
-      setIpData({ ip: ipv4, ...geoJson });
-    } catch {
-      setIpData({ error: true });
+    for (const fetcher of fetchers) {
+      try {
+        const data = await fetcher();
+        if (data.ip) {
+          setIpData(data);
+          setIpLoading(false);
+          return;
+        }
+      } catch {
+        // try next fallback
+      }
     }
+
+    setIpData({ error: true });
     setIpLoading(false);
   };
 
