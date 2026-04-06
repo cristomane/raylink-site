@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Smartphone, Monitor, Laptop, Apple } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 type Platform = 'ios' | 'android' | 'windows' | 'macos';
@@ -12,11 +12,45 @@ interface PlatformData {
   steps: string[];
 }
 
+const IOSIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3c1.5 0 2.5 1 3 2.5s-.5 3-2 4-3 .5-4-.5-1.5-3-.5-4 2-2 3.5-2z" />
+    <path d="M12 8c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z" />
+  </svg>
+);
+
+const AndroidIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 10v6c0 2 1.5 3 3 3h6c1.5 0 3-1 3-3v-6" />
+    <path d="M2 10h20" />
+    <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+    <circle cx="9" cy="14" r="1" fill="currentColor" stroke="none" />
+    <circle cx="15" cy="14" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const WindowsIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <rect x="3" y="3" width="8" height="8" rx="1" />
+    <rect x="13" y="3" width="8" height="8" rx="1" />
+    <rect x="3" y="13" width="8" height="8" rx="1" />
+    <rect x="13" y="13" width="8" height="8" rx="1" />
+  </svg>
+);
+
+const MacOSIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="5" width="18" height="12" rx="2" />
+    <path d="M8 20h8" />
+    <path d="M2 20h20" />
+  </svg>
+);
+
 const platformsData: PlatformData[] = [
   {
     id: 'ios',
     name: 'iOS',
-    icon: Apple,
+    icon: IOSIcon,
     appName: 'V2RayTun',
     steps: [
       'Скачайте приложение V2RayTun из App Store',
@@ -28,7 +62,7 @@ const platformsData: PlatformData[] = [
   {
     id: 'android',
     name: 'Android',
-    icon: Smartphone,
+    icon: AndroidIcon,
     appName: 'v2rayNG',
     steps: [
       'Установите v2rayNG из Google Play или GitHub',
@@ -40,7 +74,7 @@ const platformsData: PlatformData[] = [
   {
     id: 'windows',
     name: 'Windows',
-    icon: Monitor,
+    icon: WindowsIcon,
     appName: 'v2rayN / Hiddify',
     steps: [
       'Загрузите v2rayN или Hiddify с официального сайта',
@@ -52,7 +86,7 @@ const platformsData: PlatformData[] = [
   {
     id: 'macos',
     name: 'macOS',
-    icon: Laptop,
+    icon: MacOSIcon,
     appName: 'V2RayXS / V2RayU',
     steps: [
       'Установите V2RayXS или V2RayU из GitHub',
@@ -76,7 +110,7 @@ const InstructionsPage = () => {
   };
 
   const currentPlatform = platformsData.find((p) => p.id === selectedPlatform);
-  const PlatformIcon = currentPlatform?.icon || Apple;
+  const PlatformIcon = currentPlatform?.icon || IOSIcon;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
