@@ -53,13 +53,52 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
   return (
     <div
       ref={itemRef}
-      className="glass-card-light px-6 py-8 text-center group transition-all duration-500 hover:scale-105 hover:border-lime/40"
+      className="relative group cursor-pointer transition-all duration-500 hover:scale-105 overflow-hidden text-center"
+      style={{
+        borderRadius: '28px',
+        background: 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        border: '1px solid rgba(255,255,255,0.12)',
+        boxShadow: `
+          inset 0 1px 0 rgba(255,255,255,0.15),
+          inset 0 -1px 0 rgba(255,255,255,0.05),
+          0 8px 32px rgba(0,0,0,0.2)
+        `,
+      }}
     >
-      <div className="font-montserrat text-4xl lg:text-5xl font-bold text-lime mb-2">
-        {displayValue}{suffix}
-      </div>
-      <div className="font-montserrat text-sm text-gray-600 dark:text-gray-light">
-        {label}
+      {/* Top glossy highlight */}
+      <div
+        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+        }}
+      />
+
+      {/* Soft inner glow from top */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 40%)',
+        }}
+      />
+
+      {/* Corner reflection */}
+      <div
+        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-30"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+      />
+
+      <div className="relative z-10 px-6 py-8">
+        <div className="font-montserrat text-4xl lg:text-5xl font-bold text-lime mb-2">
+          {displayValue}{suffix}
+        </div>
+        <div className="font-montserrat text-sm text-gray-400">
+          {label}
+        </div>
       </div>
     </div>
   );
