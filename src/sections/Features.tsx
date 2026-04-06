@@ -44,22 +44,18 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
       className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden"
       style={{
         borderRadius: '28px',
-        background: 'rgba(255,255,255,0.03)',
+        background: 'rgba(255,255,255,0.02)',
         backdropFilter: 'blur(40px) saturate(180%)',
         WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-        border: '1px solid rgba(255,255,255,0.12)',
-        boxShadow: `
-          inset 0 1px 0 rgba(255,255,255,0.15),
-          inset 0 -1px 0 rgba(255,255,255,0.05),
-          0 8px 32px rgba(0,0,0,0.2)
-        `,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       {/* Top glossy highlight */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
         }}
       />
 
@@ -67,15 +63,15 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 40%)',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 40%)',
         }}
       />
 
       {/* Corner reflection */}
       <div
-        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-30"
+        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-20"
         style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
           filter: 'blur(20px)',
         }}
       />
@@ -85,9 +81,9 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
           <div 
             className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
             }}
           >
             <Icon className="w-7 h-7 text-gray-300 transition-colors duration-300 group-hover:text-lime" />
@@ -184,7 +180,6 @@ const Features = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <h2
           ref={titleRef}
           className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
@@ -192,7 +187,6 @@ const Features = () => {
           Преимущества
         </h2>
 
-        {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <FeatureCard
