@@ -19,7 +19,7 @@ const Footer = () => {
   const fetchIP = async () => {
     setIpLoading(true);
     try {
-      const res = await fetch('https://ipapi.co/json/');
+      const res = await fetch('https://ipv4.ipapi.co/json/');
       const data = await res.json();
       setIpData(data);
     } catch {
