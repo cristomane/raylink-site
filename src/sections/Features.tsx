@@ -41,19 +41,65 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
   return (
     <div
       ref={cardRef}
-      className="glass-card-light p-8 lg:p-10 group cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:border-lime/40 !bg-white/40 dark:!bg-[rgba(26,26,26,0.35)]"
+      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+      style={{
+        borderRadius: '28px',
+        background: 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        border: '1px solid rgba(255,255,255,0.12)',
+        boxShadow: `
+          inset 0 1px 0 rgba(255,255,255,0.15),
+          inset 0 -1px 0 rgba(255,255,255,0.05),
+          0 8px 32px rgba(0,0,0,0.2)
+        `,
+      }}
     >
-      <div className="mb-6">
-        <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-dark-card flex items-center justify-center border border-black/5 dark:border-white/5 transition-all duration-300 group-hover:border-lime/50 group-hover:scale-110 group-hover:shadow-glow-sm">
-          <Icon className="w-7 h-7 text-gray-600 dark:text-gray-light transition-colors duration-300 group-hover:text-lime" />
+      {/* Top glossy highlight */}
+      <div
+        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+        }}
+      />
+
+      {/* Soft inner glow from top */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 40%)',
+        }}
+      />
+
+      {/* Corner reflection */}
+      <div
+        className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-30"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+      />
+
+      <div className="relative z-10 p-8 lg:p-10">
+        <div className="mb-6">
+          <div 
+            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+            }}
+          >
+            <Icon className="w-7 h-7 text-gray-300 transition-colors duration-300 group-hover:text-lime" />
+          </div>
         </div>
+        <h3 className="font-montserrat text-lg font-bold text-white mb-3 uppercase tracking-wide">
+          {title}
+        </h3>
+        <p className="font-montserrat text-gray-400 text-sm leading-relaxed">
+          {description}
+        </p>
       </div>
-      <h3 className="font-montserrat text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
-        {title}
-      </h3>
-      <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-        {description}
-      </p>
     </div>
   );
 };
@@ -141,7 +187,7 @@ const Features = () => {
         {/* Section Title */}
         <h2
           ref={titleRef}
-          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-montserrat text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Преимущества
         </h2>
