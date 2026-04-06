@@ -69,7 +69,7 @@ const Footer = () => {
       <div ref={contentRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <span className="font-syncopate text-2xl font-bold text-dark dark:text-white tracking-wider uppercase">
+            <span className="font-syncopate text-2xl font-bold text-dark dark:text-white uppercase" style={{ letterSpacing: '-0.04em' }}>
               RayLink
             </span>
           </div>
