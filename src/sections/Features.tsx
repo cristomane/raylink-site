@@ -52,22 +52,18 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
         boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
-      {/* Top glossy highlight */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
           background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
         }}
       />
-
-      {/* Soft inner glow from top */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
         }}
       />
-
       <div className="relative z-10 p-8 lg:p-10">
         <div className="mb-6">
           <div 
@@ -157,29 +153,6 @@ const Features = () => {
       id="features"
       className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden"
     >
-      {/* Blueprint grid lines with edge fade */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-          maskImage: `
-            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
-            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
-          `,
-          WebkitMaskImage: `
-            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
-            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
-          `,
-          maskComposite: 'intersect',
-          WebkitMaskComposite: 'source-in',
-        }}
-      />
-
-      {/* Abstract SVG ellipses */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <svg
           className="w-[1400px] h-[900px] opacity-[0.04]"
