@@ -64,25 +64,20 @@ const Footer = () => {
       ref={footerRef}
       className="relative pt-16 lg:pt-24 pb-8"
     >
-      {/* Top border */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div ref={contentRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Content */}
         <div className="text-center mb-12">
-          {/* Logo */}
           <div className="flex items-center justify-center mb-6">
-            <span className="font-montserrat text-2xl font-bold text-dark dark:text-white tracking-wider uppercase">
+            <span className="font-martian text-2xl font-bold text-dark dark:text-white tracking-wider uppercase">
               RayLink
             </span>
           </div>
 
-          {/* Description */}
           <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm max-w-md mx-auto mb-10">
             Быстрый VPN на протоколе VLESS. Безопасный доступ к интернету без ограничений.
           </p>
 
-          {/* Links Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16">
             {allLinks.map((link, index) => (
               <a
@@ -100,7 +95,7 @@ const Footer = () => {
                   ) : (
                     <link.icon className="w-5 h-5 text-lime mt-0.5 shrink-0" />
                   )}
-                  <span className="font-montserrat font-medium text-dark dark:text-white text-sm leading-snug">
+                  <span className="font-martian font-medium text-dark dark:text-white text-sm leading-snug">
                     {link.title}
                   </span>
                 </div>
@@ -112,7 +107,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-black/5 dark:border-white/5 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-montserrat text-xs text-gray-600 dark:text-gray-light">
