@@ -20,11 +20,6 @@ const Header = () => {
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToPricing = () => {
-    const target = document.querySelector('#pricing');
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 hidden md:block bg-white/85 dark:bg-[rgba(10,10,10,0.85)] backdrop-blur-[20px]">
