@@ -12,35 +12,26 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Card entrance animation
       gsap.fromTo(
         cardRef.current,
         { scale: 0.95, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
       );
-
-      // Title animation
       gsap.fromTo(
         titleRef.current,
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.4 }
       );
-
-      // Subtitle animation
       gsap.fromTo(
         subtitleRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.6 }
       );
-
-      // Description animation
       gsap.fromTo(
         descRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.8 }
       );
-
-      // Button animation
       gsap.fromTo(
         buttonRef.current,
         { y: 20, opacity: 0 },
@@ -53,9 +44,7 @@ const Hero = () => {
 
   const scrollToPricing = () => {
     const target = document.querySelector('#pricing');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -64,7 +53,6 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
-      {/* Blueprint grid lines with edge fade on all sides */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.05]"
         style={{
@@ -86,7 +74,6 @@ const Hero = () => {
         }}
       />
 
-      {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full opacity-40"
@@ -114,7 +101,6 @@ const Hero = () => {
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={cardRef}
@@ -128,7 +114,6 @@ const Hero = () => {
             touchAction: 'pan-y',
           }}
         >
-          {/* Liquid glass inner glow */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -136,23 +121,20 @@ const Hero = () => {
             }}
           />
 
-          {/* Main Title */}
           <h1
             ref={titleRef}
-            className="relative font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
+            className="relative font-martian text-4xl sm:text-5xl lg:text-6xl font-bold text-dark dark:text-white mb-4 uppercase tracking-wider"
           >
             RayLink
           </h1>
 
-          {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="relative font-montserrat text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
+            className="relative font-martian text-base sm:text-lg text-lime tracking-[0.2em] font-bold mb-6 uppercase"
           >
             Свобода в каждом клике
           </p>
 
-          {/* Description */}
           <p
             ref={descRef}
             className="relative font-montserrat text-lg text-gray-600 dark:text-gray-light max-w-xl mx-auto mb-10"
@@ -160,11 +142,10 @@ const Hero = () => {
             Откройте для себя интернет без границ. Быстро, безопасно, свободно.
           </p>
 
-          {/* CTA Button */}
           <button
             ref={buttonRef}
             onClick={scrollToPricing}
-            className="relative btn-primary group"
+            className="relative btn-primary group font-martian"
           >
             <span>Получить доступ (3 дня бесплатно)</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -172,7 +153,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-dark to-transparent pointer-events-none" />
 
       <style>{`
