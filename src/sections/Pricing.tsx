@@ -132,7 +132,7 @@ const Pricing = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
-          className="font-syncopate text-4xl lg:text-5xl font-bold text-center text-dark dark:text-white mb-12 lg:mb-16"
+          className="font-martian text-4xl lg:text-5xl font-bold text-center text-dark dark:text-white mb-12 lg:mb-16 uppercase tracking-wide"
         >
           Тариф
         </h2>
