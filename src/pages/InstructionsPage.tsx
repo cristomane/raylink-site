@@ -80,20 +80,34 @@ const platformsData: PlatformData[] = [
       {
         number: '01',
         title: 'Скачайте приложение',
-        description: 'Установите официальное приложение V2RayTun из App Store:',
+        description: 'Установите официальное приложение Happ из App Store:',
         action: (
-          <a
-            href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-4 px-5 py-4 rounded-2xl bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-dark dark:text-white transition-all duration-300 hover:-translate-y-1 hover:border-lime/40 w-full"
-          >
-            <AppStoreIcon className="w-9 h-9 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-            <div className="flex flex-col leading-tight">
-              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-              <span className="text-base font-bold tracking-tight">App Store</span>
-            </div>
-          </a>
+          <div className="flex flex-col gap-3">
+            <a
+              href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-4 px-5 py-4 rounded-2xl bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-dark dark:text-white transition-all duration-300 hover:-translate-y-1 hover:border-lime/40 w-full"
+            >
+              <AppStoreIcon className="w-9 h-9 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+              <div className="flex flex-col leading-tight">
+                <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+                <span className="text-base font-bold tracking-tight">App Store</span>
+              </div>
+            </a>
+            <a
+              href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-4 px-5 py-3.5 rounded-2xl bg-transparent border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-light transition-all duration-300 hover:border-lime/30 hover:text-dark dark:hover:text-white w-full"
+            >
+              <AppStoreIcon className="w-7 h-7 flex-shrink-0 text-lime/70 transition-transform duration-300 group-hover:scale-110" />
+              <div className="flex flex-col leading-tight">
+                <small className="text-[10px] text-gray-400 dark:text-gray-500 font-normal uppercase tracking-wide">Альтернативный клиент</small>
+                <span className="text-sm font-semibold tracking-tight">V2RayTun</span>
+              </div>
+            </a>
+          </div>
         ),
       },
       {
@@ -105,7 +119,7 @@ const platformsData: PlatformData[] = [
       {
         number: '03',
         title: 'Импортируйте профиль',
-        description: <>Откройте приложение V2RayTun, нажмите <strong>«+»</strong> и вставьте скопированную ссылку из бота.</>,
+        description: <>Откройте приложение Happ, нажмите <strong>«+»</strong> и вставьте скопированную ссылку из бота.</>,
         media: { type: 'video', src: 'media/ios/step3.mp4', alt: 'Импорт профиля' },
       },
       {
