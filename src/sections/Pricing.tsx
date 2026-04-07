@@ -41,6 +41,10 @@ const Pricing = () => {
         }
       );
 
+      gsap.set([cardRef.current, leftCardRef.current, rightCardRef.current], {
+        opacity: 0,
+      });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cardRef.current,
@@ -51,21 +55,21 @@ const Pricing = () => {
 
       tl.fromTo(
         cardRef.current,
-        { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.7, ease: 'power3.out' }
+        { scale: 0.95, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, ease: 'power2.out' }
       );
 
       tl.fromTo(
         leftCardRef.current,
-        { x: 80, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-        '-=0.3'
+        { x: 40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
+        '-=0.4'
       );
 
       tl.fromTo(
         rightCardRef.current,
-        { x: -80, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
         '<'
       );
 
@@ -153,7 +157,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto">
           {/* Годовая */}
-          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 opacity-0">
+          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1" style={{ willChange: 'transform, opacity' }}>
             <div>
               <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
                 Годовая подписка
@@ -184,9 +188,10 @@ const Pricing = () => {
           {/* Единый тариф — центральный */}
           <div
             ref={cardRef}
-            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group transition-all duration-500 hover:scale-[1.02] opacity-0"
+            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group transition-all duration-500 hover:scale-[1.02]"
             style={{
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
+              willChange: 'transform, opacity',
             }}
           >
             <div>
@@ -242,7 +247,7 @@ const Pricing = () => {
           </div>
 
           {/* 3 месяца */}
-          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative opacity-0">
+          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative" style={{ willChange: 'transform, opacity' }}>
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
               В тренде
             </div>
