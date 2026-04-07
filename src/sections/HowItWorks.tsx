@@ -6,17 +6,11 @@ import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface TiltCardProps {
-  children: React.ReactNode;
-  className?: string;
-  intensity?: number;
-}
-
 // 3D Tilt эффект при наведении
-const TiltCard = ({ children, className = '', intensity = 15 }: TiltCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+const TiltCard = ({ children, className = '', intensity = 12 }) => {
+  const cardRef = useRef(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     
     const rect = cardRef.current.getBoundingClientRect();
@@ -65,26 +59,16 @@ const TiltCard = ({ children, className = '', intensity = 15 }: TiltCardProps) =
   );
 };
 
-interface StepCardProps {
-  number: number;
-  icon: React.ElementType;
-  title: string;
-  description: React.ReactNode;
-  isLeft: boolean;
-  isActive: boolean;
-}
-
-const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: StepCardProps) => {
-  const stepRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
+const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) => {
+  const stepRef = useRef(null);
+  const cardRef = useRef(null);
+  const iconRef = useRef(null);
+  const contentRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 3D появление карточки с вращением
+      // 3D появление карточки
       gsap.fromTo(
         cardRef.current,
         { 
@@ -93,7 +77,6 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
           rotateX: 25,
           rotateY: isLeft ? -15 : 15,
           scale: 0.8,
-          z: -100,
         },
         {
           opacity: 1,
@@ -101,7 +84,6 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
           rotateX: 0,
           rotateY: 0,
           scale: 1,
-          z: 0,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
@@ -112,18 +94,16 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
         }
       );
 
-      // 3D вращение иконки
+      // Вращение иконки
       gsap.fromTo(
         iconRef.current,
         { 
           scale: 0, 
           rotateY: 180,
-          rotateZ: -90,
         },
         {
           scale: 1,
           rotateY: 0,
-          rotateZ: 0,
           duration: 0.8,
           delay: 0.3,
           ease: 'back.out(2)',
@@ -134,22 +114,6 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
           },
         }
       );
-
-      // Glow эффект при появлении
-      if (glowRef.current) {
-        gsap.to(glowRef.current, {
-          opacity: 0.4,
-          duration: 0.6,
-          delay: 0.5,
-          yoyo: true,
-          repeat: 2,
-          scrollTrigger: {
-            trigger: stepRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        });
-      }
 
       // Появление контента
       gsap.fromTo(
@@ -195,7 +159,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
       <div className="flex items-center gap-6 lg:gap-12 w-full max-w-6xl">
         {isLeft ? (
           <>
-            <TiltCard className="flex-1 group cursor-pointer" intensity={12}>
+            <TiltCard className="flex-1 group cursor-pointer">
               <div 
                 ref={cardRef}
                 className="relative p-8 lg:p-10 rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(163,230,53,0.3)]"
@@ -210,34 +174,6 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                {/* Animated glow background */}
-                <div 
-                  ref={glowRef}
-                  className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(163, 230, 53, 0.2) 0%, transparent 70%)',
-                    filter: 'blur(20px)',
-                  }}
-                />
-                
-                {/* Floating particles effect */}
-                {isActive && (
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-lime/40 rounded-full"
-                        style={{
-                          left: `${20 + i * 15}%`,
-                          top: `${30 + (i % 3) * 20}%`,
-                          animation: `float3d ${3 + i * 0.5}s ease-in-out infinite`,
-                          animationDelay: `${i * 0.2}s`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
-                
                 <div className="relative z-10">
                   <div className="flex items-start gap-5 mb-4">
                     <div 
@@ -249,22 +185,14 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
                         boxShadow: isHovered 
                           ? '0 0 40px rgba(163, 230, 53, 0.4), inset 0 0 20px rgba(163, 230, 53, 0.1)'
                           : '0 0 20px rgba(163, 230, 53, 0.2)',
-                        transformStyle: 'preserve-3d',
                       }}
                     >
-                      {/* Glow ring animation */}
-                      <div className="absolute inset-0 rounded-2xl animate-ping opacity-20"
-                        style={{
-                          background: 'rgba(163, 230, 53, 0.3)',
-                          animationDuration: '3s',
-                        }}
-                      />
-                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10 drop-shadow-[0_0_10px_rgba(163,230,53,0.5)]" />
+                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10" />
                     </div>
                     
                     <div ref={contentRef}>
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="relative font-syncopate text-xs font-bold text-lime bg-gradient-to-r from-lime/20 to-lime/5 px-4 py-1.5 rounded-full border border-lime/30">
+                        <span className="font-syncopate text-xs font-bold text-lime bg-gradient-to-r from-lime/20 to-lime/5 px-4 py-1.5 rounded-full border border-lime/30">
                           <Sparkles className="w-3 h-3 inline mr-1" />
                           ШАГ {number}
                         </span>
@@ -284,25 +212,16 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
               </div>
             </TiltCard>
 
-            {/* 3D Центральная точка */}
+            {/* Центральная точка */}
             <div className="flex flex-col items-center relative" style={{ width: '64px', flexShrink: 0 }}>
               <div 
                 className="relative w-16 h-16 rounded-full flex items-center justify-center z-10"
                 style={{
                   background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
                   boxShadow: '0 0 40px rgba(163, 230, 53, 0.6), 0 0 80px rgba(163, 230, 53, 0.3)',
-                  transformStyle: 'preserve-3d',
-                  animation: 'rotate3d 8s linear infinite',
                 }}
               >
-                {/* Orbiting ring */}
-                <div className="absolute inset-0 rounded-full border-2 border-lime/30"
-                  style={{
-                    animation: 'orbit 4s linear infinite',
-                    transformStyle: 'preserve-3d',
-                  }}
-                />
-                <span className="font-syncopate text-xl font-bold text-dark relative z-10 drop-shadow-lg">
+                <span className="font-syncopate text-xl font-bold text-dark relative z-10">
                   {number}
                 </span>
               </div>
@@ -314,30 +233,22 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
           <>
             <div className="flex-1" />
 
-            {/* 3D Центральная точка */}
+            {/* Центральная точка */}
             <div className="flex flex-col items-center relative" style={{ width: '64px', flexShrink: 0 }}>
               <div 
                 className="relative w-16 h-16 rounded-full flex items-center justify-center z-10"
                 style={{
                   background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
                   boxShadow: '0 0 40px rgba(163, 230, 53, 0.6), 0 0 80px rgba(163, 230, 53, 0.3)',
-                  transformStyle: 'preserve-3d',
-                  animation: 'rotate3d 8s linear infinite',
                 }}
               >
-                <div className="absolute inset-0 rounded-full border-2 border-lime/30"
-                  style={{
-                    animation: 'orbit 4s linear infinite',
-                    transformStyle: 'preserve-3d',
-                  }}
-                />
-                <span className="font-syncopate text-xl font-bold text-dark relative z-10 drop-shadow-lg">
+                <span className="font-syncopate text-xl font-bold text-dark relative z-10">
                   {number}
                 </span>
               </div>
             </div>
 
-            <TiltCard className="flex-1 group cursor-pointer" intensity={12}>
+            <TiltCard className="flex-1 group cursor-pointer">
               <div 
                 ref={cardRef}
                 className="relative p-8 lg:p-10 rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(163,230,53,0.3)]"
@@ -352,32 +263,6 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <div 
-                  ref={glowRef}
-                  className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(163, 230, 53, 0.2) 0%, transparent 70%)',
-                    filter: 'blur(20px)',
-                  }}
-                />
-                
-                {isActive && (
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-lime/40 rounded-full"
-                        style={{
-                          left: `${20 + i * 15}%`,
-                          top: `${30 + (i % 3) * 20}%`,
-                          animation: `float3d ${3 + i * 0.5}s ease-in-out infinite`,
-                          animationDelay: `${i * 0.2}s`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
-                
                 <div className="relative z-10">
                   <div className="flex items-start gap-5 mb-4">
                     <div 
@@ -389,21 +274,14 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
                         boxShadow: isHovered 
                           ? '0 0 40px rgba(163, 230, 53, 0.4), inset 0 0 20px rgba(163, 230, 53, 0.1)'
                           : '0 0 20px rgba(163, 230, 53, 0.2)',
-                        transformStyle: 'preserve-3d',
                       }}
                     >
-                      <div className="absolute inset-0 rounded-2xl animate-ping opacity-20"
-                        style={{
-                          background: 'rgba(163, 230, 53, 0.3)',
-                          animationDuration: '3s',
-                        }}
-                      />
-                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10 drop-shadow-[0_0_10px_rgba(163,230,53,0.5)]" />
+                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10" />
                     </div>
                     
                     <div ref={contentRef}>
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="relative font-syncopate text-xs font-bold text-lime bg-gradient-to-r from-lime/20 to-lime/5 px-4 py-1.5 rounded-full border border-lime/30">
+                        <span className="font-syncopate text-xs font-bold text-lime bg-gradient-to-r from-lime/20 to-lime/5 px-4 py-1.5 rounded-full border border-lime/30">
                           <Sparkles className="w-3 h-3 inline mr-1" />
                           ШАГ {number}
                         </span>
@@ -430,10 +308,10 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }: 
 };
 
 const HowItWorks = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const timelineRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
@@ -486,11 +364,10 @@ const HowItWorks = () => {
       // Появление подзаголовка
       gsap.fromTo(
         subtitleRef.current,
-        { y: 50, opacity: 0, z: -50 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          z: 0,
           duration: 0.8,
           delay: 0.2,
           ease: 'power3.out',
@@ -502,18 +379,9 @@ const HowItWorks = () => {
         }
       );
 
-      // Анимированная линия с glow trail
+      // Анимация линии
       if (timelineRef.current) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            scrub: 1,
-          },
-        });
-
-        tl.fromTo(
+        gsap.fromTo(
           timelineRef.current,
           { scaleY: 0, opacity: 0 },
           {
@@ -521,17 +389,13 @@ const HowItWorks = () => {
             opacity: 1,
             duration: 1,
             ease: 'power2.out',
+            scrollTrigger: {
+              trigger: timelineRef.current,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              scrub: 1,
+            },
           }
-        );
-
-        // Glow effect на линии
-        tl.to(
-          timelineRef.current,
-          {
-            boxShadow: '0 0 30px rgba(163, 230, 53, 0.6)',
-            duration: 0.3,
-          },
-          '-=0.5'
         );
       }
 
@@ -569,16 +433,14 @@ const HowItWorks = () => {
       className="relative py-32 lg:py-40 overflow-hidden"
       style={{ perspective: '2000px' }}
     >
-      {/* 3D Фоновые элементы */}
+      {/* Фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Вращающиеся 3D объекты */}
         <div
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20"
           style={{
             background: 'radial-gradient(circle, rgba(163, 230, 53, 0.3) 0%, transparent 70%)',
             filter: 'blur(80px)',
-            animation: 'float3d 12s ease-in-out infinite, rotate3d 20s linear infinite',
-            transformStyle: 'preserve-3d',
+            animation: 'floatBlob 12s ease-in-out infinite',
           }}
         />
         <div
@@ -586,12 +448,11 @@ const HowItWorks = () => {
           style={{
             background: 'radial-gradient(circle, rgba(163, 230, 53, 0.25) 0%, transparent 70%)',
             filter: 'blur(100px)',
-            animation: 'float3d 10s ease-in-out infinite reverse, rotate3d 15s linear infinite reverse',
-            transformStyle: 'preserve-3d',
+            animation: 'floatBlob 10s ease-in-out infinite reverse',
           }}
         />
         
-        {/* Floating geometric shapes */}
+        {/* Плавающие фигуры */}
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
@@ -599,9 +460,8 @@ const HowItWorks = () => {
             style={{
               left: `${10 + i * 15}%`,
               top: `${20 + (i % 3) * 25}%`,
-              animation: `float3d ${8 + i * 2}s ease-in-out infinite, rotate3d ${10 + i * 5}s linear infinite`,
+              animation: `floatBlob ${8 + i * 2}s ease-in-out infinite`,
               animationDelay: `${i * 0.5}s`,
-              transformStyle: 'preserve-3d',
             }}
           />
         ))}
@@ -627,16 +487,16 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* 3D Timeline */}
+        {/* Timeline */}
         <div className="relative" style={{ perspective: '2000px' }}>
-          {/* Центральная линия с glow */}
+          {/* Центральная линия */}
           <div 
             className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 hidden lg:block"
-            style={{ transformOrigin: 'top', transformStyle: 'preserve-3d' }}
+            style={{ transformOrigin: 'top' }}
           >
             <div
               ref={timelineRef}
-              className="w-full h-full rounded-full relative"
+              className="w-full h-full rounded-full"
               style={{ 
                 background: 'linear-gradient(180deg, rgba(163, 230, 53, 0.8) 0%, rgba(163, 230, 53, 0.4) 50%, rgba(163, 230, 53, 0.1) 100%)',
                 transformOrigin: 'top',
@@ -667,7 +527,7 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* 3D CTA */}
+        {/* CTA */}
         <div className="mt-24 lg:mt-32 text-center" style={{ transformStyle: 'preserve-3d' }}>
           <div 
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-lime/30 bg-gradient-to-r from-lime/10 via-lime/5 to-lime/10"
@@ -675,44 +535,23 @@ const HowItWorks = () => {
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
               boxShadow: '0 0 30px rgba(163, 230, 53, 0.2)',
-              animation: 'float3d 4s ease-in-out infinite',
-              transformStyle: 'preserve-3d',
+              animation: 'floatBlob 4s ease-in-out infinite',
             }}
           >
             <div className="w-3 h-3 rounded-full bg-lime animate-pulse" style={{ boxShadow: '0 0 10px rgba(163, 230, 53, 0.6)' }} />
             <span className="font-montserrat text-base text-gray-600 dark:text-gray-400">
               Первые 72 часа —{' '}
-              <span className="text-lime font-bold" style={{ textShadow: '0 0 10px rgba(163, 230, 53, 0.4)' }}>бесплатно</span>
+              <span className="text-lime font-bold">бесплатно</span>
             </span>
           </div>
         </div>
       </div>
 
-      {/* 3D CSS Animations */}
       <style>{`
-        @keyframes rotate3d {
-          0% { transform: rotateY(0deg) rotateX(0deg); }
-          100% { transform: rotateY(360deg) rotateX(360deg); }
-        }
-        
-        @keyframes orbit {
-          0% { transform: rotateZ(0deg) rotateX(60deg); }
-          100% { transform: rotateZ(360deg) rotateX(60deg); }
-        }
-        
-        @keyframes float3d {
-          0%, 100% { 
-            transform: translate(0, 0) scale(1) rotateX(0deg); 
-          }
-          25% { 
-            transform: translate(20px, -30px) scale(1.05) rotateX(10deg); 
-          }
-          50% { 
-            transform: translate(-10px, 20px) scale(0.95) rotateX(-5deg); 
-          }
-          75% { 
-            transform: translate(15px, 10px) scale(1.02) rotateX(5deg); 
-          }
+        @keyframes floatBlob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -30px) scale(1.05); }
+          66% { transform: translate(-20px, 20px) scale(0.95); }
         }
       `}</style>
     </section>
