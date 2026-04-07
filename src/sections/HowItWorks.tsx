@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState, ReactNode, MouseEvent, CSSProperties } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ReactNode, MouseEvent, CSSProperties } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CreditCard, Rocket, MessageSquare, ArrowRight, Sparkles, LucideIcon } from 'lucide-react';
+import { CreditCard, Rocket, MessageSquare, ArrowRight, Sparkles } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
