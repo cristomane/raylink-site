@@ -81,12 +81,15 @@ const platformsData: PlatformData[] = [
         href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
         target="_blank"
         rel="noopener noreferrer"
-        className="download-btn"
+        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
       >
-        <AppStoreIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="flex flex-col leading-tight">
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+        <AppStoreIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="relative z-10 flex flex-col leading-tight">
           <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">App Store</span>
+          <span className="text-base font-bold tracking-tight text-dark dark:text-white">App Store</span>
         </div>
       </a>
     ),
@@ -125,12 +128,15 @@ const platformsData: PlatformData[] = [
         href="https://play.google.com/store/apps/details?id=com.v2raytun.android"
         target="_blank"
         rel="noopener noreferrer"
-        className="download-btn"
+        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
       >
-        <GooglePlayIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="flex flex-col leading-tight">
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+        <GooglePlayIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="relative z-10 flex flex-col leading-tight">
           <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">Google Play</span>
+          <span className="text-base font-bold tracking-tight text-dark dark:text-white">Google Play</span>
         </div>
       </a>
     ),
@@ -171,12 +177,15 @@ const platformsData: PlatformData[] = [
         href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe"
         target="_blank"
         rel="noopener noreferrer"
-        className="download-btn"
+        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
       >
-        <WindowsIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="flex flex-col leading-tight">
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+        <WindowsIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="relative z-10 flex flex-col leading-tight">
           <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Скачать</small>
-          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">HAPP для Windows</span>
+          <span className="text-base font-bold tracking-tight text-dark dark:text-white">HAPP для Windows</span>
         </div>
       </a>
     ),
@@ -294,57 +303,8 @@ const InstructionsPage = () => {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-5px); }
         }
-        @keyframes pulseBtn {
-          0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lime) 40%, transparent); }
-          70% { box-shadow: 0 0 0 15px color-mix(in srgb, var(--lime) 0%, transparent); }
-          100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lime) 0%, transparent); }
-        }
         .animate-float-icon {
           animation: floatIcon 2s ease-in-out infinite;
-        }
-        .animate-pulse-btn {
-          animation: pulseBtn 2s infinite;
-        }
-        .download-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 16px;
-          background: linear-gradient(145deg, #e5e5e5 0%, #f5f5f5 100%);
-          color: inherit;
-          padding: 16px 28px;
-          border-radius: 16px;
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 600;
-          font-size: 15px;
-          margin-top: 12px;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(0,0,0,0.08);
-          min-width: 260px;
-          justify-content: flex-start;
-          position: relative;
-          overflow: hidden;
-        }
-        .dark .download-btn {
-          background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-          border-color: #333;
-        }
-        .download-btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--lime) 10%, transparent), transparent);
-          transition: left 0.6s ease;
-        }
-        .download-btn:hover::before {
-          left: 100%;
-        }
-        .download-btn:hover {
-          transform: translateY(-3px);
-          border-color: var(--lime);
-          box-shadow: 0 8px 25px color-mix(in srgb, var(--lime) 15%, transparent);
         }
       `}</style>
 
@@ -407,65 +367,81 @@ const InstructionsPage = () => {
           </div>
 
           {/* Instruction content */}
-          <div className="rounded-3xl p-5 lg:p-6 bg-gray-100 dark:bg-[#111] border border-black/[0.08] dark:border-white/[0.08] mb-8">
+          <div className="space-y-6 mb-8">
             {selectedPlatform === 'macos' ? (
-              <div className="flex flex-col items-center justify-center py-14 text-center">
-                <span className="inline-block mb-5 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider border border-lime/30 text-lime bg-lime/10">
-                  В разработке
-                </span>
-                <div className="text-5xl mb-4 animate-float-icon">🍏</div>
-                <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-2">Инструкция для macOS скоро</h3>
-                <p className="font-montserrat text-sm text-gray-500 dark:text-gray-light max-w-sm leading-relaxed">
-                  Мы активно работаем над инструкцией для macOS. Следите за обновлениями в нашем новостном канале!
-                </p>
+              <div
+                className="relative group overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)] p-8 lg:p-12 text-center"
+                style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
+              >
+                <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+                <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+                <div className="relative z-10">
+                  <span className="inline-block mb-5 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider border border-lime/30 text-lime bg-lime/10">
+                    В разработке
+                  </span>
+                  <div className="text-5xl mb-4 animate-float-icon">🍏</div>
+                  <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-2">Инструкция для macOS скоро</h3>
+                  <p className="font-montserrat text-sm text-gray-500 dark:text-gray-light max-w-sm mx-auto leading-relaxed">
+                    Мы активно работаем над инструкцией для macOS. Следите за обновлениями в нашем новостном канале!
+                  </p>
+                </div>
               </div>
             ) : (
-              <div className="space-y-8">
+              <>
                 {currentPlatform?.downloadButton && (
-                  <div className="pb-2">{currentPlatform.downloadButton}</div>
+                  <div className="pb-1">{currentPlatform.downloadButton}</div>
                 )}
                 {currentPlatform?.steps.map((step, idx) => (
-                  <div key={idx} className="relative pl-6">
-                    <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bg-gradient-to-b from-lime to-transparent" />
-                    <span className="inline-block bg-lime text-dark font-montserrat text-[11px] font-bold px-2.5 py-1 rounded-full mb-2 tracking-wide">
-                      {step.number}
-                    </span>
-                    <h4 className="font-martian text-base font-semibold text-dark dark:text-white mb-1">{step.title}</h4>
-                    <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed mb-3">
-                      {step.description}
-                    </p>
-                    {step.media && (
-                      <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black">
-                        {step.media.type === 'video' ? (
-                          <video autoPlay loop muted playsInline controls className="w-full h-auto block">
-                            <source src={step.media.src} type="video/mp4" />
-                            Ваш браузер не поддерживает видео.
-                          </video>
-                        ) : (
-                          <img src={step.media.src} alt={step.media.alt} className="w-full h-auto block" />
-                        )}
+                  <div
+                    key={idx}
+                    className="relative group overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)]"
+                    style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
+                  >
+                    <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+                    <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+                    <div className="relative z-10 p-6 lg:p-8">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-lime flex items-center justify-center">
+                          <span className="font-syncopate text-[11px] font-bold text-dark">{step.number}</span>
+                        </div>
+                        <h4 className="font-martian text-base font-semibold text-dark dark:text-white">{step.title}</h4>
                       </div>
-                    )}
-                    {step.extraDescription && (
-                      <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed mt-4 mb-3">
-                        {step.extraDescription}
+                      <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed">
+                        {step.description}
                       </p>
-                    )}
-                    {step.extraMedia && (
-                      <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black">
-                        {step.extraMedia.type === 'video' ? (
-                          <video autoPlay loop muted playsInline controls className="w-full h-auto block">
-                            <source src={step.extraMedia.src} type="video/mp4" />
-                            Ваш браузер не поддерживает видео.
-                          </video>
-                        ) : (
-                          <img src={step.extraMedia.src} alt={step.extraMedia.alt} className="w-full h-auto block" />
-                        )}
-                      </div>
-                    )}
+                      {step.media && (
+                        <div className={`rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] mt-4 ${step.media.type === 'video' ? 'bg-black' : ''}`}>
+                          {step.media.type === 'video' ? (
+                            <video autoPlay loop muted playsInline controls className="w-full h-auto block">
+                              <source src={step.media.src} type="video/mp4" />
+                              Ваш браузер не поддерживает видео.
+                            </video>
+                          ) : (
+                            <img src={step.media.src} alt={step.media.alt} className="w-full h-auto block" />
+                          )}
+                        </div>
+                      )}
+                      {step.extraDescription && (
+                        <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed mt-4">
+                          {step.extraDescription}
+                        </p>
+                      )}
+                      {step.extraMedia && (
+                        <div className={`rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] mt-4 ${step.extraMedia.type === 'video' ? 'bg-black' : ''}`}>
+                          {step.extraMedia.type === 'video' ? (
+                            <video autoPlay loop muted playsInline controls className="w-full h-auto block">
+                              <source src={step.extraMedia.src} type="video/mp4" />
+                              Ваш браузер не поддерживает видео.
+                            </video>
+                          ) : (
+                            <img src={step.extraMedia.src} alt={step.extraMedia.alt} className="w-full h-auto block" />
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
-              </div>
+              </>
             )}
           </div>
 
