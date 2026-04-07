@@ -39,11 +39,10 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
       );
 
       if (lineRef.current && !isLast) {
-        gsap.fromTo(
+        gsap.from(
           lineRef.current,
-          { scaleY: 0 },
           {
-            scaleY: 1,
+            scaleY: 0,
             duration: 0.8,
             delay: 0.4,
             ease: 'power2.out',

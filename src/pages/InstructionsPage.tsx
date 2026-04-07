@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Platform = 'ios' | 'android' | 'windows' | 'macos';
 
@@ -278,6 +281,8 @@ const InstructionsPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
+  const faqContainerRef = useRef<HTMLDivElement>(null);
   const answerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -291,9 +296,50 @@ const InstructionsPage = () => {
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
       );
+
+      if (stepsContainerRef.current) {
+        const stepCards = stepsContainerRef.current.querySelectorAll('.instruction-step');
+        gsap.fromTo(
+          stepCards,
+          { y: 40, opacity: 0, scale: 0.96 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: stepsContainerRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (faqContainerRef.current) {
+        const faqItems = faqContainerRef.current.querySelectorAll('.faq-item');
+        gsap.fromTo(
+          faqItems,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: faqContainerRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     }, pageRef);
     return () => ctx.revert();
-  }, []);
+  }, [selectedPlatform]);
 
   useEffect(() => {
     answerRefs.current.forEach((el, idx) => {
@@ -383,10 +429,10 @@ const InstructionsPage = () => {
           </div>
 
           {/* Instruction content */}
-          <div className="space-y-6 mb-8">
+          <div ref={stepsContainerRef} className="space-y-6 mb-8">
             {selectedPlatform === 'macos' ? (
               <div
-                className="relative overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)] p-8 lg:p-12 text-center"
+                className="instruction-step relative overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)] p-8 lg:p-12 text-center"
                 style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
               >
                 <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
@@ -407,7 +453,7 @@ const InstructionsPage = () => {
                 {currentPlatform?.steps.map((step, idx) => (
                   <div
                     key={idx}
-                    className="relative overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)]"
+                    className="instruction-step relative overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)]"
                     style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
                   >
                     <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
@@ -460,7 +506,7 @@ const InstructionsPage = () => {
           </div>
 
           {/* FAQ */}
-          <div className="mb-8">
+          <div ref={faqContainerRef} className="mb-8">
             <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-5 tracking-tight">Частые вопросы</h3>
             <div className="space-y-4">
               {faqs.map((faq, idx) => {
@@ -468,7 +514,7 @@ const InstructionsPage = () => {
                 return (
                   <div
                     key={idx}
-                    className="glass-card-light overflow-hidden transition-all duration-300 hover:border-lime/30"
+                    className="faq-item glass-card-light overflow-hidden transition-all duration-300 hover:border-lime/30"
                   >
                     <button
                       onClick={() => setOpenFaqIndex(isOpen ? null : idx)}

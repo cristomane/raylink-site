@@ -41,10 +41,11 @@ const Pricing = () => {
 
       gsap.fromTo(
         cardRef.current,
-        { y: 40, opacity: 0 },
+        { y: 40, opacity: 0, rotateX: 15 },
         {
           y: 0,
           opacity: 1,
+          rotateX: 0,
           duration: 0.9,
           ease: 'power3.out',
           scrollTrigger: {
@@ -59,14 +60,15 @@ const Pricing = () => {
         const items = featuresRef.current.querySelectorAll('li');
         gsap.fromTo(
           items,
-          { x: -40, opacity: 0 },
+          { scale: 0.8, opacity: 0, y: 20 },
           {
-            x: 0,
+            scale: 1,
             opacity: 1,
-            duration: 0.6,
-            stagger: 0.1,
-            delay: 0.4,
-            ease: 'power3.out',
+            y: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            delay: 0.3,
+            ease: 'back.out(1.7)',
             scrollTrigger: {
               trigger: featuresRef.current,
               start: 'top 85%',
@@ -161,7 +163,7 @@ const Pricing = () => {
               <ul ref={featuresRef} className="space-y-3 mb-8 text-left">
                 {features.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
+                    <div className="w-5 h-5 rounded-full bg-lime/15 border border-lime/30 flex items-center justify-center flex-shrink-0">
                       <Check className="w-3 h-3 text-lime" />
                     </div>
                     <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
