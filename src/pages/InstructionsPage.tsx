@@ -91,7 +91,7 @@ const platformsData: PlatformData[] = [
             >
               <AppStoreIcon className="w-9 h-9 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
               <div className="flex flex-col leading-tight">
-                <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+                <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить клиент</small>
                 <span className="text-base font-bold tracking-tight">HAPP в App Store</span>
               </div>
             </a>
