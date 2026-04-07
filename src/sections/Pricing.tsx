@@ -8,8 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Pricing = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const leftCardRef = useRef<HTMLDivElement>(null);
-  const rightCardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const featuresRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -41,34 +39,20 @@ const Pricing = () => {
         }
       );
 
-      const cards = [cardRef.current, leftCardRef.current, rightCardRef.current];
-      gsap.set(cards, { opacity: 0, y: 40, force3D: true });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      tl.to(cardRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: 'sine.out',
-      });
-
-      tl.to(
-        [leftCardRef.current, rightCardRef.current],
+      gsap.fromTo(
+        cardRef.current,
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: 'sine.out',
-          stagger: 0.1,
-        },
-        '-=0.5'
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
       );
 
       if (featuresRef.current) {
@@ -153,55 +137,17 @@ const Pricing = () => {
           Тариф
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto">
-          {/* Годовая */}
-          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between">
-            <div>
-              <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
-                Годовая подписка
-              </div>
-              <div className="mb-4">
-                <span className="font-syncopate text-5xl lg:text-6xl font-bold text-dark dark:text-white">
-                  1490₽
-                </span>
-                <span className="font-montserrat text-gray-500 dark:text-gray-light text-sm block mt-1">
-                  / год
-                </span>
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-mart font-medium mb-6">
-                Экономия 17%
-              </div>
-
-              <ul className="space-y-3 mb-8 text-left">
-                {features.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-lime" />
-                    </div>
-                    <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <a
-              href="https://t.me/raylink_service_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-full py-3 text-sm font-martian"
-            >
-              <Send className="w-4 h-4" />
-              Подключить
-            </a>
-          </div>
-
-          {/* Единый тариф — центральный */}
+        <div className="flex justify-center" style={{ perspective: '1000px' }}>
           <div
             ref={cardRef}
-            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group"
+            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center flex flex-col justify-between group relative"
             style={{
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
             }}
           >
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
+              В тренде
+            </div>
             <div>
               <div className="font-martian text-lg text-lime tracking-wider mb-4 uppercase font-semibold">
                 Единый тариф
@@ -254,47 +200,6 @@ const Pricing = () => {
             </div>
           </div>
 
-          {/* 3 месяца */}
-          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
-              В тренде
-            </div>
-            <div>
-              <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
-                3 месяца
-              </div>
-              <div className="mb-4">
-                <span className="font-syncopate text-5xl lg:text-6xl font-bold text-dark dark:text-white">
-                  400₽
-                </span>
-                <span className="font-montserrat text-gray-500 dark:text-gray-light text-sm block mt-1">
-                  разовый платёж
-                </span>
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-montserrat font-medium mb-6">
-                Экономия 12%
-              </div>
-
-              <ul className="space-y-3 mb-8 text-left">
-                {features.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-lime" />
-                    </div>
-                    <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <a
-              href="https://t.me/raylink_service_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-full py-3 text-sm font-martian"
-            >
-              <Send className="w-4 h-4" />
-              Подключить
-            </a>
           </div>
         </div>
       </div>
