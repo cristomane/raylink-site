@@ -171,6 +171,17 @@ const Pricing = () => {
               <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-mart font-medium mb-6">
                 Экономия 17%
               </div>
+
+              <ul className="space-y-3 mb-8 text-left">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-lime" />
+                    </div>
+                    <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <a
               href="https://t.me/raylink_service_bot"
@@ -263,6 +274,17 @@ const Pricing = () => {
               <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-montserrat font-medium mb-6">
                 Экономия 12%
               </div>
+
+              <ul className="space-y-3 mb-8 text-left">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-lime" />
+                    </div>
+                    <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <a
               href="https://t.me/raylink_service_bot"
