@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 
@@ -260,14 +260,6 @@ const faqs = [
     ),
   },
   {
-    question: 'Какая скорость соединения?',
-    answer: (
-      <>
-        Что касается скорости, то скорость вашего VPN зависит только от скорости вашего интернет-соединения. Незначительные падения скорости на <strong>10-20%</strong> совершенно нормальны при использовании VPN, поскольку его главным приоритетом всегда должна быть безопасность и конфиденциальность.
-      </>
-    ),
-  },
-  {
     question: 'Как продлить подписку?',
     answer: (
       <>
@@ -284,6 +276,7 @@ const InstructionsPage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const answerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -299,6 +292,17 @@ const InstructionsPage = () => {
     }, pageRef);
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    answerRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      if (openFaqIndex === idx) {
+        gsap.to(el, { height: 'auto', opacity: 1, duration: 0.4, ease: 'power2.out' });
+      } else {
+        gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+      }
+    });
+  }, [openFaqIndex]);
 
   const goBack = () => {
     navigate('/');
@@ -456,41 +460,32 @@ const InstructionsPage = () => {
           {/* FAQ */}
           <div className="mb-8">
             <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-5 tracking-tight">Частые вопросы</h3>
-            <div className="space-y-0">
+            <div className="space-y-4">
               {faqs.map((faq, idx) => {
                 const isOpen = openFaqIndex === idx;
                 return (
                   <div
                     key={idx}
-                    className={idx !== faqs.length - 1 ? 'border-b border-black/[0.08] dark:border-white/[0.08]' : ''}
+                    className="glass-card-light overflow-hidden transition-all duration-300 hover:border-lime/30"
                   >
                     <button
                       onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                      className="w-full flex items-center justify-between py-4 text-left group"
+                      className="w-full flex items-center justify-between p-6 text-left"
                     >
-                      <span className="font-martian font-medium text-sm text-dark dark:text-white group-hover:text-lime transition-colors pr-4">
+                      <span className="font-martian text-lg font-medium text-dark dark:text-white pr-4">
                         {faq.question}
                       </span>
-                      <span className="relative w-6 h-6 flex-shrink-0 ml-2">
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300" />
-                        <span
-                          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-3.5 bg-lime rounded-full transition-all duration-300 ${
-                            isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
-                          }`}
-                        />
-                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 text-lime flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                      />
                     </button>
                     <div
-                      className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                        isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                      }`}
+                      ref={(el) => { answerRefs.current[idx] = el; }}
+                      className="overflow-hidden"
+                      style={{ height: 0, opacity: 0 }}
                     >
-                      <div className="overflow-hidden">
-                        <div className={`pb-4 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
-                          <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed">
-                            {faq.answer}
-                          </p>
-                        </div>
+                      <div className="font-montserrat text-gray-600 dark:text-gray-light text-sm px-6 pb-6 leading-relaxed">
+                        {faq.answer}
                       </div>
                     </div>
                   </div>
