@@ -1,15 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
 
 type Platform = 'ios' | 'android' | 'windows' | 'macos';
+
+interface StepData {
+  number: string;
+  title: string;
+  description: React.ReactNode;
+  media?: {
+    type: 'image' | 'video';
+    src: string;
+    alt?: string;
+  };
+  extraDescription?: React.ReactNode;
+  extraMedia?: {
+    type: 'image' | 'video';
+    src: string;
+    alt?: string;
+  };
+}
 
 interface PlatformData {
   id: Platform;
   name: string;
   icon: React.ElementType;
-  appName: string;
-  steps: string[];
+  steps: StepData[];
+  downloadButton?: React.ReactNode;
 }
 
 const IOSIcon = ({ className }: { className?: string }) => (
@@ -46,63 +64,226 @@ const MacOSIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const AppStoreIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 384 512" fill="currentColor">
+    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+  </svg>
+);
+
+const GooglePlayIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503C15.5902 8.2033 13.8533 7.758 12 7.758c-1.8532 0-3.5901.4453-5.1366 1.1917L4.8409 5.4467a.4161.4161 0 00-.5676-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
+  </svg>
+);
+
 const platformsData: PlatformData[] = [
   {
     id: 'ios',
     name: 'iOS',
     icon: IOSIcon,
-    appName: 'V2RayTun',
+    downloadButton: (
+      <a
+        href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="download-btn"
+      >
+        <AppStoreIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="flex flex-col leading-tight">
+          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">App Store</span>
+        </div>
+      </a>
+    ),
     steps: [
-      'Скачайте приложение V2RayTun из App Store',
-      'Напишите нашему боту в Telegram или ВКонтакте для получения конфигурационной ссылки',
-      'Откройте полученную ссылку в приложении или скопируйте конфигурацию вручную',
-      'Нажмите кнопку подключения в приложении',
+      {
+        number: '01',
+        title: 'Скачайте приложение',
+        description: 'Установите официальное приложение V2RayTun из App Store:',
+      },
+      {
+        number: '02',
+        title: 'Получите конфигурацию',
+        description: <>Скопируйте свой профиль в разделе <strong>👤 Мой профиль &gt; 🔗 Ссылки</strong> в боте RayLink.</>,
+        media: { type: 'image', src: 'media/ios/step2.png', alt: 'Копирование профиля' },
+      },
+      {
+        number: '03',
+        title: 'Импортируйте профиль',
+        description: <>Откройте приложение V2RayTun, нажмите <strong>«+»</strong> и вставьте скопированную ссылку из бота.</>,
+        media: { type: 'video', src: 'media/ios/step3.mp4', alt: 'Импорт профиля' },
+      },
+      {
+        number: '04',
+        title: 'Подключитесь',
+        description: 'Выберите добавленную конфигурацию и нажмите кнопку подключения. Готово!',
+        media: { type: 'image', src: 'media/ios/step4.png', alt: 'Подключение' },
+      },
     ],
   },
   {
     id: 'android',
     name: 'Android',
     icon: AndroidIcon,
-    appName: 'v2rayNG',
+    downloadButton: (
+      <a
+        href="https://play.google.com/store/apps/details?id=com.v2raytun.android"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="download-btn"
+      >
+        <GooglePlayIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="flex flex-col leading-tight">
+          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">Google Play</span>
+        </div>
+      </a>
+    ),
     steps: [
-      'Установите v2rayNG из Google Play или GitHub',
-      'Напишите нашему боту в Telegram или ВКонтакте для получения конфигурационной ссылки',
-      'Отсканируйте QR-код или импортируйте ссылку в приложении',
-      'Выберите сервер и нажмите кнопку подключения',
+      {
+        number: '01',
+        title: 'Скачайте приложение',
+        description: 'Установите официальное приложение V2RayTun из Google Play:',
+      },
+      {
+        number: '02',
+        title: 'Получите конфигурацию',
+        description: <>Скопируйте свой профиль в разделе <strong>👤 Мой профиль &gt; 🔗 Ссылки</strong> в боте RayLink.</>,
+        media: { type: 'image', src: 'media/android/step2.png', alt: 'Копирование профиля' },
+      },
+      {
+        number: '03',
+        title: 'Импортируйте профиль',
+        description: <>Откройте приложение, нажмите <strong>«+»</strong></>,
+        media: { type: 'image', src: 'media/android/step3_1.png', alt: 'Нажмите плюс' },
+        extraDescription: <><strong>«Импорт из буфера обмена»</strong> и вставьте ссылку из бота.</>,
+        extraMedia: { type: 'image', src: 'media/android/step3_2.png', alt: 'Импорт из буфера обмена' },
+      },
+      {
+        number: '04',
+        title: 'Подключитесь',
+        description: 'Выберите добавленную конфигурацию и нажмите кнопку подключения. Готово!',
+        media: { type: 'image', src: 'media/android/step4.png', alt: 'Подключение' },
+      },
     ],
   },
   {
     id: 'windows',
     name: 'Windows',
     icon: WindowsIcon,
-    appName: 'v2rayN / Hiddify',
+    downloadButton: (
+      <a
+        href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="download-btn"
+      >
+        <WindowsIcon className="w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+        <div className="flex flex-col leading-tight">
+          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Скачать</small>
+          <span className="text-lg font-bold tracking-tight text-dark dark:text-white">HAPP для Windows</span>
+        </div>
+      </a>
+    ),
     steps: [
-      'Загрузите v2rayN или Hiddify с официального сайта',
-      'Запустите установщик и следуйте инструкциям',
-      'Напишите нашему боту в Telegram или ВКонтакте для получения конфигурационной ссылки',
-      'Вставьте ссылку в приложение и нажмите подключение',
+      {
+        number: '01',
+        title: 'Загрузите клиент',
+        description: 'Скачайте Happ для Windows:',
+      },
+      {
+        number: '02',
+        title: 'Запуск установщика',
+        description: 'Запустите скачанный .exe файл и следуйте инструкциям мастера установки.',
+      },
+      {
+        number: '03',
+        title: 'Получите конфигурацию',
+        description: <>Скопируйте свой профиль в разделе <strong>👤 Мой профиль &gt; 🔗 Ссылки</strong> в боте RayLink.</>,
+        media: { type: 'image', src: 'media/windows/step3.png', alt: 'Копирование профиля' },
+      },
+      {
+        number: '04',
+        title: 'Настройте подключение',
+        description: 'Вставьте конфигурационную ссылку из бота (Ctrl+V)',
+        media: { type: 'image', src: 'media/windows/step4_1.png', alt: 'Вставка конфигурации' },
+        extraDescription: 'Убедитесь, что у вас включен режим TUN',
+        extraMedia: { type: 'image', src: 'media/windows/step4_2.png', alt: 'Режим TUN' },
+      },
+      {
+        number: '05',
+        title: 'Подключитесь',
+        description: 'Выберите добавленную конфигурацию и нажмите кнопку подключения. Готово!',
+        media: { type: 'image', src: 'media/windows/step5.png', alt: 'Подключение' },
+      },
     ],
   },
   {
     id: 'macos',
     name: 'macOS',
     icon: MacOSIcon,
-    appName: 'V2RayXS / V2RayU',
-    steps: [
-      'Установите V2RayXS или V2RayU из GitHub',
-      'Напишите нашему боту в Telegram или ВКонтакте для получения конфигурационной ссылки',
-      'Вставьте ссылку в приложение через буфер обмена',
-      'Выберите сервер и активируйте подключение',
-    ],
+    steps: [],
+  },
+];
+
+const faqs = [
+  {
+    question: 'Как получить пробный период?',
+    answer: (
+      <>
+        Пробный период составляет <strong>72 часа</strong>. Для активации нужно перейти в{' '}
+        <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">@raylink_service_bot</a> и нажать кнопку{' '}
+        <strong>⚙️ Тестовый период</strong>
+      </>
+    ),
+  },
+  {
+    question: 'Можно ли использовать на нескольких устройствах?',
+    answer: (
+      <>
+        Да, одна подписка работает на <strong>2 устройствах одновременно</strong>. Вы можете использовать RayLink на телефоне и компьютере. Также профили совместимы с <strong>TV</strong> — подключайте VPN прямо на телевизоре!
+      </>
+    ),
+  },
+  {
+    question: 'Какая скорость соединения?',
+    answer: (
+      <>
+        Что касается скорости, то скорость вашего VPN зависит только от скорости вашего интернет-соединения. Незначительные падения скорости на <strong>10-20%</strong> совершенно нормальны при использовании VPN, поскольку его главным приоритетом всегда должна быть безопасность и конфиденциальность.
+      </>
+    ),
+  },
+  {
+    question: 'Как продлить подписку?',
+    answer: (
+      <>
+        Откройте бота <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">@raylink_service_bot</a>, выберите раздел{' '}
+        <strong>💳 Тарифы (Оплата)</strong> и следуйте инструкциям. Подписка продлится автоматически после оплаты.
+      </>
+    ),
   },
 ];
 
 const InstructionsPage = () => {
   const navigate = useNavigate();
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('ios');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        contentRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+      );
+    }, pageRef);
+    return () => ctx.revert();
   }, []);
 
   const goBack = () => {
@@ -110,12 +291,70 @@ const InstructionsPage = () => {
   };
 
   const currentPlatform = platformsData.find((p) => p.id === selectedPlatform);
-  const PlatformIcon = currentPlatform?.icon || IOSIcon;
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-white/5 dark:border-white/5 border-black/5 bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
+    <div ref={pageRef} className="min-h-screen bg-background text-foreground">
+      <style>{`
+        @keyframes floatIcon {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        @keyframes pulseBtn {
+          0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lime) 40%, transparent); }
+          70% { box-shadow: 0 0 0 15px color-mix(in srgb, var(--lime) 0%, transparent); }
+          100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lime) 0%, transparent); }
+        }
+        .animate-float-icon {
+          animation: floatIcon 2s ease-in-out infinite;
+        }
+        .animate-pulse-btn {
+          animation: pulseBtn 2s infinite;
+        }
+        .download-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 16px;
+          background: linear-gradient(145deg, #e5e5e5 0%, #f5f5f5 100%);
+          color: inherit;
+          padding: 16px 28px;
+          border-radius: 16px;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 600;
+          font-size: 15px;
+          margin-top: 12px;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.08);
+          min-width: 260px;
+          justify-content: flex-start;
+          position: relative;
+          overflow: hidden;
+        }
+        .dark .download-btn {
+          background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+          border-color: #333;
+        }
+        .download-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--lime) 10%, transparent), transparent);
+          transition: left 0.6s ease;
+        }
+        .download-btn:hover::before {
+          left: 100%;
+        }
+        .download-btn:hover {
+          transform: translateY(-3px);
+          border-color: var(--lime);
+          box-shadow: 0 8px 25px color-mix(in srgb, var(--lime) 15%, transparent);
+        }
+      `}</style>
+
+      <header className="sticky top-0 z-50 border-b border-black/5 dark:border-white/5 bg-white/95 dark:bg-[rgba(10,10,10,0.95)] backdrop-blur-[20px]">
+        <div className="max-w-3xl mx-auto px-4 py-4 flex items-center gap-4">
           <button
             onClick={goBack}
             className="flex items-center gap-2 text-gray-600 dark:text-gray-light hover:text-lime transition-colors duration-300"
@@ -127,29 +366,53 @@ const InstructionsPage = () => {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="glass-card p-8 lg:p-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <main ref={contentRef} className="max-w-3xl mx-auto px-4 py-10">
+        <div className="glass-card p-6 lg:p-10">
+          {/* Hero header */}
+          <div className="text-center pt-6 pb-8">
+            <div className="font-syncopate text-2xl font-bold tracking-widest text-dark dark:text-white uppercase mb-2">RayLink</div>
+            <p className="font-montserrat text-sm text-gray-500 dark:text-gray-light mb-6">Инструкция по настройке</p>
+            <a
+              href="https://t.me/raylink_service_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 btn-primary py-3.5 px-7 rounded-full text-sm animate-pulse-btn"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.38-.49 1.03-.74 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.89 5.17-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.25z" />
+              </svg>
+              <span className="font-martian font-semibold">Запустить бота</span>
+            </a>
+          </div>
+
+          {/* Platform selector */}
+          <div className="grid grid-cols-2 gap-4 mb-8">
             {platformsData.map((platform) => {
               const Icon = platform.icon;
+              const isActive = selectedPlatform === platform.id;
               return (
                 <button
                   key={platform.id}
                   onClick={() => setSelectedPlatform(platform.id)}
-                  className={`glass-card-light p-5 flex flex-col items-center gap-2 transition-all duration-300 ${
-                    selectedPlatform === platform.id
-                      ? 'border-lime/50 bg-lime/5'
-                      : 'hover:border-black/20 dark:hover:border-white/20'
+                  className={`relative rounded-2xl p-5 text-center transition-all duration-300 overflow-hidden border ${
+                    isActive
+                      ? 'bg-lime/[0.03] border-lime/50 dark:border-lime'
+                      : 'bg-gray-100 dark:bg-[#111] border-black/[0.08] dark:border-white/[0.08] hover:-translate-y-1 hover:border-black/20 dark:hover:border-white/20'
                   }`}
                 >
+                  <div
+                    className={`absolute top-0 left-0 right-0 h-0.5 bg-lime transition-transform duration-300 origin-left ${
+                      isActive ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  />
                   <Icon
-                    className={`w-5 h-5 transition-colors ${
-                      selectedPlatform === platform.id ? 'text-lime' : 'text-gray-600 dark:text-gray-light'
+                    className={`w-10 h-10 mx-auto mb-3 transition-colors duration-300 ${
+                      isActive ? 'text-lime animate-float-icon' : 'text-gray-400 dark:text-gray-500'
                     }`}
                   />
                   <span
-                    className={`font-martian text-sm font-medium ${
-                      selectedPlatform === platform.id ? 'text-dark dark:text-white' : 'text-gray-600 dark:text-gray-light'
+                    className={`font-martian text-sm font-semibold transition-colors duration-300 ${
+                      isActive ? 'text-dark dark:text-white' : 'text-gray-500 dark:text-gray-light'
                     }`}
                   >
                     {platform.name}
@@ -159,103 +422,141 @@ const InstructionsPage = () => {
             })}
           </div>
 
-          <div className="flex items-center gap-4 mb-8 pb-6 border-b border-black/10 dark:border-white/10">
-            <div className="w-12 h-12 rounded-xl bg-lime/10 flex items-center justify-center border border-lime/30">
-              <PlatformIcon className="w-6 h-6 text-lime" />
-            </div>
-            <div>
-              <h2 className="font-syncopate text-xl font-bold text-dark dark:text-white uppercase tracking-wide">
-                {currentPlatform?.name}
-              </h2>
-              <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light">
-                Приложение: {currentPlatform?.appName}
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-6 mb-10">
-            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white uppercase tracking-wide">
-              Шаги настройки
-            </h3>
-            {currentPlatform?.steps.map((step, index) => (
-              <div
-                key={index}
-                className="flex gap-4 items-start p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5"
-              >
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-lime/10 border border-lime/30 flex items-center justify-center">
-                  <span className="font-syncopate font-bold text-lime text-sm">
-                    {index + 1}
-                  </span>
-                </div>
-                <p className="font-montserrat text-gray-700 dark:text-gray-300 text-sm leading-relaxed pt-1">
-                  {step}
+          {/* Instruction content */}
+          <div className="rounded-3xl p-5 lg:p-6 bg-gray-100 dark:bg-[#111] border border-black/[0.08] dark:border-white/[0.08] mb-8">
+            {selectedPlatform === 'macos' ? (
+              <div className="flex flex-col items-center justify-center py-14 text-center">
+                <span className="inline-block mb-5 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider border border-lime/30 text-lime bg-lime/10">
+                  В разработке
+                </span>
+                <div className="text-5xl mb-4 animate-float-icon">🍏</div>
+                <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-2">Инструкция для macOS скоро</h3>
+                <p className="font-montserrat text-sm text-gray-500 dark:text-gray-light max-w-sm leading-relaxed">
+                  Мы активно работаем над инструкцией для macOS. Следите за обновлениями в нашем новостном канале!
                 </p>
               </div>
-            ))}
+            ) : (
+              <div className="space-y-8">
+                {currentPlatform?.downloadButton && (
+                  <div className="pb-2">{currentPlatform.downloadButton}</div>
+                )}
+                {currentPlatform?.steps.map((step, idx) => (
+                  <div key={idx} className="relative pl-6">
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bg-gradient-to-b from-lime to-transparent" />
+                    <span className="inline-block bg-lime text-dark font-montserrat text-[11px] font-bold px-2.5 py-1 rounded-full mb-2 tracking-wide">
+                      {step.number}
+                    </span>
+                    <h4 className="font-martian text-base font-semibold text-dark dark:text-white mb-1">{step.title}</h4>
+                    <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed mb-3">
+                      {step.description}
+                    </p>
+                    {step.media && (
+                      <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black">
+                        {step.media.type === 'video' ? (
+                          <video autoPlay loop muted playsInline controls className="w-full h-auto block">
+                            <source src={step.media.src} type="video/mp4" />
+                            Ваш браузер не поддерживает видео.
+                          </video>
+                        ) : (
+                          <img src={step.media.src} alt={step.media.alt} className="w-full h-auto block" />
+                        )}
+                      </div>
+                    )}
+                    {step.extraDescription && (
+                      <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed mt-4 mb-3">
+                        {step.extraDescription}
+                      </p>
+                    )}
+                    {step.extraMedia && (
+                      <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black">
+                        {step.extraMedia.type === 'video' ? (
+                          <video autoPlay loop muted playsInline controls className="w-full h-auto block">
+                            <source src={step.extraMedia.src} type="video/mp4" />
+                            Ваш браузер не поддерживает видео.
+                          </video>
+                        ) : (
+                          <img src={step.extraMedia.src} alt={step.extraMedia.alt} className="w-full h-auto block" />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="border-t border-black/10 dark:border-white/10 pt-8 mb-8">
-            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white mb-4 uppercase tracking-wide">
-              Получить конфигурацию
-            </h3>
-            <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm mb-6">
-              Напишите нашему боту для получения персональной конфигурации и начала тестового периода (72 часа)
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+          {/* FAQ */}
+          <div className="mb-8">
+            <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-5 tracking-tight">Частые вопросы</h3>
+            <div className="space-y-0">
+              {faqs.map((faq, idx) => {
+                const isOpen = openFaqIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="border-b border-black/[0.08] dark:border-white/[0.08]"
+                  >
+                    <button
+                      onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                      className="w-full flex items-center justify-between py-4 text-left group"
+                    >
+                      <span className="font-martian font-medium text-sm text-dark dark:text-white group-hover:text-lime transition-colors pr-4">
+                        {faq.question}
+                      </span>
+                      <span className="relative w-6 h-6 flex-shrink-0 ml-2">
+                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-0.5 bg-lime rounded-full transition-transform duration-300" />
+                        <span
+                          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-3.5 bg-lime rounded-full transition-all duration-300 ${
+                            isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
+                          }`}
+                        />
+                      </span>
+                    </button>
+                    <div
+                      className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                        isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className={`pb-4 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
+                          <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Support */}
+          <div className="text-center pt-8 border-t border-black/[0.08] dark:border-white/[0.08]">
+            <p className="font-syncopate text-[11px] text-gray-500 dark:text-gray-light uppercase tracking-[0.15em] mb-5">Нужна помощь?</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="https://t.me/raylink_service_bot"
+                href="https://t.me/RayLinkSupport"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary flex-1 justify-center font-martian"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-black/5 dark:bg-white/10 text-dark dark:text-white border border-transparent hover:border-lime hover:text-lime transition-all font-martian text-sm font-semibold w-full sm:w-auto"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.38-.49 1.03-.74 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.89 5.17-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.25z" />
                 </svg>
-                <span>Telegram бот</span>
+                Написать в поддержку
               </a>
               <a
-                href="https://vk.com/raylinkvpn"
+                href="https://t.me/raylink_news"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-vk flex-1 justify-center font-martian"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-black/10 dark:border-white/10 text-gray-600 dark:text-gray-light hover:border-gray-400 dark:hover:border-gray-500 hover:text-dark dark:hover:text-white transition-all font-martian text-sm font-semibold w-full sm:w-auto"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.714-1.033-1.033-1.49-1.171-1.744-1.171-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.673 4 8.231c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.049.17.491-.085.744-.576.744z"/>
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
                 </svg>
-                <span>VK бот</span>
+                Новостной канал
               </a>
-            </div>
-          </div>
-
-          <div className="border-t border-black/10 dark:border-white/10 pt-8">
-            <h3 className="font-syncopate text-lg font-bold text-dark dark:text-white mb-6 uppercase tracking-wide">
-              Частые вопросы
-            </h3>
-            <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
-                <h4 className="font-martian font-semibold text-dark dark:text-white text-sm mb-2">
-                  Что делать, если не подключается?
-                </h4>
-                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-                  Проверьте правильность введенной конфигурации, убедитесь что приложение обновлено до последней версии, попробуйте перезагрузить устройство. Если проблема остаётся — обратитесь в поддержку.
-                </p>
-              </div>
-              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
-                <h4 className="font-martian font-semibold text-dark dark:text-white text-sm mb-2">
-                  Можно ли использовать на нескольких устройствах?
-                </h4>
-                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-                  Да, одна подписка позволяет подключить до 3 устройств одновременно.
-                </p>
-              </div>
-              <div className="p-4 rounded-2xl bg-gray-100/50 dark:bg-dark-card/50 border border-black/5 dark:border-white/5">
-                <h4 className="font-martian font-semibold text-dark dark:text-white text-sm mb-2">
-                  Как обновить конфигурацию?
-                </h4>
-                <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm leading-relaxed">
-                  Просто запросите новую конфигурацию у бота в Telegram или ВКонтакте и импортируйте её в приложение.
-                </p>
-              </div>
             </div>
           </div>
         </div>
