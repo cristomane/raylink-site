@@ -52,33 +52,41 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
   return (
     <div
       ref={itemRef}
-      className="relative group cursor-pointer transition-all duration-500 hover:scale-105 overflow-hidden text-center"
+      className="relative group cursor-pointer transition-all duration-500 hover:scale-105 overflow-hidden text-center rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)]"
       style={{
-        borderRadius: '28px',
-        background: 'rgba(255,255,255,0.01)',
         backdropFilter: 'blur(20px) saturate(140%)',
         WebkitBackdropFilter: 'blur(20px) saturate(140%)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       <div
-        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block"
         style={{
           background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
         }}
       />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none hidden dark:block"
         style={{
           background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none block dark:hidden"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 40%)',
         }}
       />
       <div className="relative z-10 px-6 py-8">
         <div className="font-syncopate text-4xl lg:text-5xl font-bold text-lime mb-2">
           {displayValue}{suffix}
         </div>
-        <div className="font-montserrat text-sm text-gray-400">
+        <div className="font-montserrat text-sm text-gray-600 dark:text-gray-400">
           {label}
         </div>
       </div>

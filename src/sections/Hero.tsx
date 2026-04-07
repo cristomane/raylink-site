@@ -54,11 +54,31 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.05]"
+        className="absolute inset-0 pointer-events-none opacity-[0.05] hidden dark:block"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          maskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          WebkitMaskImage: `
+            linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
+          `,
+          maskComposite: 'intersect',
+          WebkitMaskComposite: 'source-in',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.08] block dark:hidden"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(0,0,0,0.25) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0,0,0,0.25) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
           maskImage: `
@@ -92,9 +112,17 @@ const Hero = () => {
           }}
         />
         <div
-          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-20"
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-20 hidden dark:block"
           style={{
             background: 'radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+            animation: 'floatBlob 12s ease-in-out infinite 2s',
+          }}
+        />
+        <div
+          className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-20 block dark:hidden"
+          style={{
+            background: 'radial-gradient(circle, rgba(0,0,0,0.15) 0%, transparent 70%)',
             filter: 'blur(50px)',
             animation: 'floatBlob 12s ease-in-out infinite 2s',
           }}
@@ -153,7 +181,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-dark to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background dark:from-dark to-transparent pointer-events-none" />
 
       <style>{`
         @keyframes floatBlob {

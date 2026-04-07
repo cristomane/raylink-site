@@ -41,45 +41,51 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: FeatureCardProps
   return (
     <div
       ref={cardRef}
-      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+      className="relative group cursor-pointer transition-all duration-500 hover:-translate-y-2 overflow-hidden rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)]"
       style={{
-        borderRadius: '28px',
-        background: 'rgba(255,255,255,0.01)',
         backdropFilter: 'blur(20px) saturate(140%)',
         WebkitBackdropFilter: 'blur(20px) saturate(140%)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1)',
       }}
     >
       <div
-        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block"
         style={{
           background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
         }}
       />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none hidden dark:block"
         style={{
           background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none block dark:hidden"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 40%)',
         }}
       />
       <div className="relative z-10 p-8 lg:p-10">
         <div className="mb-6">
           <div 
-            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.06]"
             style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)',
+              boxShadow: 'inset 0 1px 0 rgba(0,0,0,0.03)',
             }}
           >
-            <Icon className="w-7 h-7 text-gray-300 transition-colors duration-300 group-hover:text-lime" />
+            <Icon className="w-7 h-7 text-gray-500 dark:text-gray-300 transition-colors duration-300 group-hover:text-lime" />
           </div>
         </div>
-        <h3 className="font-martian text-lg font-bold text-white mb-3 uppercase tracking-wide">
+        <h3 className="font-martian text-lg font-bold text-dark dark:text-white mb-3 uppercase tracking-wide">
           {title}
         </h3>
-        <p className="font-montserrat text-gray-400 text-sm leading-relaxed">
+        <p className="font-montserrat text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
           {description}
         </p>
       </div>
@@ -159,16 +165,16 @@ const Features = () => {
           fill="none"
           style={{ minWidth: '1400px' }}
         >
-          <ellipse cx="700" cy="450" rx="650" ry="350" stroke="white" strokeWidth="1" />
-          <ellipse cx="700" cy="450" rx="520" ry="280" stroke="white" strokeWidth="0.5" />
-          <ellipse cx="700" cy="450" rx="390" ry="210" stroke="white" strokeWidth="0.5" />
+          <ellipse cx="700" cy="450" rx="650" ry="350" className="stroke-black/20 dark:stroke-white" strokeWidth="1" />
+          <ellipse cx="700" cy="450" rx="520" ry="280" className="stroke-black/20 dark:stroke-white" strokeWidth="0.5" />
+          <ellipse cx="700" cy="450" rx="390" ry="210" className="stroke-black/20 dark:stroke-white" strokeWidth="0.5" />
         </svg>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
-          className="font-syncopate text-3xl lg:text-4xl font-bold text-center text-white mb-16 lg:mb-20 uppercase tracking-wide"
+          className="font-syncopate text-3xl lg:text-4xl font-bold text-center text-dark dark:text-white mb-16 lg:mb-20 uppercase tracking-wide"
         >
           Преимущества
         </h2>

@@ -140,10 +140,7 @@ const Pricing = () => {
         <div className="flex justify-center" style={{ perspective: '1000px' }}>
           <div
             ref={cardRef}
-            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center flex flex-col justify-between group relative"
-            style={{
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
-            }}
+            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center flex flex-col justify-between group relative shadow-[0_8px_32px_rgba(0,0,0,0.15),0_0_60px_rgba(204,255,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(204,255,0,0.05)]"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
               В тренде

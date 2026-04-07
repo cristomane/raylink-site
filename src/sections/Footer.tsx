@@ -124,7 +124,7 @@ const Footer = () => {
       ref={footerRef}
       className="relative pt-16 lg:pt-24 pb-8"
     >
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
 
       <div ref={contentRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
@@ -256,34 +256,34 @@ const Footer = () => {
           >
             <button
               onClick={() => setShowIP(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-dark hover:bg-black/10 dark:hover:text-white dark:hover:bg-white/10 transition-colors"
             >
               ✕
             </button>
-            <h3 className="font-syncopate text-xl font-bold mb-6 uppercase tracking-wide">
+            <h3 className="font-syncopate text-xl font-bold mb-6 uppercase tracking-wide text-dark dark:text-white">
               Мой IP адрес
             </h3>
             {ipLoading ? (
-              <p className="font-montserrat text-sm text-gray-400">Загрузка...</p>
+              <p className="font-montserrat text-sm text-gray-500 dark:text-gray-400">Загрузка...</p>
             ) : ipData?.error ? (
-              <p className="font-montserrat text-sm text-red-400">Не удалось получить данные</p>
+              <p className="font-montserrat text-sm text-red-500 dark:text-red-400">Не удалось получить данные</p>
             ) : (
               <div className="space-y-3 font-montserrat text-sm">
-                <div className="flex justify-between border-b border-white/10 pb-2">
-                  <span className="text-gray-400">IP адрес</span>
+                <div className="flex justify-between border-b border-black/10 dark:border-white/10 pb-2">
+                  <span className="text-gray-500 dark:text-gray-400">IP адрес</span>
                   <span className="text-lime font-bold">{ipData?.ip}</span>
                 </div>
-                <div className="flex justify-between border-b border-white/10 pb-2">
-                  <span className="text-gray-400">Страна</span>
-                  <span className="text-white">{ipData?.country_name}</span>
+                <div className="flex justify-between border-b border-black/10 dark:border-white/10 pb-2">
+                  <span className="text-gray-500 dark:text-gray-400">Страна</span>
+                  <span className="text-dark dark:text-white">{ipData?.country_name}</span>
                 </div>
-                <div className="flex justify-between border-b border-white/10 pb-2">
-                  <span className="text-gray-400">Город</span>
-                  <span className="text-white">{ipData?.city}</span>
+                <div className="flex justify-between border-b border-black/10 dark:border-white/10 pb-2">
+                  <span className="text-gray-500 dark:text-gray-400">Город</span>
+                  <span className="text-dark dark:text-white">{ipData?.city}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Провайдер</span>
-                  <span className="text-white text-right max-w-[60%]">{ipData?.org}</span>
+                  <span className="text-gray-500 dark:text-gray-400">Провайдер</span>
+                  <span className="text-dark dark:text-white text-right max-w-[60%]">{ipData?.org}</span>
                 </div>
               </div>
             )}
@@ -302,11 +302,11 @@ const Footer = () => {
           >
             <button
               onClick={() => setShowSpeed(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-dark hover:bg-black/10 dark:hover:text-white dark:hover:bg-white/10 transition-colors"
             >
               ✕
             </button>
-            <h3 className="font-syncopate text-xl font-bold mb-4 uppercase tracking-wide px-2">
+            <h3 className="font-syncopate text-xl font-bold mb-4 uppercase tracking-wide px-2 text-dark dark:text-white">
               Тест скорости
             </h3>
             <iframe

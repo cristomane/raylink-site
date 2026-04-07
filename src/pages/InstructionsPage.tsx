@@ -139,7 +139,7 @@ const InstructionsPage = () => {
                   className={`glass-card-light p-5 flex flex-col items-center gap-2 transition-all duration-300 ${
                     selectedPlatform === platform.id
                       ? 'border-lime/50 bg-lime/5'
-                      : 'hover:border-white/20'
+                      : 'hover:border-black/20 dark:hover:border-white/20'
                   }`}
                 >
                   <Icon

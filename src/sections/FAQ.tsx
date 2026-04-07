@@ -81,7 +81,7 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <p className="font-montserrat text-gray-light text-sm px-6 pb-6 leading-relaxed">
+        <p className="font-montserrat text-gray-600 dark:text-gray-light text-sm px-6 pb-6 leading-relaxed">
           {answer}
         </p>
       </div>

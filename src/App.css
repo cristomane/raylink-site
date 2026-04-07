@@ -8,7 +8,7 @@ html {
 /* Custom selection color */
 ::selection {
   background-color: rgba(204, 255, 0, 0.3);
-  color: #FFFFFF;
+  color: inherit;
 }
 
 /* Hide scrollbar but keep functionality */
