@@ -246,7 +246,8 @@ const faqs = [
     answer: (
       <>
         Пробный период составляет <strong>72 часа</strong>. Для активации нужно перейти в{' '}
-        <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">@raylink_service_bot</a> и нажать кнопку{' '}
+        <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">Telegram</a> или{' '}
+        <a href="https://vk.com/raylinkvpn" className="text-lime hover:underline font-medium">VK</a> и нажать кнопку{' '}
         <strong>⚙️ Тестовый период</strong>
       </>
     ),
@@ -263,7 +264,8 @@ const faqs = [
     question: 'Как продлить подписку?',
     answer: (
       <>
-        Откройте бота <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">@raylink_service_bot</a>, выберите раздел{' '}
+        Откройте бота в <a href="https://t.me/raylink_service_bot" className="text-lime hover:underline font-medium">Telegram</a> или{' '}
+        <a href="https://vk.com/raylinkvpn" className="text-lime hover:underline font-medium">VK</a>, выберите раздел{' '}
         <strong>💳 Тарифы (Оплата)</strong> и следуйте инструкциям. Подписка продлится автоматически после оплаты.
       </>
     ),
