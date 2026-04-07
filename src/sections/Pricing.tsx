@@ -8,6 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Pricing = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const leftCardRef = useRef<HTMLDivElement>(null);
+  const rightCardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const featuresRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -39,20 +41,32 @@ const Pricing = () => {
         }
       );
 
-      gsap.fromTo(
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      tl.fromTo(
         cardRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.7, ease: 'power3.out' }
+      );
+
+      tl.fromTo(
+        leftCardRef.current,
+        { x: 80, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        '-=0.3'
+      );
+
+      tl.fromTo(
+        rightCardRef.current,
+        { x: -80, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        '<'
       );
 
       if (featuresRef.current) {
@@ -139,7 +153,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto">
           {/* Годовая */}
-          <div className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
             <div>
               <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
                 Годовая подписка
@@ -228,7 +242,7 @@ const Pricing = () => {
           </div>
 
           {/* 3 месяца */}
-          <div className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative">
+          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
               В тренде
             </div>
