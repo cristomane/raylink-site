@@ -87,15 +87,17 @@ const platformsData: PlatformData[] = [
               href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-4 px-5 py-4 rounded-2xl bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-dark dark:text-white transition-all duration-300 hover:-translate-y-1 hover:border-lime/40 w-full"
+              className="group inline-flex items-center gap-4 px-5 py-4 rounded-2xl bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-dark dark:text-white transition-all duration-300 hover:-translate-y-1 hover:border-lime/40 w-full"
             >
-              <span className="absolute top-2 right-3 px-2 py-0.5 rounded-full bg-lime text-dark text-[10px] font-bold uppercase tracking-wide">
-                Рекомендуем
-              </span>
               <AppStoreIcon className="w-9 h-9 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-              <div className="flex flex-col leading-tight">
+              <div className="flex flex-col leading-tight min-w-0">
                 <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить клиент</small>
-                <span className="text-base font-bold tracking-tight">HAPP в App Store</span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-base font-bold tracking-tight">HAPP в App Store</span>
+                  <span className="px-1.5 py-0.5 rounded-md bg-lime/10 text-lime text-[10px] font-bold uppercase tracking-wide border border-lime/20">
+                    Рекомендуем
+                  </span>
+                </div>
               </div>
             </a>
             <a
