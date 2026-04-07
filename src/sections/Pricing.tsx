@@ -41,10 +41,9 @@ const Pricing = () => {
 
       gsap.fromTo(
         cardRef.current,
-        { rotateY: -10, x: -50, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
-          rotateY: 0,
-          x: 0,
+          y: 0,
           opacity: 1,
           duration: 1,
           ease: 'power3.out',
@@ -138,37 +137,68 @@ const Pricing = () => {
           Тариф
         </h2>
 
-        <div className="flex justify-center" style={{ perspective: '1000px' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto">
+          {/* Годовая */}
+          <div className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
+                Годовая подписка
+              </div>
+              <div className="mb-4">
+                <span className="font-syncopate text-5xl lg:text-6xl font-bold text-dark dark:text-white">
+                  1490₽
+                </span>
+                <span className="font-montserrat text-gray-500 dark:text-gray-light text-sm block mt-1">
+                  / год
+                </span>
+              </div>
+              <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-mart font-medium mb-6">
+                Экономия 17%
+              </div>
+            </div>
+            <a
+              href="https://t.me/raylink_service_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full py-3 text-sm font-martian"
+            >
+              <Send className="w-4 h-4" />
+              Подключить
+            </a>
+          </div>
+
+          {/* Единый тариф — центральный */}
           <div
             ref={cardRef}
-            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center group transition-all duration-500 hover:scale-[1.02]"
+            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group transition-all duration-500 hover:scale-[1.02]"
             style={{
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
             }}
           >
-            <div className="font-martian text-lg text-lime tracking-wider mb-6 uppercase font-semibold">
-              Единый тариф
-            </div>
+            <div>
+              <div className="font-martian text-lg text-lime tracking-wider mb-4 uppercase font-semibold">
+                Единый тариф
+              </div>
+              <div className="mb-6">
+                <span className="font-syncopate text-6xl lg:text-7xl font-bold text-dark dark:text-white">
+                  150₽
+                </span>
+                <span className="font-montserrat text-gray-600 dark:text-gray-light text-lg ml-2">
+                  / месяц
+                </span>
+              </div>
 
-            <div className="mb-8">
-              <span className="font-syncopate text-7xl lg:text-8xl font-bold text-dark dark:text-white">
-                150₽
-              </span>
-              <span className="font-montserrat text-gray-600 dark:text-gray-light text-lg ml-2">
-                / месяц
-              </span>
+              <ul ref={featuresRef} className="space-y-3 mb-8 text-left">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-lime" />
+                    </div>
+                    <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <ul ref={featuresRef} className="space-y-4 mb-10 text-left">
-              {features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-lime/20 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3 h-3 text-lime" />
-                  </div>
-                  <span className="font-montserrat text-dark dark:text-white text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
 
             <div className="space-y-3">
               <a
@@ -195,6 +225,38 @@ const Pricing = () => {
                 <span>Подключить через VK</span>
               </a>
             </div>
+          </div>
+
+          {/* 3 месяца */}
+          <div className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
+              В тренде
+            </div>
+            <div>
+              <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
+                3 месяца
+              </div>
+              <div className="mb-4">
+                <span className="font-syncopate text-5xl lg:text-6xl font-bold text-dark dark:text-white">
+                  400₽
+                </span>
+                <span className="font-montserrat text-gray-500 dark:text-gray-light text-sm block mt-1">
+                  разовый платёж
+                </span>
+              </div>
+              <div className="inline-block px-3 py-1 rounded-full bg-lime/10 text-lime text-xs font-montserrat font-medium mb-6">
+                Экономия 12%
+              </div>
+            </div>
+            <a
+              href="https://t.me/raylink_service_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full py-3 text-sm font-martian"
+            >
+              <Send className="w-4 h-4" />
+              Подключить
+            </a>
           </div>
         </div>
       </div>
