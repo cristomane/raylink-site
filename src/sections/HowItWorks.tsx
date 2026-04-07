@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CreditCard, Rocket, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,7 +10,7 @@ interface StepProps {
   number: number;
   icon: React.ElementType;
   title: string;
-  description: string;
+  description: React.ReactNode;
   isLast: boolean;
 }
 
@@ -137,7 +138,14 @@ const HowItWorks = () => {
     {
       icon: Rocket,
       title: 'Подключитесь',
-      description: 'Получите готовую конфигурацию и подключитесь за 1 минуту. Работает на всех устройствах.',
+      description: (
+        <>
+          Получите готовую конфигурацию и подключитесь за 1 минуту. Работает на всех устройствах.{' '}
+          <Link to="/instructions" className="text-lime hover:underline transition-colors">
+            Подробная инструкция
+          </Link>.
+        </>
+      ),
     },
   ];
 
