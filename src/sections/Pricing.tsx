@@ -153,7 +153,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto">
           {/* Годовая */}
-          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+          <div ref={leftCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 opacity-0">
             <div>
               <div className="font-martian text-sm text-gray-400 tracking-wider mb-2 uppercase font-semibold">
                 Годовая подписка
@@ -184,7 +184,7 @@ const Pricing = () => {
           {/* Единый тариф — центральный */}
           <div
             ref={cardRef}
-            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group transition-all duration-500 hover:scale-[1.02]"
+            className="glass-card-premium w-full p-8 lg:p-10 text-center flex flex-col justify-between group transition-all duration-500 hover:scale-[1.02] opacity-0"
             style={{
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(204, 255, 0, 0.05)',
             }}
@@ -242,7 +242,7 @@ const Pricing = () => {
           </div>
 
           {/* 3 месяца */}
-          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative">
+          <div ref={rightCardRef} className="glass-card w-full p-6 lg:p-8 text-center flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative opacity-0">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
               В тренде
             </div>
