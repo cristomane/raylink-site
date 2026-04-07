@@ -53,29 +53,14 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
         if (stepRef.current) observer.observe(stepRef.current);
       }
 
-      gsap.fromTo(
-        contentRef.current,
-        { x: 30, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.7,
-          delay: 0.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: stepRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+
     });
 
     return () => ctx.revert();
   }, [isLast]);
 
   return (
-    <div ref={stepRef} className="flex gap-6 lg:gap-8 relative">
+    <div ref={stepRef} className="step-item flex gap-6 lg:gap-8 relative">
       <div className="flex flex-col items-center relative" style={{ width: '56px', flexShrink: 0 }}>
         <div
           ref={circleRef}
@@ -115,6 +100,7 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
 const HowItWorks = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     {
@@ -158,6 +144,27 @@ const HowItWorks = () => {
           },
         }
       );
+
+      if (stepsContainerRef.current) {
+        const stepItems = stepsContainerRef.current.querySelectorAll('.step-item');
+        gsap.fromTo(
+          stepItems,
+          { rotateX: 15, y: 50, opacity: 0 },
+          {
+            rotateX: 0,
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: stepsContainerRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -177,7 +184,11 @@ const HowItWorks = () => {
           Как это работает
         </h2>
 
-        <div className="relative max-w-xl mx-auto">
+        <div
+          ref={stepsContainerRef}
+          className="relative max-w-xl mx-auto"
+          style={{ perspective: '1000px' }}
+        >
           <div className="space-y-0">
             {steps.map((step, index) => (
               <Step
