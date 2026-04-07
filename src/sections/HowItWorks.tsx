@@ -39,22 +39,18 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
       );
 
       if (lineRef.current && !isLast) {
-        gsap.fromTo(
-          lineRef.current,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            duration: 0.8,
-            delay: 0.4,
-            ease: 'power2.out',
-            transformOrigin: 'top center',
-            scrollTrigger: {
-              trigger: stepRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                lineRef.current?.classList.add('animate-draw-line');
+                observer.disconnect();
+              }
+            });
+          },
+          { threshold: 0.1 }
         );
+        if (stepRef.current) observer.observe(stepRef.current);
       }
 
       gsap.fromTo(
@@ -93,12 +89,8 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
         {!isLast && (
           <div
             ref={lineRef}
-            className="absolute top-12 lg:top-14 left-1/2 w-0.5 bg-gradient-to-b from-lime/60 to-lime/20"
-            style={{ 
-              height: 'calc(100% - 3rem)',
-              marginLeft: '-1px',
-              transformOrigin: 'top center'
-            }}
+            className="absolute top-12 lg:top-14 bottom-0 left-[calc(50%-1px)] w-0.5 bg-gradient-to-b from-lime/60 to-lime/20 origin-top"
+            style={{ transform: 'scaleY(0)', opacity: 0 }}
           />
         )}
       </div>
@@ -172,11 +164,21 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="how-it-works"
-      className="relative py-24 lg:py-32"
-    >
+    <>
+      <style>{`
+        @keyframes drawLine {
+          from { transform: scaleY(0); opacity: 0; }
+          to { transform: scaleY(1); opacity: 1; }
+        }
+        .animate-draw-line {
+          animation: drawLine 0.8s ease-out 0.4s forwards;
+        }
+      `}</style>
+      <section
+        ref={sectionRef}
+        id="how-it-works"
+        className="relative py-24 lg:py-32"
+      >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
