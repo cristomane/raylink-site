@@ -12,10 +12,9 @@ interface StepCardProps {
   title: string;
   description: React.ReactNode;
   isLeft: boolean;
-  index: number;
 }
 
-const StepCard = ({ number, icon: Icon, title, description, isLeft, index }: StepCardProps) => {
+const StepCard = ({ number, icon: Icon, title, description, isLeft }: StepCardProps) => {
   const stepRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
@@ -424,7 +423,6 @@ const HowItWorks = () => {
                 title={step.title}
                 description={step.description}
                 isLeft={index % 2 === 0}
-                index={index}
               />
             ))}
           </div>
