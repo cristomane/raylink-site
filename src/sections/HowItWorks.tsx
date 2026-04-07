@@ -1,16 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode, MouseEvent, CSSProperties } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CreditCard, Rocket, MessageSquare, ArrowRight, Sparkles } from 'lucide-react';
+import { CreditCard, Rocket, MessageSquare, ArrowRight, Sparkles, LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // 3D Tilt эффект при наведении
-const TiltCard = ({ children, className = '', intensity = 12 }) => {
-  const cardRef = useRef(null);
+const TiltCard = ({ 
+  children, 
+  className = '', 
+  intensity = 12 
+}: { 
+  children: ReactNode; 
+  className?: string; 
+  intensity?: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     
     const rect = cardRef.current.getBoundingClientRect();
@@ -52,18 +60,32 @@ const TiltCard = ({ children, className = '', intensity = 12 }) => {
       style={{
         transformStyle: 'preserve-3d',
         willChange: 'transform',
-      }}
+      } as CSSProperties}
     >
       {children}
     </div>
   );
 };
 
-const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) => {
-  const stepRef = useRef(null);
-  const cardRef = useRef(null);
-  const iconRef = useRef(null);
-  const contentRef = useRef(null);
+const StepCard = ({ 
+  number, 
+  icon: Icon, 
+  title, 
+  description, 
+  isLeft, 
+  isActive 
+}: {
+  number: number;
+  icon: LucideIcon;
+  title: string;
+  description: ReactNode;
+  isLeft: boolean;
+  isActive: boolean;
+}) => {
+  const stepRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
@@ -148,13 +170,35 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
     return () => ctx.revert();
   }, [isLeft, isActive]);
 
+  const cardStyle = (hovered: boolean): CSSProperties => ({
+    background: 'var(--glass-bg)',
+    backdropFilter: 'blur(40px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+    border: hovered ? '2px solid rgba(163, 230, 53, 0.5)' : '1px solid var(--glass-border)',
+    boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
+    transformStyle: 'preserve-3d',
+  });
+
+  const iconStyle = (hovered: boolean): CSSProperties => ({
+    background: 'linear-gradient(135deg, rgba(163, 230, 53, 0.2) 0%, rgba(163, 230, 53, 0.05) 100%)',
+    border: '2px solid rgba(163, 230, 53, 0.4)',
+    boxShadow: hovered 
+      ? '0 0 40px rgba(163, 230, 53, 0.4), inset 0 0 20px rgba(163, 230, 53, 0.1)'
+      : '0 0 20px rgba(163, 230, 53, 0.2)',
+  });
+
+  const pointStyle: CSSProperties = {
+    background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
+    boxShadow: '0 0 40px rgba(163, 230, 53, 0.6), 0 0 80px rgba(163, 230, 53, 0.3)',
+  };
+
   return (
     <div 
       ref={stepRef} 
       className={`flex items-center w-full mb-20 lg:mb-32 last:mb-0 ${
         isLeft ? 'justify-start' : 'justify-end'
       }`}
-      style={{ perspective: '2000px' }}
+      style={{ perspective: '2000px' } as CSSProperties}
     >
       <div className="flex items-center gap-6 lg:gap-12 w-full max-w-6xl">
         {isLeft ? (
@@ -163,14 +207,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
               <div 
                 ref={cardRef}
                 className="relative p-8 lg:p-10 rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(163,230,53,0.3)]"
-                style={{
-                  background: 'var(--glass-bg)',
-                  backdropFilter: 'blur(40px) saturate(180%)',
-                  WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-                  border: isHovered ? '2px solid rgba(163, 230, 53, 0.5)' : '1px solid var(--glass-border)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
-                  transformStyle: 'preserve-3d',
-                }}
+                style={cardStyle(isHovered) as CSSProperties}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -179,13 +216,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
                     <div 
                       ref={iconRef}
                       className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(163, 230, 53, 0.2) 0%, rgba(163, 230, 53, 0.05) 100%)',
-                        border: '2px solid rgba(163, 230, 53, 0.4)',
-                        boxShadow: isHovered 
-                          ? '0 0 40px rgba(163, 230, 53, 0.4), inset 0 0 20px rgba(163, 230, 53, 0.1)'
-                          : '0 0 20px rgba(163, 230, 53, 0.2)',
-                      }}
+                      style={iconStyle(isHovered) as CSSProperties}
                     >
                       <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10" />
                     </div>
@@ -216,10 +247,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
             <div className="flex flex-col items-center relative" style={{ width: '64px', flexShrink: 0 }}>
               <div 
                 className="relative w-16 h-16 rounded-full flex items-center justify-center z-10"
-                style={{
-                  background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
-                  boxShadow: '0 0 40px rgba(163, 230, 53, 0.6), 0 0 80px rgba(163, 230, 53, 0.3)',
-                }}
+                style={pointStyle}
               >
                 <span className="font-syncopate text-xl font-bold text-dark relative z-10">
                   {number}
@@ -237,10 +265,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
             <div className="flex flex-col items-center relative" style={{ width: '64px', flexShrink: 0 }}>
               <div 
                 className="relative w-16 h-16 rounded-full flex items-center justify-center z-10"
-                style={{
-                  background: 'linear-gradient(135deg, #a3e635 0%, #84cc16 100%)',
-                  boxShadow: '0 0 40px rgba(163, 230, 53, 0.6), 0 0 80px rgba(163, 230, 53, 0.3)',
-                }}
+                style={pointStyle}
               >
                 <span className="font-syncopate text-xl font-bold text-dark relative z-10">
                   {number}
@@ -252,14 +277,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
               <div 
                 ref={cardRef}
                 className="relative p-8 lg:p-10 rounded-[32px] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_rgba(163,230,53,0.3)]"
-                style={{
-                  background: 'var(--glass-bg)',
-                  backdropFilter: 'blur(40px) saturate(180%)',
-                  WebkitBackdropFilter: 'blur(40px) saturate(180%)',
-                  border: isHovered ? '2px solid rgba(163, 230, 53, 0.5)' : '1px solid var(--glass-border)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-border)',
-                  transformStyle: 'preserve-3d',
-                }}
+                style={cardStyle(isHovered) as CSSProperties}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -268,13 +286,7 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
                     <div 
                       ref={iconRef}
                       className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(163, 230, 53, 0.2) 0%, rgba(163, 230, 53, 0.05) 100%)',
-                        border: '2px solid rgba(163, 230, 53, 0.4)',
-                        boxShadow: isHovered 
-                          ? '0 0 40px rgba(163, 230, 53, 0.4), inset 0 0 20px rgba(163, 230, 53, 0.1)'
-                          : '0 0 20px rgba(163, 230, 53, 0.2)',
-                      }}
+                      style={iconStyle(isHovered) as CSSProperties}
                     >
                       <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-lime relative z-10" />
                     </div>
@@ -308,13 +320,17 @@ const StepCard = ({ number, icon: Icon, title, description, isLeft, isActive }) 
 };
 
 const HowItWorks = () => {
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const timelineRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = [
+  const steps: Array<{
+    icon: LucideIcon;
+    title: string;
+    description: ReactNode;
+  }> = [
     {
       icon: MessageSquare,
       title: 'Перейдите в бота',
@@ -431,7 +447,7 @@ const HowItWorks = () => {
       ref={sectionRef}
       id="how-it-works"
       className="relative py-32 lg:py-40 overflow-hidden"
-      style={{ perspective: '2000px' }}
+      style={{ perspective: '2000px' } as CSSProperties}
     >
       {/* Фоновые элементы */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -441,7 +457,7 @@ const HowItWorks = () => {
             background: 'radial-gradient(circle, rgba(163, 230, 53, 0.3) 0%, transparent 70%)',
             filter: 'blur(80px)',
             animation: 'floatBlob 12s ease-in-out infinite',
-          }}
+          } as CSSProperties}
         />
         <div
           className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-15"
@@ -449,7 +465,7 @@ const HowItWorks = () => {
             background: 'radial-gradient(circle, rgba(163, 230, 53, 0.25) 0%, transparent 70%)',
             filter: 'blur(100px)',
             animation: 'floatBlob 10s ease-in-out infinite reverse',
-          }}
+          } as CSSProperties}
         />
         
         {/* Плавающие фигуры */}
@@ -462,20 +478,20 @@ const HowItWorks = () => {
               top: `${20 + (i % 3) * 25}%`,
               animation: `floatBlob ${8 + i * 2}s ease-in-out infinite`,
               animationDelay: `${i * 0.5}s`,
-            }}
+            } as CSSProperties}
           />
         ))}
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Заголовок */}
-        <div className="text-center mb-20 lg:mb-32" style={{ transformStyle: 'preserve-3d' }}>
+        <div className="text-center mb-20 lg:mb-32" style={{ transformStyle: 'preserve-3d' } as CSSProperties}>
           <h2
             ref={titleRef}
             className="font-syncopate text-4xl sm:text-5xl lg:text-6xl font-bold text-center text-dark dark:text-white mb-6 uppercase tracking-wide"
             style={{
               textShadow: '0 0 40px rgba(163, 230, 53, 0.3)',
-            }}
+            } as CSSProperties}
           >
             Как это работает
           </h2>
@@ -488,11 +504,11 @@ const HowItWorks = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative" style={{ perspective: '2000px' }}>
+        <div className="relative" style={{ perspective: '2000px' } as CSSProperties}>
           {/* Центральная линия */}
           <div 
             className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 hidden lg:block"
-            style={{ transformOrigin: 'top' }}
+            style={{ transformOrigin: 'top' } as CSSProperties}
           >
             <div
               ref={timelineRef}
@@ -501,7 +517,7 @@ const HowItWorks = () => {
                 background: 'linear-gradient(180deg, rgba(163, 230, 53, 0.8) 0%, rgba(163, 230, 53, 0.4) 50%, rgba(163, 230, 53, 0.1) 100%)',
                 transformOrigin: 'top',
                 boxShadow: '0 0 20px rgba(163, 230, 53, 0.4)',
-              }}
+              } as CSSProperties}
             />
           </div>
 
@@ -528,7 +544,7 @@ const HowItWorks = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-24 lg:mt-32 text-center" style={{ transformStyle: 'preserve-3d' }}>
+        <div className="mt-24 lg:mt-32 text-center" style={{ transformStyle: 'preserve-3d' } as CSSProperties}>
           <div 
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-lime/30 bg-gradient-to-r from-lime/10 via-lime/5 to-lime/10"
             style={{
@@ -536,9 +552,9 @@ const HowItWorks = () => {
               WebkitBackdropFilter: 'blur(20px)',
               boxShadow: '0 0 30px rgba(163, 230, 53, 0.2)',
               animation: 'floatBlob 4s ease-in-out infinite',
-            }}
+            } as CSSProperties}
           >
-            <div className="w-3 h-3 rounded-full bg-lime animate-pulse" style={{ boxShadow: '0 0 10px rgba(163, 230, 53, 0.6)' }} />
+            <div className="w-3 h-3 rounded-full bg-lime animate-pulse" style={{ boxShadow: '0 0 10px rgba(163, 230, 53, 0.6)' } as CSSProperties} />
             <span className="font-montserrat text-base text-gray-600 dark:text-gray-400">
               Первые 72 часа —{' '}
               <span className="text-lime font-bold">бесплатно</span>
