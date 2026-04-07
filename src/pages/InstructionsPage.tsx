@@ -9,6 +9,7 @@ interface StepData {
   number: string;
   title: string;
   description: React.ReactNode;
+  action?: React.ReactNode;
   media?: {
     type: 'image' | 'video';
     src: string;
@@ -27,7 +28,6 @@ interface PlatformData {
   name: string;
   icon: React.ElementType;
   steps: StepData[];
-  downloadButton?: React.ReactNode;
 }
 
 const IOSIcon = ({ className }: { className?: string }) => (
@@ -76,28 +76,28 @@ const platformsData: PlatformData[] = [
     id: 'ios',
     name: 'iOS',
     icon: IOSIcon,
-    downloadButton: (
-      <a
-        href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
-        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
-      >
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
-        <AppStoreIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="relative z-10 flex flex-col leading-tight">
-          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-          <span className="text-base font-bold tracking-tight text-dark dark:text-white">App Store</span>
-        </div>
-      </a>
-    ),
     steps: [
       {
         number: '01',
         title: 'Скачайте приложение',
         description: 'Установите официальное приложение V2RayTun из App Store:',
+        action: (
+          <a
+            href="https://apps.apple.com/ru/app/v2raytun/id6476628951"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+            style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
+          >
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+            <AppStoreIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+            <div className="relative z-10 flex flex-col leading-tight">
+              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+              <span className="text-base font-bold tracking-tight text-dark dark:text-white">App Store</span>
+            </div>
+          </a>
+        ),
       },
       {
         number: '02',
@@ -123,28 +123,28 @@ const platformsData: PlatformData[] = [
     id: 'android',
     name: 'Android',
     icon: AndroidIcon,
-    downloadButton: (
-      <a
-        href="https://play.google.com/store/apps/details?id=com.v2raytun.android"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
-        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
-      >
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
-        <GooglePlayIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="relative z-10 flex flex-col leading-tight">
-          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-          <span className="text-base font-bold tracking-tight text-dark dark:text-white">Google Play</span>
-        </div>
-      </a>
-    ),
     steps: [
       {
         number: '01',
         title: 'Скачайте приложение',
         description: 'Установите официальное приложение V2RayTun из Google Play:',
+        action: (
+          <a
+            href="https://play.google.com/store/apps/details?id=com.v2raytun.android"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+            style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
+          >
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+            <GooglePlayIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+            <div className="relative z-10 flex flex-col leading-tight">
+              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
+              <span className="text-base font-bold tracking-tight text-dark dark:text-white">Google Play</span>
+            </div>
+          </a>
+        ),
       },
       {
         number: '02',
@@ -172,28 +172,28 @@ const platformsData: PlatformData[] = [
     id: 'windows',
     name: 'Windows',
     icon: WindowsIcon,
-    downloadButton: (
-      <a
-        href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
-        style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
-      >
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
-        <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
-        <WindowsIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
-        <div className="relative z-10 flex flex-col leading-tight">
-          <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Скачать</small>
-          <span className="text-base font-bold tracking-tight text-dark dark:text-white">HAPP для Windows</span>
-        </div>
-      </a>
-    ),
     steps: [
       {
         number: '01',
         title: 'Загрузите клиент',
         description: 'Скачайте Happ для Windows:',
+        action: (
+          <a
+            href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative w-full flex items-center gap-4 p-4 rounded-2xl overflow-hidden bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] transition-all duration-300 hover:-translate-y-1 hover:border-lime/50"
+            style={{ backdropFilter: 'blur(20px) saturate(140%)', WebkitBackdropFilter: 'blur(20px) saturate(140%)' }}
+          >
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)' }} />
+            <div className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+            <WindowsIcon className="relative z-10 w-10 h-10 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
+            <div className="relative z-10 flex flex-col leading-tight">
+              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Скачать</small>
+              <span className="text-base font-bold tracking-tight text-dark dark:text-white">HAPP для Windows</span>
+            </div>
+          </a>
+        ),
       },
       {
         number: '02',
@@ -388,9 +388,6 @@ const InstructionsPage = () => {
               </div>
             ) : (
               <>
-                {currentPlatform?.downloadButton && (
-                  <div className="pb-1">{currentPlatform.downloadButton}</div>
-                )}
                 {currentPlatform?.steps.map((step, idx) => (
                   <div
                     key={idx}
@@ -409,6 +406,7 @@ const InstructionsPage = () => {
                       <p className="font-montserrat text-sm text-gray-600 dark:text-gray-light leading-relaxed">
                         {step.description}
                       </p>
+                      {step.action && <div className="mt-4">{step.action}</div>}
                       {step.media && (
                         <div className={`rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] mt-4 ${step.media.type === 'video' ? 'bg-black' : ''}`}>
                           {step.media.type === 'video' ? (
@@ -454,7 +452,7 @@ const InstructionsPage = () => {
                 return (
                   <div
                     key={idx}
-                    className="border-b border-black/[0.08] dark:border-white/[0.08]"
+                    className={idx !== faqs.length - 1 ? 'border-b border-black/[0.08] dark:border-white/[0.08]' : ''}
                   >
                     <button
                       onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
