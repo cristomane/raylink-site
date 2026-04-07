@@ -46,6 +46,14 @@ html {
 }
 
 /* Animation utilities */
+@keyframes drawLine {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+.animate-draw-line {
+  animation: drawLine 0.8s ease-out 0.4s forwards;
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);

@@ -164,21 +164,11 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <>
-      <style>{`
-        @keyframes drawLine {
-          from { transform: scaleY(0); opacity: 0; }
-          to { transform: scaleY(1); opacity: 1; }
-        }
-        .animate-draw-line {
-          animation: drawLine 0.8s ease-out 0.4s forwards;
-        }
-      `}</style>
-      <section
-        ref={sectionRef}
-        id="how-it-works"
-        className="relative py-24 lg:py-32"
-      >
+    <section
+      ref={sectionRef}
+      id="how-it-works"
+      className="relative py-24 lg:py-32"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           ref={titleRef}
@@ -203,7 +193,6 @@ const HowItWorks = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };
 
