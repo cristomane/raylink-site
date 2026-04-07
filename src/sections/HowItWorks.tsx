@@ -39,10 +39,11 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
       );
 
       if (lineRef.current && !isLast) {
-        gsap.from(
+        gsap.fromTo(
           lineRef.current,
+          { scaleY: 0 },
           {
-            scaleY: 0,
+            scaleY: 1,
             duration: 0.8,
             delay: 0.4,
             ease: 'power2.out',
@@ -95,7 +96,7 @@ const Step = ({ number, icon: Icon, title, description, isLast }: StepProps) => 
             className="absolute top-12 lg:top-14 left-1/2 w-0.5 bg-gradient-to-b from-lime/60 to-lime/20"
             style={{ 
               height: 'calc(100% - 3rem)',
-              transform: 'translateX(-50%)',
+              marginLeft: '-1px',
               transformOrigin: 'top center'
             }}
           />
