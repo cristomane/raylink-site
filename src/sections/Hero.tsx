@@ -54,13 +54,13 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.05] hidden dark:block"
+        className="absolute inset-0 pointer-events-none opacity-[0.08] hidden dark:block"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
+          backgroundSize: '80px 80px',
           maskImage: `
             linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
             linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
@@ -74,13 +74,13 @@ const Hero = () => {
         }}
       />
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08] block dark:hidden"
+        className="absolute inset-0 pointer-events-none opacity-[0.12] block dark:hidden"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0,0,0,0.25) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0,0,0,0.25) 1px, transparent 1px)
+            linear-gradient(to right, rgba(0,0,0,0.35) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0,0,0,0.35) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
+          backgroundSize: '80px 80px',
           maskImage: `
             linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
             linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)
