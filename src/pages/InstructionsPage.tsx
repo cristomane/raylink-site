@@ -143,18 +143,18 @@ const platformsData: PlatformData[] = [
       {
         number: '01',
         title: 'Скачайте приложение',
-        description: 'Установите официальное приложение V2RayTun из Google Play:',
+        description: 'Установите официальное приложение Happ из Google Play:',
         action: (
           <a
-            href="https://play.google.com/store/apps/details?id=com.v2raytun.android"
+            href="https://play.google.com/store/apps/details?id=com.happproxy&pcampaignid=web_share"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-4 px-5 py-4 rounded-2xl bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-dark dark:text-white transition-all duration-300 hover:-translate-y-1 hover:border-lime/40 w-full"
           >
             <GooglePlayIcon className="w-9 h-9 flex-shrink-0 text-lime transition-transform duration-300 group-hover:scale-110" />
             <div className="flex flex-col leading-tight">
-              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить в</small>
-              <span className="text-base font-bold tracking-tight">Google Play</span>
+              <small className="text-[11px] text-gray-500 dark:text-gray-light font-normal uppercase tracking-wide">Загрузить клиент</small>
+              <span className="text-base font-bold tracking-tight">Happ в Google Play</span>
             </div>
           </a>
         ),
