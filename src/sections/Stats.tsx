@@ -112,7 +112,7 @@ const Stats = () => {
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(204, 255, 0, 0.03) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--lime) 3%, transparent) 0%, transparent 70%)',
         }}
       />
 

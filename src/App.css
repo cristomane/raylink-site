@@ -7,7 +7,7 @@ html {
 
 /* Custom selection color */
 ::selection {
-  background-color: rgba(204, 255, 0, 0.3);
+  background-color: color-mix(in srgb, var(--lime) 30%, transparent);
   color: inherit;
 }
 
@@ -30,16 +30,16 @@ html {
 
 /* Glow effects */
 .glow-lime {
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.4);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--lime) 40%, transparent);
 }
 
 .glow-lime-sm {
-  box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--lime) 30%, transparent);
 }
 
 /* Text gradient */
 .text-gradient-lime {
-  background: linear-gradient(135deg, #CCFF00 0%, #B3E600 100%);
+  background: linear-gradient(135deg, var(--lime) 0%, var(--lime-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

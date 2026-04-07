@@ -18,23 +18,24 @@
     --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 9%;
-    --primary: 76 100% 50%;
+    --primary: 142 76% 36%;
     --primary-foreground: 0 0% 4%;
     --secondary: 0 0% 93%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 90%;
     --muted-foreground: 0 0% 40%;
-    --accent: 76 100% 50%;
+    --accent: 142 76% 36%;
     --accent-foreground: 0 0% 4%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 85%;
     --input: 0 0% 85%;
-    --ring: 76 100% 50%;
+    --ring: 142 76% 36%;
     --radius: 0.625rem;
     
     /* RayLink Custom Variables */
-    --lime: #CCFF00;
+    --lime: #16a34a;
+    --lime-dark: #15803d;
     --dark: #0A0A0A;
     --dark-card: #1A1A1A;
     --gray-light: #666666;
@@ -60,6 +61,11 @@
     --muted-foreground: 0 0% 53%;
     --border: 0 0% 20%;
     --input: 0 0% 20%;
+    --primary: 76 100% 50%;
+    --accent: 76 100% 50%;
+    --ring: 76 100% 50%;
+    --lime: #CCFF00;
+    --lime-dark: #B3E600;
     --gray-light: #888888;
     --glass-bg: rgba(26, 26, 26, 0.6);
     --glass-border: rgba(255, 255, 255, 0.08);
@@ -89,7 +95,7 @@
   }
   
   ::selection {
-    background-color: rgba(204, 255, 0, 0.3);
+    background-color: color-mix(in srgb, var(--lime) 30%, transparent);
     color: inherit;
   }
 }
@@ -142,7 +148,7 @@ html.lenis {
     background: var(--glass-bg);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
-    border: 1px solid rgba(204, 255, 0, 0.2);
+    border: 1px solid color-mix(in srgb, var(--lime) 20%, transparent);
     border-radius: 40px;
   }
   
@@ -160,7 +166,7 @@ html.lenis {
   
   .btn-primary:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(204, 255, 0, 0.4);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--lime) 40%, transparent);
   }
   
   /* Secondary Button (Glass) */
@@ -178,7 +184,7 @@ html.lenis {
   }
   
   .btn-secondary:hover {
-    border-color: rgba(204, 255, 0, 0.4);
+    border-color: color-mix(in srgb, var(--lime) 40%, transparent);
     transform: translateY(-2px);
   }
   
@@ -198,7 +204,7 @@ html.lenis {
   
   .btn-vk:hover:not(:disabled) {
     background: rgba(128, 128, 128, 0.15);
-    border-color: rgba(204, 255, 0, 0.3);
+    border-color: color-mix(in srgb, var(--lime) 30%, transparent);
     transform: translateY(-2px);
   }
   
@@ -220,7 +226,7 @@ html.lenis {
   
   /* Gradient Background */
   .gradient-glow {
-    background: radial-gradient(ellipse at center, rgba(204, 255, 0, 0.05) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--lime) 5%, transparent) 0%, transparent 70%);
   }
 }
 
@@ -256,7 +262,7 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #CCFF00 0%, #B3E600 100%);
+    background: linear-gradient(135deg, var(--lime) 0%, var(--lime-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

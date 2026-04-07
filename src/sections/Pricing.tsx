@@ -125,7 +125,7 @@ const Pricing = () => {
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(204, 255, 0, 0.03) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--lime) 3%, transparent) 0%, transparent 60%)',
         }}
       />
 
@@ -140,7 +140,7 @@ const Pricing = () => {
         <div className="flex justify-center" style={{ perspective: '1000px' }}>
           <div
             ref={cardRef}
-            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center flex flex-col justify-between group relative shadow-[0_8px_32px_rgba(0,0,0,0.15),0_0_60px_rgba(204,255,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(204,255,0,0.05)]"
+            className="glass-card-premium w-full max-w-md p-8 lg:p-12 text-center flex flex-col justify-between group relative shadow-[0_8px_32px_rgba(0,0,0,0.15),0_0_60px_color-mix(in_srgb,var(--lime)_5%,transparent)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_color-mix(in_srgb,var(--lime)_5%,transparent)]"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-lime text-dark text-xs font-bold font-martian">
               В тренде

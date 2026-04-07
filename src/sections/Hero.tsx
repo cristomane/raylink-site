@@ -98,7 +98,7 @@ const Hero = () => {
         <div
           className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full opacity-40"
           style={{
-            background: 'radial-gradient(circle, rgba(204,255,0,0.4) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, color-mix(in srgb, var(--lime) 40%, transparent) 0%, transparent 70%)',
             filter: 'blur(60px)',
             animation: 'floatBlob 8s ease-in-out infinite',
           }}
@@ -106,7 +106,7 @@ const Hero = () => {
         <div
           className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full opacity-30"
           style={{
-            background: 'radial-gradient(circle, rgba(204,255,0,0.3) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, color-mix(in srgb, var(--lime) 30%, transparent) 0%, transparent 70%)',
             filter: 'blur(80px)',
             animation: 'floatBlob 10s ease-in-out infinite reverse',
           }}
@@ -145,7 +145,7 @@ const Hero = () => {
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at 50% 0%, rgba(204,255,0,0.08) 0%, transparent 60%)',
+              background: 'radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--lime) 8%, transparent) 0%, transparent 60%)',
             }}
           />
 

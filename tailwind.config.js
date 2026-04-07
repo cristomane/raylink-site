@@ -39,8 +39,8 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         lime: {
-          DEFAULT: "#CCFF00",
-          dark: "#B3E600",
+          DEFAULT: "var(--lime)",
+          dark: "var(--lime-dark)",
         },
         dark: {
           DEFAULT: "#0A0A0A",
@@ -71,8 +71,8 @@ module.exports = {
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         glass: "0 8px 32px rgba(0, 0, 0, 0.4)",
-        glow: "0 0 30px rgba(204, 255, 0, 0.4)",
-        'glow-sm': "0 0 15px rgba(204, 255, 0, 0.3)",
+        glow: "0 0 30px color-mix(in srgb, var(--lime) 40%, transparent)",
+        'glow-sm': "0 0 15px color-mix(in srgb, var(--lime) 30%, transparent)",
       },
       backdropBlur: {
         glass: '40px',
