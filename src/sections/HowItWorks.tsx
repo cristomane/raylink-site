@@ -126,10 +126,39 @@ const HowItWorks = () => {
                     isLeft ? '' : 'lg:[&>*:first-child]:col-start-2'
                   }`}
                 >
-                  <div className="group relative overflow-visible rounded-3xl border border-white/15 bg-white/[0.06] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_22px_45px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-all duration-300 hover:border-lime/45 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_28px_60px_rgba(163,230,53,0.16)] lg:p-7">
-                    <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-white/[0.04] to-transparent" />
-                    <div className="pointer-events-none absolute -left-8 -top-8 h-20 w-20 rounded-full bg-white/10 blur-2xl" />
-                    <div className="pointer-events-none absolute -bottom-10 right-6 h-24 w-24 rounded-full bg-lime/10 blur-2xl" />
+                  <div
+                    className="relative group overflow-visible cursor-pointer transition-all duration-500 hover:-translate-y-1 rounded-[28px] bg-white/60 dark:bg-[rgba(255,255,255,0.01)] border border-black/[0.08] dark:border-white/[0.08] shadow-[inset_0_1px_0_rgba(0,0,0,0.03),0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.1)] p-6 lg:p-7"
+                    style={{
+                      backdropFilter: 'blur(20px) saturate(140%)',
+                      WebkitBackdropFilter: 'blur(20px) saturate(140%)',
+                    }}
+                  >
+                    <div
+                      className="absolute inset-x-0 top-0 h-px pointer-events-none hidden dark:block"
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
+                      }}
+                    />
+                    <div
+                      className="absolute inset-x-0 top-0 h-px pointer-events-none block dark:hidden"
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 50%, transparent 100%)',
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none hidden dark:block rounded-[28px]"
+                      style={{
+                        background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%)',
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none block dark:hidden rounded-[28px]"
+                      style={{
+                        background: 'linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 40%)',
+                      }}
+                    />
 
                     <div
                       className={`absolute top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-lime/40 bg-lime text-sm font-bold text-dark shadow-[0_0_22px_rgba(163,230,53,0.45)] lg:flex ${
@@ -147,8 +176,11 @@ const HowItWorks = () => {
                       Шаг {index + 1}
                     </div>
 
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-lime/40 bg-lime/10 shadow-[inset_0_0_18px_rgba(163,230,53,0.14)]">
-                      <Icon className="h-6 w-6 text-lime" />
+                    <div
+                      className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.06]"
+                      style={{ boxShadow: 'inset 0 1px 0 rgba(0,0,0,0.03)' }}
+                    >
+                      <Icon className="h-6 w-6 text-gray-500 dark:text-gray-300 transition-colors duration-300 group-hover:text-lime" />
                     </div>
 
                     <h3 className="font-martian text-2xl uppercase text-dark transition-colors duration-300 dark:text-white lg:text-3xl">
