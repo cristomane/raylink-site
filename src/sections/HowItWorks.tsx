@@ -112,7 +112,7 @@ const HowItWorks = () => {
         </div>
 
         <div className="how-steps relative">
-          <div className="absolute left-6 top-2 hidden h-[calc(100%-2rem)] w-px bg-gradient-to-b from-lime/70 via-lime/35 to-transparent lg:left-1/2 lg:block lg:-translate-x-1/2" />
+          <div className="absolute left-6 top-2 hidden h-[calc(100%-2rem)] w-px bg-gradient-to-b from-lime/45 via-lime/20 to-transparent lg:left-1/2 lg:block lg:-translate-x-1/2" />
 
           <div className="space-y-7 lg:space-y-10">
             {steps.map((step, index) => {
@@ -122,16 +122,32 @@ const HowItWorks = () => {
               return (
                 <article
                   key={step.title}
-                  className={`how-step relative lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center ${
-                    isLeft ? '' : 'lg:[&>*:first-child]:order-3 lg:[&>*:last-child]:order-1'
+                  className={`how-step relative lg:grid lg:grid-cols-2 ${
+                    isLeft ? '' : 'lg:[&>*:first-child]:col-start-2'
                   }`}
                 >
-                  <div className="rounded-3xl border border-white/10 bg-black/45 p-6 backdrop-blur-xl transition-all duration-300 hover:border-lime/40 hover:shadow-[0_16px_48px_rgba(163,230,53,0.16)] lg:p-7">
+                  <div className="group relative overflow-visible rounded-3xl border border-white/15 bg-white/[0.06] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_22px_45px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-all duration-300 hover:border-lime/45 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_28px_60px_rgba(163,230,53,0.16)] lg:p-7">
+                    <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-white/[0.04] to-transparent" />
+                    <div className="pointer-events-none absolute -left-8 -top-8 h-20 w-20 rounded-full bg-white/10 blur-2xl" />
+                    <div className="pointer-events-none absolute -bottom-10 right-6 h-24 w-24 rounded-full bg-lime/10 blur-2xl" />
+
+                    <div
+                      className={`absolute top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-lime/40 bg-lime text-sm font-bold text-dark shadow-[0_0_22px_rgba(163,230,53,0.45)] lg:flex ${
+                        isLeft ? '-right-16' : '-left-16'
+                      }`}
+                    >
+                      {index + 1}
+                    </div>
+
+                    <div className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-lime/40 bg-lime text-xs font-bold text-dark shadow-[0_0_18px_rgba(163,230,53,0.4)] lg:hidden">
+                      {index + 1}
+                    </div>
+
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-3 py-1 font-syncopate text-[11px] uppercase tracking-[0.06em] text-lime">
                       Шаг {index + 1}
                     </div>
 
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-lime/40 bg-lime/10">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-lime/40 bg-lime/10 shadow-[inset_0_0_18px_rgba(163,230,53,0.14)]">
                       <Icon className="h-6 w-6 text-lime" />
                     </div>
 
@@ -152,14 +168,6 @@ const HowItWorks = () => {
                       </Link>
                     )}
                   </div>
-
-                  <div className="pointer-events-none relative z-10 hidden px-5 lg:flex lg:justify-center">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-lime/40 bg-lime text-sm font-bold text-dark shadow-[0_0_22px_rgba(163,230,53,0.45)]">
-                      {index + 1}
-                    </div>
-                  </div>
-
-                  <div className="hidden lg:block" />
                 </article>
               );
             })}
